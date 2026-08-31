@@ -1,0 +1,67 @@
+/* SEMANTIC ALIASES — reach for these in product code, not the raw palette.
+   Green leads; every other colour supports it. */
+:root{
+  /* Text */
+  --text-heading:var(--ink);
+  --text-body:var(--charcoal);
+  --text-muted:var(--neutral-500);
+  --text-subtle:var(--neutral-400);
+  --text-brand:var(--deep-fern);
+  --text-inverse:var(--warm-cream);
+  --text-inverse-muted:var(--alpha-cream-72);
+  --text-link:var(--deep-fern);
+  --text-link-hover:var(--green-800);
+  --text-danger:var(--clay-600);
+
+  /* Surfaces */
+  --surface-page:var(--warm-cream);
+  --surface-card:var(--neutral-0);
+  --surface-raised:var(--neutral-0);
+  --surface-subtle:var(--neutral-100);
+  --surface-sage:var(--sage-mist);
+  --surface-brand:var(--amplio-green);
+  --surface-brand-strong:var(--deep-fern);
+  --surface-ink:var(--ink);
+  --surface-terracotta:var(--terracotta-50);
+  --surface-sky:var(--sky-50);
+  --surface-scrim:var(--alpha-ink-64);
+  --surface-glass:var(--alpha-cream-88);
+
+  /* Borders */
+  --border-subtle:var(--neutral-200);
+  --border-default:var(--neutral-300);
+  --border-strong:var(--neutral-400);
+  --border-brand:var(--amplio-green);
+  --border-inverse:var(--alpha-cream-24);
+  --border-width:1px;
+
+  /* Primary action */
+  --action-primary-bg:var(--amplio-green);
+  --action-primary-bg-hover:var(--green-600);
+  --action-primary-bg-active:var(--deep-fern);
+  --action-primary-fg:var(--neutral-0);
+  /* Secondary action — outlined */
+  --action-secondary-bg:transparent;
+  --action-secondary-bg-hover:var(--green-50);
+  --action-secondary-fg:var(--deep-fern);
+  --action-secondary-border:var(--green-300);
+  /* Ghost / quiet action */
+  --action-ghost-bg-hover:var(--alpha-ink-04);
+  --action-ghost-fg:var(--charcoal);
+  /* Disabled */
+  --action-disabled-bg:var(--neutral-200);
+  --action-disabled-fg:var(--neutral-400);
+
+  /* Feedback */
+  --feedback-success-fg:var(--green-700); --feedback-success-bg:var(--green-50);
+  --feedback-success-border:var(--green-200);
+  --feedback-warning-fg:var(--terracotta-700); --feedback-warning-bg:var(--terracotta-50);
+  --feedback-warning-border:var(--terracotta-100);
+  --feedback-info-fg:var(--sky-700); --feedback-info-bg:var(--sky-50);
+  --feedback-info-border:var(--sky-100);
+  --feedback-danger-fg:var(--clay-600); --feedback-danger-bg:#FBEDEA;
+  --feedback-danger-border:#F0D2CB;
+
+  --focus-ring:var(--ring-focus);
+  --focus-ring-color:var(--amplio-green);
+}

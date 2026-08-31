@@ -1,0 +1,47 @@
+/* COLOUR — base palette.
+   Rows marked APPROVED come verbatim from amplio_systems_brand_guidelines.pdf v1.0.
+   Rows marked DERIVED are tints/shades interpolated from those values for UI needs
+   (states, borders, fills). Derived values are not brand colours: never use one where
+   an approved value will do. */
+:root{
+  /* --- APPROVED brand palette --- */
+  --amplio-green:#6FA84A;      /* Primary, sampled from the logo mark */
+  --deep-fern:#45732C;         /* Shade — hover / depth */
+  --sage-mist:#DCEACB;         /* Tint — soft fills */
+  --terracotta-bloom:#C97C56;  /* Organic complement */
+  --calm-sky:#5BA9D6;          /* Secondary accent, used sparingly */
+  --warm-cream:#FAF7F0;        /* Backgrounds */
+  --charcoal:#55534C;          /* Body text */
+  --ink:#2B2A27;               /* Headings — never pure black */
+
+  /* --- DERIVED green scale (green-500 = Amplio Green, 100 = Sage Mist, 700 = Deep Fern) --- */
+  --green-50:#F2F8EC; --green-100:#DCEACB; --green-200:#C3DCA8; --green-300:#A5CB82;
+  --green-400:#88BA63; --green-500:#6FA84A; --green-600:#5C8F3B; --green-700:#45732C;
+  --green-800:#365A23; --green-900:#263F19;
+
+  /* --- DERIVED warm neutral scale (50 = Warm Cream, 600 = Charcoal, 900 = Ink) --- */
+  --neutral-0:#FFFFFF;  --neutral-50:#FAF7F0; --neutral-100:#F2EEE5; --neutral-200:#E5E0D4;
+  --neutral-300:#D2CCBD; --neutral-400:#ABA69A; --neutral-500:#857F74; --neutral-600:#55534C;
+  --neutral-700:#45433D; --neutral-800:#35342F; --neutral-900:#2B2A27;
+
+  /* --- DERIVED accent ramps --- */
+  --terracotta-50:#FBF2ED; --terracotta-100:#F3DFD3; --terracotta-300:#DFA98A;
+  --terracotta-500:#C97C56; --terracotta-700:#9E5C3C;
+  --sky-50:#EFF7FC;  --sky-100:#D9ECF7; --sky-300:#98CBE7;
+  --sky-500:#5BA9D6; --sky-700:#3B7EA6;
+  --clay-600:#A8412F;          /* DERIVED — the only red in the system, for destructive states */
+
+  /* --- Alpha utilities, for scrims, shadows and glass --- */
+  --alpha-ink-04:rgba(43,42,39,.04); --alpha-ink-08:rgba(43,42,39,.08);
+  --alpha-ink-12:rgba(43,42,39,.12); --alpha-ink-24:rgba(43,42,39,.24);
+  --alpha-ink-64:rgba(43,42,39,.64); --alpha-ink-88:rgba(43,42,39,.88);
+  --alpha-cream-12:rgba(250,247,240,.12); --alpha-cream-24:rgba(250,247,240,.24);
+  --alpha-cream-72:rgba(250,247,240,.72); --alpha-cream-88:rgba(250,247,240,.88);
+  --alpha-green-12:rgba(111,168,74,.12); --alpha-green-24:rgba(111,168,74,.24);
+
+  /* --- Gradients. Guidelines: hero sections and special graphics only.
+         Every asset must also work as flat colour. --- */
+  --gradient-hero:linear-gradient(135deg,#45732C 0%,#6FA84A 58%,#88BA63 100%); /* @kind other */
+  --gradient-mist:linear-gradient(180deg,#FAF7F0 0%,#DCEACB 100%); /* @kind other */
+  --gradient-scrim:linear-gradient(180deg,rgba(43,42,39,0) 0%,rgba(43,42,39,.72) 100%); /* @kind other */
+}

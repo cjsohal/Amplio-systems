@@ -1,0 +1,37 @@
+<!-- @dsCard group="Components" viewport="700x360" name="Feedback" subtitle="Alert, Tooltip, Dialog" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8" data-amplio-icon-base="x"><link rel="stylesheet" href="../../styles.css">
+<style>html,body{margin:0;background:var(--surface-page)}body{padding:24px}#root{font-family:var(--font-body)}.lbl{font-family:var(--font-body);font-size:10px;letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-muted);font-weight:700;margin-bottom:10px}.grp{display:flex;flex-wrap:wrap;gap:12px;align-items:center}@keyframes amplio-spin{to{transform:rotate(360deg)}}@keyframes amplio-fade{from{opacity:0}}@keyframes amplio-rise{from{opacity:0;transform:translateY(12px)}}</style>
+<script>window.AMPLIO_ICON_BASE='../../assets/icons';window.AMPLIO_ASSET_BASE='../../assets';</script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script></head><body><div id="root"></div>
+<script type="text/babel">
+const NS = window.AmplioSystemsDesignSystem_38186e;
+
+
+const {Alert,Tooltip,Dialog,Button,IconButton,Input}=NS;
+function Demo(){
+ const [open,setOpen]=React.useState(false);
+ return <div style={{display:'grid',gap:18}}>
+  <div style={{display:'grid',gap:10}}>
+   <Alert tone="success" title="Thanks — that's booked">You'll get a calendar invite in the next few minutes.</Alert>
+   <Alert tone="warning" title="Two steps still need your approval"/>
+   <Alert tone="info" title="This workflow is in draft" onDismiss={()=>{}}>Nothing runs until you publish it.</Alert>
+   <Alert tone="danger" title="We couldn't reach your calendar">Reconnect it and we'll pick up where we left off.</Alert>
+  </div>
+  <div className="grp">
+   <div className="lbl" style={{margin:0}}>Tooltip</div>
+   <Tooltip label="Runs every weekday at 8am"><IconButton icon="clock" label="Schedule" variant="outline"/></Tooltip>
+   <Tooltip label="Open in a new tab" placement="right"><IconButton icon="external-link" label="Open"/></Tooltip>
+   <span style={{width:20}}/>
+   <Button variant="secondary" onClick={()=>setOpen(true)}>Open dialog</Button>
+  </div>
+  <Dialog open={open} onClose={()=>setOpen(false)} title="Book a discovery call"
+   description="Thirty minutes, no pitch. We'll map what's worth automating."
+   footer={<><Button variant="ghost" onClick={()=>setOpen(false)}>Not now</Button><Button iconRight="arrow-right">Find a time</Button></>}>
+   <Input label="Work email" placeholder="you@practice.com" iconLeft="mail"/>
+  </Dialog>
+ </div>;}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script></body></html>

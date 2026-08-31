@@ -1,0 +1,25 @@
+<!-- @dsCard group="Components" viewport="700x340" name="Navigation" subtitle="Tabs (underline + pill), Accordion" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8" data-amplio-icon-base="x"><link rel="stylesheet" href="../../styles.css">
+<style>html,body{margin:0;background:var(--surface-page)}body{padding:24px}#root{font-family:var(--font-body)}.lbl{font-family:var(--font-body);font-size:10px;letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-muted);font-weight:700;margin-bottom:10px}.grp{display:flex;flex-wrap:wrap;gap:12px;align-items:center}@keyframes amplio-spin{to{transform:rotate(360deg)}}@keyframes amplio-fade{from{opacity:0}}@keyframes amplio-rise{from{opacity:0;transform:translateY(12px)}}</style>
+<script>window.AMPLIO_ICON_BASE='../../assets/icons';window.AMPLIO_ASSET_BASE='../../assets';</script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script></head><body><div id="root"></div>
+<script type="text/babel">
+const NS = window.AmplioSystemsDesignSystem_38186e;
+
+
+const {Tabs,Accordion}=NS;
+function Demo(){
+ const [t,setT]=React.useState('intake');const [f,setF]=React.useState('all');
+ return <div style={{display:'grid',gap:24}}>
+  <Tabs value={t} onChange={setT} tabs={[{id:'intake',label:'Client intake',icon:'inbox'},{id:'billing',label:'Billing',icon:'file-text'},{id:'followup',label:'Follow-up',icon:'repeat'}]}/>
+  <Tabs variant="pill" value={f} onChange={setF} tabs={[{id:'all',label:'All'},{id:'live',label:'Live'},{id:'draft',label:'Draft'}]} style={{justifySelf:'start'}}/>
+  <Accordion defaultOpen={['q1']} items={[
+   {id:'q1',question:'How long does setup take?',answer:'Most systems are live inside three weeks — one week mapping, two building and testing alongside you.'},
+   {id:'q2',question:'Will I need to change the tools I already use?',answer:'Rarely. We build around your calendar, inbox and booking system rather than replacing them.'},
+   {id:'q3',question:'What if automation is the wrong answer?',answer:"We'll tell you. Integrity comes first, and some problems are cheaper to solve by changing a process."}]}/>
+ </div>;}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script></body></html>

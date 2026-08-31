@@ -1,0 +1,39 @@
+/* TYPE — families, ramp, weights, tracking.
+   Display / wordmark family: the logo is set in Optima (Zapf, 1958), a flared humanist
+   sans with no open equivalent. Marcellus is the closest freely-licensed stand-in
+   (classical Roman-inscriptional letterforms, flared strokes) and ships with this system.
+   Body family: Lato, exactly as specified in the brand guidelines. */
+:root{
+  --font-display:"Marcellus",Optima,"Palatino Linotype",Palatino,Georgia,serif;
+  --font-body:"Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+
+  /* Marcellus ships in a single weight; do not fake bold on display type. */
+  --weight-display:400;
+  --weight-light:300; --weight-regular:400; --weight-bold:700; --weight-black:900;
+
+  /* Ramp — 1.25 major third, rounded to whole px */
+  --text-2xs:11px; --text-xs:12px; --text-sm:14px; --text-base:16px; --text-md:18px;
+  --text-lg:20px;  --text-xl:24px; --text-2xl:30px; --text-3xl:38px; --text-4xl:48px;
+  --text-5xl:60px; --text-6xl:76px; --text-7xl:96px;
+
+  --leading-tight:1.08; --leading-snug:1.24; --leading-normal:1.45;
+  --leading-relaxed:1.65; --leading-loose:1.8;
+
+  /* Tracking. The wide-tracked uppercase eyebrow is a signature of the brand book
+     ("V I S U A L  I D E N T I T Y") — use --tracking-eyebrow for it. */
+  --tracking-tight:-0.02em; --tracking-normal:0; --tracking-wide:0.04em;
+  --tracking-eyebrow:0.22em; --tracking-wordmark:0.34em;
+
+  /* Semantic roles */
+  --type-hero-family:var(--font-display);   --type-hero-size:var(--text-6xl);
+  --type-hero-leading:var(--leading-tight);
+  --type-title-family:var(--font-display);  --type-title-size:var(--text-4xl);
+  --type-heading-family:var(--font-display);--type-heading-size:var(--text-2xl);
+  --type-eyebrow-family:var(--font-body);   --type-eyebrow-size:var(--text-2xs);
+  --type-body-family:var(--font-body);      --type-body-size:var(--text-md);
+  --type-body-leading:var(--leading-relaxed);
+  --type-quote-family:var(--font-display);  --type-quote-size:var(--text-2xl);
+  --type-ui-family:var(--font-body);        --type-ui-size:var(--text-sm);
+  --type-caption-size:var(--text-xs);
+}

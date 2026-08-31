@@ -1,0 +1,21 @@
+/* MOTION — "calm confidence with subtle dynamism". Everything eases out; nothing
+   bounces, overshoots or springs. Distances are short (<=12px). */
+:root{
+  --duration-instant:80ms; /* @kind other */
+  --duration-fast:140ms; /* @kind other */
+  --duration-normal:220ms; /* @kind other */
+  --duration-slow:400ms; /* @kind other */
+  --duration-reveal:700ms; /* @kind other */
+  --duration-ripple:2400ms; /* @kind other */
+  --ease-out-soft:cubic-bezier(.22,.61,.36,1); /* @kind other */
+  --ease-in-out-soft:cubic-bezier(.45,.05,.55,.95); /* @kind other */
+  --ease-entrance:cubic-bezier(.16,.84,.44,1); /* @kind other */
+  --transition-control:background-color var(--duration-fast) var(--ease-out-soft),
+    color var(--duration-fast) var(--ease-out-soft),
+    border-color var(--duration-fast) var(--ease-out-soft),
+    box-shadow var(--duration-fast) var(--ease-out-soft),
+    transform var(--duration-fast) var(--ease-out-soft); /* @kind other */
+  --lift-hover:translateY(-2px); /* @kind other */
+  --press-scale:scale(.985); /* @kind other */
+  --reveal-distance:12px; /* @kind other */
+}

@@ -1,0 +1,15 @@
+/* SPACE — 4px base. The brief asks for "spacious, breathing layouts that embody
+   making room", so section rhythm is deliberately generous: --space-20 and up. */
+:root{
+  --space-0:0; --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+  --space-5:20px; --space-6:24px; --space-8:32px; --space-10:40px; --space-12:48px;
+  --space-16:64px; --space-20:80px; --space-24:96px; --space-32:128px; --space-40:160px;
+
+  --gutter:var(--space-6);
+  --section-y:var(--space-32);       /* vertical rhythm between marketing sections */
+  --section-y-tight:var(--space-20);
+  --stack-tight:var(--space-2); --stack:var(--space-4); --stack-loose:var(--space-8);
+
+  --container-sm:640px; --container-md:840px; --container-lg:1080px;
+  --container-xl:1280px; --measure:68ch;   /* max line length for body copy */
+}

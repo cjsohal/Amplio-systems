@@ -1,0 +1,62 @@
+/* INTERACTIONS — CSS equivalents of the hover/press states that Button, Card and IconButton
+   drive via React state in their own .jsx (see the note at the top of Button.jsx). Astro renders
+   most marketing pages as static HTML with zero client JS, so these components need a
+   JS-independent way to reach the same hover/press look described in HANDOFF.md's
+   "Interactions to reproduce" table. Values are copied 1:1 from each component's own variant
+   tables — nothing here introduces a new visual value. */
+
+.amplio-btn { transition: var(--transition-control); }
+
+.amplio-btn--primary:hover:not(:disabled) {
+  background: var(--action-primary-bg-hover);
+  box-shadow: var(--shadow-brand);
+  transform: var(--lift-hover);
+}
+.amplio-btn--primary:active:not(:disabled) {
+  background: var(--action-primary-bg-active);
+  transform: var(--press-scale);
+  box-shadow: none;
+}
+
+.amplio-btn--secondary:hover:not(:disabled) {
+  background: var(--action-secondary-bg-hover);
+  border-color: var(--amplio-green);
+}
+.amplio-btn--secondary:active:not(:disabled) {
+  background: var(--green-100);
+  transform: var(--press-scale);
+  box-shadow: none;
+}
+
+.amplio-btn--ghost:hover:not(:disabled) { background: var(--action-ghost-bg-hover); }
+.amplio-btn--ghost:active:not(:disabled) {
+  background: var(--alpha-ink-08);
+  transform: var(--press-scale);
+  box-shadow: none;
+}
+
+.amplio-btn--inverse:hover:not(:disabled) { background: #fff; }
+.amplio-btn--inverse:active:not(:disabled) {
+  background: var(--green-50);
+  transform: var(--press-scale);
+  box-shadow: none;
+}
+
+.amplio-btn--danger:hover:not(:disabled) { background: #8E3527; }
+.amplio-btn--danger:active:not(:disabled) {
+  background: #7A2D21;
+  transform: var(--press-scale);
+  box-shadow: none;
+}
+
+.amplio-card--interactive { transition: var(--transition-control); }
+.amplio-card--interactive:hover {
+  transform: var(--lift-hover);
+  box-shadow: var(--shadow-lg);
+}
+
+.amplio-iconbtn { transition: var(--transition-control); }
+.amplio-iconbtn--ghost:hover:not(:disabled) { background: var(--action-ghost-bg-hover); }
+.amplio-iconbtn--solid:hover:not(:disabled) { background: var(--green-600); }
+.amplio-iconbtn--outline:hover:not(:disabled) { background: var(--green-50); }
+.amplio-iconbtn--inverse:hover:not(:disabled) { background: var(--alpha-cream-24); }
