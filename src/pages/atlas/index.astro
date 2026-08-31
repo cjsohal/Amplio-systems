@@ -1,0 +1,234 @@
+---
+/* /atlas/ — Atlas product page.
+   Structure and copy come from the client's supplied mock
+   (uploads/ChatGPT Image Aug 31, 2026, 12_47_18 AM.png). Copy is used verbatim.
+   The mock's navy + teal palette has been mapped onto the approved Amplio palette:
+   navy -> Ink, teal -> Amplio Green. Photography in the mock is replaced with labelled
+   empty slots — no imagery was supplied. */
+import React from 'react';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Section from '@components/Section.jsx';
+import { Button } from '@ds/components/core/Button.jsx';
+import { Card } from '@ds/components/core/Card.jsx';
+import { Icon } from '@ds/components/core/Icon.jsx';
+import { Badge } from '@ds/components/core/Badge.jsx';
+import { Eyebrow } from '@ds/components/marketing/Eyebrow.jsx';
+import { SectionHeading } from '@ds/components/marketing/SectionHeading.jsx';
+import { StatBlock } from '@ds/components/marketing/StatBlock.jsx';
+import MediaSlot from '@components/atlas/MediaSlot.jsx';
+import SitePotentialCard from '@components/atlas/SitePotentialCard.jsx';
+import AtlasDashboard from '@components/atlas/AtlasDashboard.jsx';
+import MapPanel from '@components/atlas/MapPanel.jsx';
+
+const CHALLENGE_PILLARS = [
+  { icon: 'search', title: 'Evidence-based insight', body: 'Combine AI, data and local intelligence to reveal what really matters.' },
+  { icon: 'map-pin', title: 'Right place, right homes', body: 'Identify the areas of greatest need and the homes that will have the biggest impact.' },
+  { icon: 'users', title: 'For the right people', body: 'Understand community needs and ensure homes meet real demand.' },
+  { icon: 'leaf', title: 'Positive impact, measurable results', body: 'Track outcomes that matter—for your organisation and the communities you serve.' },
+];
+
+const REFRESH_TODAY = [
+  ['£10k+', 'paid out each time the evidence base needs refreshing — new boundaries, an LA merger, a change of methodology'],
+  ['Tens of hours', 'of internal staff time if you update it by hand instead'],
+  ['15–20 hours', 'to turn those numbers into a single board report'],
+];
+
+const REFRESH_ATLAS = [
+  ['Instant', 'refresh across every location you are tracking, whenever the ground shifts'],
+  ['One analysis', 'covering multiple sites, compared side by side rather than one at a time'],
+  ['Board-ready', 'reporting generated from the same figures — planned for phase three'],
+];
+
+const PLATFORM_POINTS = [
+  'AI-driven analysis of need, demand and viability',
+  'Scenario modelling to test options and trade-offs',
+  'Customisable to your strategic priorities',
+  'Collaborative tools for your whole team',
+  'Clear, auditable insights you can act on',
+];
+
+const IMPACT = [
+  { icon: 'building-2', title: 'More homes that matter', body: "Deliver homes where they're needed most, for people who need them most." },
+  { icon: 'users', title: 'Stronger communities', body: 'Support thriving, connected communities for the long term.' },
+  { icon: 'globe', title: 'A better future for all', body: 'Make smarter use of resources and create lasting social value.' },
+];
+
+/* Atlas is at concept stage — no pilot and no customers yet. These describe what the
+   platform models and could unlock, not results delivered. Kept honest per the brand's
+   first value. */
+const OPPORTUNITY = [
+  ['12+', 'individual indicators combined in every site assessment'],
+  ['£millions', 'potentially saved through better-targeted investment'],
+  ['Countless', 'communities that could be helped'],
+];
+
+/* Astro's `<>...<br /></>` template syntax produces an Astro-internal chunk object, not a real
+   React element, so passing it straight into a React component prop (SectionHeading's `title`)
+   fails at render time. Building these with React.createElement gives SectionHeading a real
+   React node to render instead. */
+const challengeTitle = React.createElement(React.Fragment, null, 'Social housing demand is high.', React.createElement('br'), 'Resources are limited.');
+const staleTitle = React.createElement(React.Fragment, null, 'Your evidence base goes stale.', React.createElement('br'), 'Refreshing it costs a fortune.');
+const platformTitle = React.createElement(React.Fragment, null, 'AI-powered clarity', React.createElement('br'), 'for housing providers');
+---
+<BaseLayout title="Atlas" description="Atlas is an AI-powered decision support platform for housing providers. We help you build the right homes in the right places — for the right people.">
+
+  <div style={{ position: 'relative', background: 'var(--surface-page)' }}>
+    <div style={{ maxWidth: 'var(--container-xl)', margin: '0 auto', padding: 'var(--space-20) var(--space-8)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-12)', alignItems: 'center' }}>
+      <div>
+        <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Atlas</Eyebrow>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 'var(--weight-display)', fontSize: 'clamp(34px,4.2vw,56px)', lineHeight: 'var(--leading-tight)', color: 'var(--text-heading)', margin: 0 }}>
+          Better decisions.<br />Better homes.<br /><span style={{ color: 'var(--amplio-green)' }}>Stronger communities.</span>
+        </h1>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: 'var(--space-8) 0 0', maxWidth: 460 }}>
+          Atlas is an AI-powered decision support platform for housing providers. We help you build the right homes in the right places—for the right people.
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)', marginTop: 'var(--space-8)' }}>
+          <Button size="md" iconRight="arrow-right" href="/atlas/pilot/">Join the pilot</Button>
+          <Button size="md" variant="secondary" href="#platform">Learn how it works</Button>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 'var(--space-8)', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-body)' }}>
+          <Icon name="shield-check" size={18} style={{ color: 'var(--amplio-green)' }} />
+          Built for housing. Driven by impact.
+        </div>
+      </div>
+      <div style={{ position: 'relative' }}>
+        <MediaSlot label="Hero photography · new-build housing scheme · not supplied" height={420} align="end start" labelMaxWidth={190} />
+        <div style={{ position: 'absolute', right: -12, bottom: 110 }}><SitePotentialCard /></div>
+      </div>
+    </div>
+  </div>
+
+  <Section tone="card">
+    <SectionHeading align="center" eyebrow="The challenge"
+      title={challengeTitle}
+      description="The wrong development in the wrong place can mean missed opportunities, wasted resources, and communities left waiting. Atlas brings clarity to complex decisions—so you can invest with confidence and create lasting impact."
+      maxWidth={720} />
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 0, marginTop: 'var(--space-16)' }}>
+      {CHALLENGE_PILLARS.map((p, i) => (
+        <div key={p.title} style={{ textAlign: 'center', padding: '0 var(--space-6)', borderLeft: i ? '1px solid var(--border-subtle)' : 'none' }}>
+          <span style={{ width: 52, height: 52, margin: '0 auto', borderRadius: 'var(--radius-leaf)', background: 'var(--sage-mist)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
+            <Icon name={p.icon} size={24} />
+          </span>
+          <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-lg)', lineHeight: 'var(--leading-snug)', color: 'var(--text-heading)', margin: 'var(--space-5) 0 var(--space-3)' }}>{p.title}</h3>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: 0, maxWidth: 'none' }}>{p.body}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <Section tone="page">
+    <SectionHeading align="center" eyebrow="Cost and efficiency"
+      title={staleTitle}
+      description="Boundaries move. Councils merge. Political priorities change. Reporting methodologies get rewritten. Every time it happens, the data you already paid for stops being true — and the bill to put that right lands again."
+      maxWidth={720} />
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-6)', marginTop: 'var(--space-12)', alignItems: 'stretch' }}>
+      <Card variant="outlined" padding="lg">
+        <Eyebrow tone="muted" style={{ marginBottom: 'var(--space-6)' }}>How it works today</Eyebrow>
+        <div style={{ display: 'grid', gap: 'var(--space-6)' }}>
+          {REFRESH_TODAY.map(([v, l]) => (
+            <div key={v}>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', lineHeight: 1.1, color: 'var(--text-heading)' }}>{v}</div>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: '6px 0 0', maxWidth: 'none' }}>{l}</p>
+            </div>
+          ))}
+        </div>
+      </Card>
+      <Card variant="sage" padding="lg">
+        <Eyebrow style={{ marginBottom: 'var(--space-6)' }}>With Atlas</Eyebrow>
+        <div style={{ display: 'grid', gap: 'var(--space-6)' }}>
+          {REFRESH_ATLAS.map(([v, l], i) => (
+            <div key={v}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
+                <span style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', lineHeight: 1.1, color: 'var(--deep-fern)' }}>{v}</span>
+                {i === 2 && <Badge tone="neutral" icon="clock">Phase three</Badge>}
+              </div>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: '6px 0 0', maxWidth: 'none' }}>{l}</p>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
+    <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textAlign: 'center', margin: 'var(--space-8) auto 0', maxWidth: 620 }}>
+      Figures describe what housing providers tell us they currently spend. Automated board
+      reporting is planned for the third phase of development, not available today.
+    </p>
+  </Section>
+
+  <Section tone="sage" id="platform" style={{ scrollMarginTop: 80 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 'var(--space-16)', alignItems: 'center' }}>
+      <div>
+        <SectionHeading eyebrow="The platform" title={platformTitle}
+          description="Atlas brings together data, AI and human expertise in one secure platform—helping you assess opportunities, compare options and make confident, impactful decisions."
+          maxWidth={440} />
+        <div style={{ display: 'grid', gap: 'var(--space-3)', marginTop: 'var(--space-8)' }}>
+          {PLATFORM_POINTS.map((p) => (
+            <div key={p} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+              <Icon name="circle-check" size={18} style={{ color: 'var(--amplio-green)', marginTop: 2 }} />
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-normal)', color: 'var(--text-body)' }}>{p}</span>
+            </div>
+          ))}
+        </div>
+        <Button style={{ marginTop: 'var(--space-8)' }} href="#platform">Explore the platform</Button>
+      </div>
+      <AtlasDashboard>
+        <MapPanel client:only="react" height={168} />
+      </AtlasDashboard>
+    </div>
+  </Section>
+
+  <Section tone="page">
+    <SectionHeading align="center" eyebrow="Our impact" title="Building more than homes" maxWidth={560} />
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 0, marginTop: 'var(--space-12)' }}>
+      {IMPACT.map((p, i) => (
+        <div key={p.title} style={{ padding: '0 var(--space-8)', borderLeft: i ? '1px solid var(--border-subtle)' : 'none' }}>
+          <div style={{ display: 'flex', gap: 'var(--space-4)', alignItems: 'center' }}>
+            <span style={{ width: 46, height: 46, flex: 'none', borderRadius: 'var(--radius-circle)', background: 'var(--sage-mist)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
+              <Icon name={p.icon} size={22} />
+            </span>
+            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-xl)', lineHeight: 'var(--leading-snug)', color: 'var(--text-heading)', margin: 0 }}>{p.title}</h3>
+          </div>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: 'var(--space-5) 0 0', maxWidth: 'none' }}>{p.body}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <Section tone="ink" tight>
+    <Eyebrow tone="inverse" style={{ textAlign: 'center', marginBottom: 'var(--space-10)' }}>The opportunity</Eyebrow>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 0 }}>
+      {OPPORTUNITY.map(([v, l], i) => (
+        <div key={v} style={{ padding: '0 var(--space-8)', borderLeft: i ? '1px solid var(--border-inverse)' : 'none' }}>
+          <StatBlock tone="inverse" align="center" value={v} label={l} />
+        </div>
+      ))}
+    </div>
+    <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--text-inverse-muted)', textAlign: 'center', margin: 'var(--space-10) auto 0', maxWidth: 560 }}>
+      Atlas is at concept stage. These are the indicators we model and the outcomes better
+      decisions could unlock — not results we have delivered.
+    </p>
+  </Section>
+
+  <Section tone="page" tight>
+    <Card variant="sage" padding="none" style={{ overflow: 'hidden' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 'var(--space-12)', alignItems: 'center', padding: 'clamp(32px,4vw,64px)' }}>
+        <div>
+          <Eyebrow style={{ marginBottom: 'var(--space-4)' }}>Let's build better, together</Eyebrow>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 'var(--weight-display)', fontSize: 'clamp(28px,3.4vw,42px)', lineHeight: 'var(--leading-snug)', color: 'var(--text-heading)', margin: 0 }}>
+            Ready to make<br />better decisions?
+          </h2>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: 'var(--space-5) 0 0', maxWidth: 420 }}>
+            Join forward-thinking housing providers shaping Atlas from the start, and help us build the right homes in the right places.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-4)', alignItems: 'center', marginTop: 'var(--space-8)' }}>
+            <Button iconRight="arrow-right" href="/atlas/pilot/">Join the pilot</Button>
+            <Button variant="ghost" href="#platform">Learn more about Atlas</Button>
+          </div>
+        </div>
+        <div style={{ display: 'grid', placeItems: 'center' }}>
+          <img src="/assets/atlas-logo.png" alt="Atlas" style={{ width: 'min(320px, 100%)', height: 'auto' }} />
+        </div>
+      </div>
+    </Card>
+  </Section>
+
+</BaseLayout>
