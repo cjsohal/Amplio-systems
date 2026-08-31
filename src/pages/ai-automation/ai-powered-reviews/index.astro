@@ -1,0 +1,217 @@
+---
+/* Content written from the client's own article, "You Don't Have a Review Problem"
+   (CJ Sohal, Professionals UK, 06.08.2026):
+   https://www.professionalsuk.co.uk/articles/134559/you-dont-have-a-review-problem
+   The three-step process, the two-profile comparison and the pricing are taken from that
+   article. LAUNCH_OFFER below is time-limited — see the comment on it. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Section from '@components/Section.jsx';
+import { Button } from '@ds/components/core/Button.jsx';
+import { Card } from '@ds/components/core/Card.jsx';
+import { Icon } from '@ds/components/core/Icon.jsx';
+import { Badge } from '@ds/components/core/Badge.jsx';
+import { Eyebrow } from '@ds/components/marketing/Eyebrow.jsx';
+import { SectionHeading } from '@ds/components/marketing/SectionHeading.jsx';
+import { CTABanner } from '@ds/components/marketing/CTABanner.jsx';
+import { Accordion } from '@ds/components/navigation/Accordion.jsx';
+import { Alert } from '@ds/components/feedback/Alert.jsx';
+import ProfileCard from '@components/reviews/ProfileCard.jsx';
+
+/* The launch promotion ends 30 September 2026. Set to null once it lapses —
+   do not leave an expired offer on the page. */
+const LAUNCH_OFFER = {
+  price: '£100',
+  was: '£200',
+  badge: '50% off until 30 Sep',
+  note: 'Launch offer — 50% off the usual £200 per month. Ends 30 September 2026.',
+};
+
+const REVIEW_QUESTIONS = [
+  ['shield-check', 'Is this business reliable?'],
+  ['heart-handshake', 'Do people receive a good service?'],
+  ['message-circle', 'Does the company communicate well?'],
+  ['users', 'Can I trust them with my money, property or health?'],
+  ['repeat', 'How do they respond when something goes wrong?'],
+];
+
+const STEPS = [
+  { n: '01', icon: 'message-circle', title: 'The feedback request', when: 'Shortly after the job',
+    body: 'An SMS or email asks the customer how it went. They get to tell you directly, and you learn what the service actually felt like — which is the half of review management most businesses skip.' },
+  { n: '02', icon: 'send', title: 'The review request', when: 'Once they have responded',
+    body: 'A friendly message with a direct route to your Google review page. No searching, no instructions, no working out where to post. Written in your tone, not a robot’s.' },
+  { n: '03', icon: 'bell', title: 'The three-day reminder', when: 'If no review has appeared',
+    body: 'One polite nudge. This is the step almost everyone misses — a customer who ignored the first message was usually just busy, not unwilling. Nobody has to check a spreadsheet to make it happen.' },
+];
+
+const REPLY_BAD = 'Thanks for your feedback.';
+const REPLY_GOOD = 'Thanks Marta — glad Dan got the boiler sorted the same afternoon. He mentioned you’d been without hot water since Friday, so we’re pleased it was a quick one.';
+
+const FAQ = [
+  { id: 'r1', question: 'Are you pressuring customers into leaving good reviews?', answer: 'No, and the system is built so that you can’t. Reviews should reflect a genuine experience. All this does is help satisfied customers remember to share the experience they already had — a small number of polite, well-timed messages, not a campaign.' },
+  { id: 'r2', question: 'What happens when the feedback is negative?', answer: 'It comes to you first, privately, which is the point of starting with a feedback request rather than a review link. You find out what went wrong and get the chance to put it right.' },
+  { id: 'r3', question: 'Do I have to change the systems I already use?', answer: 'No. It sits alongside your existing booking, invoicing or job-management tools and sends by SMS or email.' },
+  { id: 'r4', question: 'Who writes the replies to reviews?', answer: 'The system drafts a personalised response that refers to what the customer actually said — the service they used, the result, the person they praised. You stay in control of what gets posted.' },
+  { id: 'r5', question: 'How long until it is running?', answer: 'Setup is short. Tell us your tone of voice and where your Google profile lives, and the sequence starts on your next completed job.' },
+];
+---
+<BaseLayout title="AI Powered Reviews" description="You don't have a review problem. You have a remembering problem. Amplio Reviews turns asking for reviews into something that just happens.">
+
+  <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--gradient-hero)', color: 'var(--text-inverse)' }}>
+    <img src="/assets/mark-light.svg" alt="" aria-hidden="true"
+      style={{ position: 'absolute', right: '-7%', top: '-32%', width: 'min(560px, 50%)', opacity: 0.14 }} />
+    <div style={{ position: 'relative', maxWidth: 'var(--container-xl)', margin: '0 auto', padding: 'var(--space-32) var(--space-8) var(--space-24)' }}>
+      <Eyebrow tone="inverse" style={{ marginBottom: 'var(--space-5)' }}>Amplio Reviews</Eyebrow>
+      <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 'var(--weight-display)', fontSize: 'clamp(36px,5vw,68px)', lineHeight: 'var(--leading-tight)', color: 'var(--text-inverse)', margin: 0, maxWidth: 860 }}>
+        You don't have a review problem.<br />You have a remembering problem.
+      </h1>
+      <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(17px,1.5vw,21px)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-inverse-muted)', margin: 'var(--space-8) 0 0', maxWidth: 640 }}>
+        Your customers aren't unhappy and your team isn't failing. Delighted customers simply
+        forget to leave reviews, and busy businesses forget to ask. Amplio Reviews turns asking
+        into something that just happens.
+      </p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)', marginTop: 'var(--space-10)' }}>
+        <Button variant="inverse" size="lg" iconRight="arrow-right" href="/contact/">Get set up</Button>
+        <Button variant="ghost" size="lg" href="#how" style={{ color: 'var(--warm-cream)', border: '1px solid var(--alpha-cream-24)' }}>See how it works</Button>
+      </div>
+    </div>
+  </div>
+
+  <Section tone="page">
+    <div style={{ display: 'grid', gridTemplateColumns: '0.95fr 1.05fr', gap: 'var(--space-16)', alignItems: 'start' }}>
+      <SectionHeading eyebrow="The gap" maxWidth={440}
+        title="Hundreds of happy customers. Seventeen reviews."
+        description="A prospect can't see the thank-you emails in your inbox, or hear the customer who told your team they'd been brilliant. They can only judge the evidence in front of them — and a high rating on its own doesn't always do the job." />
+      <div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-5)' }}>
+          <ProfileCard tone="weak" rating="4.9" count="14" recency="Latest review: 8 months ago"
+            verdict="Excellent score. Reads as new, rarely used, or unable to persuade customers to recommend it." />
+          <ProfileCard rating="4.7" count="186" recency="Several in the past few weeks"
+            verdict="Lower score, far more convincing. Active, established, and clearly replying to people." />
+        </div>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: 'var(--space-6) 0 0' }}>
+          Volume, consistency and recency matter alongside the stars. Google says review numbers
+          and ratings can help local ranking, and that helpful replies make a business stand out —
+          so this affects how visible you are, not just how you look.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="sage" tight>
+    <SectionHeading align="center" eyebrow="What a prospect is really asking"
+      title="Your reviews answer these before you ever speak" maxWidth={620} />
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)', justifyContent: 'center', marginTop: 'var(--space-10)' }}>
+      {REVIEW_QUESTIONS.map(([icon, q]) => (
+        <span key={q} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: 'var(--surface-card)', borderRadius: 'var(--radius-pill)', padding: '10px 18px', boxShadow: 'var(--shadow-xs)' }}>
+          <Icon name={icon} size={17} style={{ color: 'var(--amplio-green)' }} />
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-heading)' }}>{q}</span>
+        </span>
+      ))}
+    </div>
+    <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-body)', textAlign: 'center', margin: 'var(--space-8) auto 0', maxWidth: 560 }}>
+      The uncomfortable part: they reach a conclusion without ever contacting you. There's no
+      rejected quote and no phone call. They simply don't get in touch.
+    </p>
+  </Section>
+
+  <Section tone="page" id="how" style={{ scrollMarginTop: 80 }}>
+    <SectionHeading eyebrow="How it works" title="Three messages, properly timed"
+      description="The whole system is three communications per customer. Enough to be remembered, few enough that nobody feels chased." />
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'var(--space-6)', marginTop: 'var(--space-12)' }}>
+      {STEPS.map((s) => (
+        <Card key={s.n} variant="raised" padding="lg" style={{ height: '100%' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <span style={{ width: 48, height: 48, borderRadius: 'var(--radius-leaf)', background: 'var(--green-50)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
+              <Icon name={s.icon} size={22} />
+            </span>
+            <Eyebrow tone="muted">{s.n}</Eyebrow>
+          </div>
+          <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-xl)', lineHeight: 'var(--leading-snug)', color: 'var(--text-heading)', margin: 'var(--space-6) 0 var(--space-2)' }}>{s.title}</h3>
+          <div style={{ marginBottom: 'var(--space-4)' }}><Badge tone="neutral" icon="clock">{s.when}</Badge></div>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: 0, maxWidth: 'none' }}>{s.body}</p>
+        </Card>
+      ))}
+    </div>
+    <Alert tone="info" title="Feedback comes to you before it goes public" style={{ marginTop: 'var(--space-8)' }}>
+      Starting with a private feedback request means an unhappy customer reaches you first, and
+      you get the chance to put it right.
+    </Alert>
+  </Section>
+
+  <Section tone="card">
+    <div style={{ display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 'var(--space-16)', alignItems: 'center' }}>
+      <SectionHeading eyebrow="Replies that sound human" maxWidth={400}
+        title="&ldquo;Thanks for your feedback&rdquo; is a box being ticked"
+        description="When the same sentence sits under every review, everyone can tell it was pasted. A reply that mentions what the customer actually said shows them — and every future customer reading it — that somebody listened." />
+      <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
+        <Card variant="outlined" padding="md">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+            <Icon name="x" size={16} style={{ color: 'var(--text-subtle)' }} />
+            <Eyebrow tone="muted">Under every single review</Eyebrow>
+          </div>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', color: 'var(--text-muted)', margin: 0, maxWidth: 'none' }}>{REPLY_BAD}</p>
+        </Card>
+        <Card variant="sage" padding="md">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+            <Icon name="check" size={16} style={{ color: 'var(--deep-fern)' }} />
+            <Eyebrow>Drafted from what they wrote</Eyebrow>
+          </div>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-heading)', margin: 0, maxWidth: 'none' }}>{REPLY_GOOD}</p>
+        </Card>
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="page" tight>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-12)', alignItems: 'center', maxWidth: 900, margin: '0 auto' }}>
+      <div>
+        <Eyebrow style={{ marginBottom: 'var(--space-4)' }}>What it costs</Eyebrow>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
+          <span style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(44px,5vw,64px)', lineHeight: 1, color: 'var(--text-brand)' }}>
+            {LAUNCH_OFFER ? LAUNCH_OFFER.price : '£200'}
+          </span>
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', color: 'var(--text-body)' }}>per month</span>
+          {LAUNCH_OFFER && (
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', color: 'var(--text-muted)', textDecoration: 'line-through' }}>{LAUNCH_OFFER.was}</span>
+          )}
+        </div>
+        {LAUNCH_OFFER && (
+          <div style={{ marginTop: 'var(--space-5)' }}>
+            <Badge tone="warning" icon="clock">{LAUNCH_OFFER.badge}</Badge>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-normal)', color: 'var(--text-body)', margin: 'var(--space-3) 0 0' }}>
+              {LAUNCH_OFFER.note}
+            </p>
+          </div>
+        )}
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: 'var(--space-6) 0 0' }}>
+          One monthly fee, no setup charge, and you can stop whenever it stops being worth it.
+        </p>
+      </div>
+      <Card variant="sage" padding="lg">
+        <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Included</Eyebrow>
+        <div style={{ display: 'grid', gap: 'var(--space-3)' }}>
+          {['Feedback request, review request and reminder', 'SMS and email, in your tone of voice', 'Direct link to your Google profile', 'Personalised reply drafts for every review', 'Setup and handover documentation'].map((t) => (
+            <div key={t} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+              <Icon name="circle-check" size={17} style={{ color: 'var(--amplio-green)', marginTop: 2 }} />
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-normal)', color: 'var(--text-body)' }}>{t}</span>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
+  </Section>
+
+  <Section tone="page" tight style={{ paddingTop: 0 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 'var(--space-20)', alignItems: 'start' }}>
+      <SectionHeading eyebrow="Questions" title="The things people ask us first" maxWidth={320} />
+      <Accordion client:load defaultOpen={['r1']} items={FAQ} />
+    </div>
+  </Section>
+
+  <Section tone="page" tight>
+    <CTABanner eyebrow="Stop relying on good intentions" title="You may already have the customers. You just need the system."
+      description="If your work is good but your Google profile doesn't show it, you're leaving reputation, visibility and enquiries on the table."
+      primaryLabel="Get set up" primaryHref="/contact/" secondaryLabel="Talk to us first" secondaryHref="/contact/" />
+  </Section>
+
+</BaseLayout>

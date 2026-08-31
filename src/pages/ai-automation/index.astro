@@ -1,0 +1,60 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Section from '@components/Section.jsx';
+import { SectionHeading } from '@ds/components/marketing/SectionHeading.jsx';
+import { FeatureCard } from '@ds/components/marketing/FeatureCard.jsx';
+import { CTABanner } from '@ds/components/marketing/CTABanner.jsx';
+import { Icon } from '@ds/components/core/Icon.jsx';
+import ServiceTabs from '@components/services/ServiceTabs.jsx';
+
+const STANDALONE = [
+  ['/ai-automation/ai-powered-reviews/', 'star', 'AI Powered Reviews', 'Google reviews on autopilot — three messages, properly timed.'],
+  ['/ai-automation/ai-voice-receptionist/', 'phone', 'AI Voice Receptionist', 'Never miss a call again. Enquiries handled 24/7.'],
+  ['/ai-automation/ai-seo/', 'trending-up', 'AI SEO', 'Be visible in LLMs, not just search engines.'],
+  ['/ai-automation/ai-strategy/', 'lightbulb', 'AI Strategy', 'A roadmap to navigate AI safely, in the right order.'],
+];
+---
+<BaseLayout title="AI Automation" description="Four systems, built in the order that pays for itself fastest. We rarely build all of these at once — we start with whichever one is costing you the most this month.">
+
+  <Section tone="page" tight style={{ paddingTop: 'var(--space-24)' }}>
+    <SectionHeading eyebrow="Services" level={1}
+      title="Four systems, built in the order that pays for itself fastest"
+      description="We rarely build all of these at once. We start with whichever one is costing you the most this month." />
+  </Section>
+
+  <Section tone="page" tight style={{ paddingTop: 0 }}>
+    <ServiceTabs client:load />
+  </Section>
+
+  <Section tone="page" tight style={{ paddingTop: 0 }}>
+    <SectionHeading eyebrow="Standalone services" title="Four things we do as products in their own right"
+      description="Each of these can be bought on its own, without a wider automation project." />
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(230px,1fr))', gap: 'var(--space-5)', marginTop: 'var(--space-10)' }}>
+      {STANDALONE.map(([href, icon, title, body]) => (
+        <FeatureCard key={href} icon={icon} title={title} tone="raised" href={href}>
+          {body}
+          <span style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 'var(--space-5)', color: 'var(--text-brand)', fontWeight: 'var(--weight-bold)', fontSize: 'var(--text-sm)' }}>
+            Learn more <Icon name="arrow-right" size={16} />
+          </span>
+        </FeatureCard>
+      ))}
+    </div>
+  </Section>
+
+  <Section tone="card">
+    <SectionHeading eyebrow="How we work" title="The parts of the process we won't cut" align="center"
+      description="These are the commitments the brand is built on, not a service tier." />
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(230px,1fr))', gap: 'var(--space-6)', marginTop: 'var(--space-12)' }}>
+      <FeatureCard icon="shield-check" title="Honest scoping" tone="outlined">If automation is the wrong answer, we say so on the first call.</FeatureCard>
+      <FeatureCard icon="lightbulb" title="Plain explanations" tone="outlined">You will understand what we built and why. No black boxes.</FeatureCard>
+      <FeatureCard icon="users" title="Built with you" tone="outlined">We test alongside your real week, not a demo account.</FeatureCard>
+      <FeatureCard icon="file-text" title="Written down" tone="outlined">Every system is documented well enough to hand to someone else.</FeatureCard>
+    </div>
+  </Section>
+
+  <Section tone="page" tight>
+    <CTABanner tone="ink" eyebrow="Not sure where to start" title="Bring us the task you dread most"
+      description="That is almost always the right first project. Thirty minutes is enough to tell." primaryLabel="Book a discovery call" primaryProps={{ 'data-open-booking': true }} />
+  </Section>
+
+</BaseLayout>

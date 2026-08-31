@@ -1,0 +1,10 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServicePageContent from '@components/ServicePageContent.astro';
+import { SERVICE_PAGES } from '@data/servicePages.js';
+
+const d = SERVICE_PAGES.strategy;
+---
+<BaseLayout title={d.eyebrow} description={d.promise}>
+  <ServicePageContent d={d} />
+</BaseLayout>
