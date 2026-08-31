@@ -1,0 +1,51 @@
+---
+import '@ds/styles.css';
+import SiteHeader from '@components/SiteHeader.jsx';
+import SiteFooter from '@components/SiteFooter.astro';
+import BookingDialog from '@components/BookingDialog.jsx';
+
+const { title, description = 'AI automation for small service businesses — life coaches, chiropractors, consultants, practitioners.' } = Astro.props;
+const pageTitle = title ? `${title} — Amplio Systems` : 'Amplio Systems — Automate the mundane. Amplify what matters.';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" href="/assets/mark.png" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <SiteHeader client:load page={Astro.url.pathname} />
+    <main>
+      <slot />
+    </main>
+    <SiteFooter />
+    <BookingDialog client:load />
+    <script>
+      document.addEventListener('click', (event) => {
+        const trigger = event.target instanceof Element ? event.target.closest('[data-open-booking]') : null;
+        if (!trigger) return;
+        event.preventDefault();
+        window.dispatchEvent(new CustomEvent('amplio:open-booking'));
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  html, body { margin: 0; }
+  body { background: var(--surface-page); }
+
+  @keyframes amplio-spin { to { transform: rotate(360deg); } }
+  @keyframes amplio-fade { from { opacity: 0; } }
+  @keyframes amplio-rise { from { opacity: 0; transform: translateY(12px); } }
+
+  .site-nav { display: flex; }
+  .site-burger { display: none; }
+  @media (max-width: 820px) {
+    .site-nav { display: none !important; }
+    .site-burger { display: inline-flex !important; }
+  }
+</style>
