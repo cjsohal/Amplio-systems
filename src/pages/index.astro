@@ -15,7 +15,7 @@ import { Accordion } from '@ds/components/navigation/Accordion.jsx';
 
 const HOME_STEPS = [
   { n: '01', icon: 'search', title: 'We map your week', body: 'A short audit of where your hours actually go. No tools, no changes — just an honest picture.' },
-  { n: '02', icon: 'workflow', title: 'We build the system', body: 'Two weeks of building and testing on the tools you already own, alongside you rather than around you.' },
+  { n: '02', icon: 'workflow', title: 'We build the system', body: 'Building and testing on the tools you already own, alongside you rather than around you.' },
   { n: '03', icon: 'heart-handshake', title: 'We hand it over', body: 'You keep the system, the logins and the documentation. We stay reachable, not required.' },
 ];
 
@@ -34,7 +34,7 @@ const TESTIMONIALS = [
 ];
 
 const FAQ = [
-  { id: 'q1', question: 'How long does setup take?', answer: 'Most systems are live inside three weeks — one week mapping, two building and testing alongside you.' },
+  { id: 'q1', question: 'How long does setup take?', answer: "It depends on the project — every build is scoped to what you actually need. Most systems are live within a matter of weeks once we've mapped what's involved." },
   { id: 'q2', question: 'Will I need to change the tools I already use?', answer: 'Rarely. We build around your calendar, inbox and booking system rather than replacing them.' },
   { id: 'q3', question: 'What if automation is the wrong answer?', answer: "We'll tell you. Integrity comes first, and some problems are cheaper to solve by changing a process than by building anything." },
   { id: 'q4', question: 'What happens after handover?', answer: "You own the system, the logins and the documentation. We're reachable if something changes, but you are not dependent on us." },
@@ -93,7 +93,7 @@ const FAQ = [
 
   <Section tone="sage">
     <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 'var(--space-20)', alignItems: 'start' }}>
-      <SectionHeading eyebrow="How it works" title="Three weeks, three steps, no upheaval" maxWidth={420}
+      <SectionHeading eyebrow="How it works" title="Three steps, no upheaval" maxWidth={420}
         description="We don't replace the tools you like. We connect them, then remove the bits you were doing by hand." />
       <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
         {HOME_STEPS.map((s) => (
@@ -146,7 +146,7 @@ const FAQ = [
   <Section tone="page" tight>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'var(--space-12)' }}>
       <StatBlock value="11 hrs" label="Average admin time returned per week across our first cohort" />
-      <StatBlock value="3 wks" label="From first call to a working system, start to finish" />
+      <StatBlock value="8+" label="Automation projects delivered for small businesses so far" />
       <StatBlock value="No lock-in" label="Built on tools you already own, documented and handed over" />
     </div>
   </Section>
