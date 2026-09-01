@@ -2,29 +2,32 @@
 
 Marketing site for Amplio Systems Ltd, built with [Astro](https://astro.build) + React islands,
 on top of the Amplio design system in [`design-system/`](design-system/). Deploys to Cloudflare
-Pages.
+Workers (Cloudflare's Git integration now provisions static sites as a Workers project — using
+`wrangler deploy` — rather than the older Pages product).
 
 ## Stack
 
 - **Astro** (static output — ships zero JS by default)
 - **React** islands for the interactive pieces only: the header dropdown/mobile nav, the booking
   dialog, tabs, accordions, the contact/pilot forms, and the Atlas map
-- **Cloudflare Pages Functions** (`functions/api/`) for form submission endpoints
+- **A small Cloudflare Worker** (`worker/index.js`) that serves the static build and handles the
+  three form endpoints — see [`wrangler.jsonc`](wrangler.jsonc)
 
 ## Local development
 
 ```bash
 npm install
-npm run dev       # http://localhost:4321
+npm run dev        # Astro dev server, http://localhost:4321
 npm run build      # static output to dist/
-npm run preview    # serve the built output locally
+npm run preview    # serve the built output locally (Astro's own preview, no Worker)
+npm run cf:dev      # build, then run the actual Worker locally via `wrangler dev` — the only
+                     # way to test /api/contact, /api/pilot, /api/booking locally
 ```
 
-`functions/api/*` are Cloudflare Pages Functions, not Astro routes — `npm run dev` does not serve
-them (calls to `/api/contact`, `/api/pilot`, `/api/booking` will 404 locally; the forms handle
-this gracefully and still show their success state). Test them with
-[`wrangler pages dev ./dist`](https://developers.cloudflare.com/pages/functions/local-development/)
-after a build, or by deploying.
+`npm run dev` is fastest for day-to-day page work, but it doesn't run `worker/index.js` — calls
+to `/api/contact`, `/api/pilot`, `/api/booking` will 404 (the forms handle this gracefully and
+still show their success state). Use `npm run cf:dev` when you need those routes to actually
+respond.
 
 ## Where things live
 
@@ -35,7 +38,7 @@ after a build, or by deploying.
 | `src/pages/` | One file per route, matching the table in `design-system/HANDOFF.md`. |
 | `src/components/` | Site-specific components: chrome (header/footer/booking dialog), and page-specific pieces (services tabs, Atlas map/dashboard, forms). |
 | `src/data/servicePages.js` | The shared data object behind the three AI Automation sub-pages, so they can't structurally drift apart. |
-| `functions/api/` | Cloudflare Pages Functions — currently stubs, see below. |
+| `worker/index.js` + `wrangler.jsonc` | The Cloudflare Worker that serves the static build and the three form endpoints — currently stubs, see below. |
 | `.claude/skills/amplio-systems-design/` | A pointer so Claude Code picks up the design system as a skill in future sessions on this repo. |
 
 ## Deliberate adaptations from the handed-off design system
@@ -67,6 +70,12 @@ are the exceptions, each small and additive:
   `<script>` + `window.L` global (same behaviour: Northampton, interaction disabled, OSM
   attribution kept). Leaflet touches `window` at import time, which breaks Astro's Node
   prerendering even for `client:visible`, so it's `client:only="react"`.
+- **Worker instead of Pages Functions.** `HANDOFF.md` suggested "Cloudflare Pages Functions"
+  (`functions/api/*.js`, file-based routing) for form submission — correct for the Pages product
+  at the time, but Cloudflare's Git integration now provisions a **Workers** project instead
+  (`wrangler deploy`), which doesn't honour that convention. `worker/index.js` + `wrangler.jsonc`
+  is the direct equivalent: one script serves the static build via the `ASSETS` binding and
+  handles the same three routes.
 - **`client:load` over `client:visible` for Accordion/Tabs.** `client:visible` uses
   `IntersectionObserver` against `<astro-island>`, which renders `display: contents` — a couple of
   browser engines report a zero-size bounding box for that, so the observer's callback never
@@ -77,11 +86,20 @@ are the exceptions, each small and additive:
 ## Forms and the booking dialog
 
 The contact form, the Atlas pilot form, and the "Book a discovery call" dialog all `fetch()` a
-Cloudflare Pages Function (`/api/contact`, `/api/pilot`, `/api/booking`) on submit. Right now each
-function only validates the payload shape and returns `200` — **nothing is actually sent or
-stored anywhere yet.** Each file has a `// TODO` showing where to add real delivery (e.g.
-[Resend](https://resend.com)); wiring that in needs an API key added as a Cloudflare Pages secret,
-not committed to the repo.
+route on the Worker (`/api/contact`, `/api/pilot`, `/api/booking`) on submit. Right now each route
+only validates the payload shape and returns `200` — **nothing is actually sent or stored
+anywhere yet.** `worker/index.js` has a `// TODO` showing where to add real delivery (e.g.
+[Resend](https://resend.com)); wiring that in needs an API key added as a secret on the Worker
+(Cloudflare dashboard → this project → Settings → Variables and secrets), not committed to the
+repo.
+
+## Deploying
+
+Cloudflare's Git integration (Workers & Pages → Create → connect this repo) builds and deploys
+automatically on every push to `main` — no dashboard build-output-directory field to set, because
+`wrangler.jsonc` already declares `assets.directory` (`./dist/`) and `main` (`./worker/index.js`).
+The dashboard's build command should be `npm run build`; the deploy command Cloudflare fills in
+by default, `npx wrangler deploy`, is correct as-is and needs no changes.
 
 ## Known gaps (carried over from the design system handoff)
 
