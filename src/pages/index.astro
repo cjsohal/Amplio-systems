@@ -19,6 +19,14 @@ const HOME_STEPS = [
   { n: '03', icon: 'heart-handshake', title: 'We hand it over', body: 'You keep the system, the logins and the documentation. We stay reachable, not required.' },
 ];
 
+const WARNING_POINTS = [
+  ['Generic AI will create slop that puts your reputation and business at risk', 'We create AI systems that work with you, not against you'],
+  ['Systems without business policies put you at risk from ICO and compliance', 'We advise you on which policies and procedures you need in place to stay compliant'],
+  ['AI without guardrails will hallucinate and cause endless frustration', 'Your AI system works with you so that it has appropriate guardrails, stays on topic and works within business boundaries'],
+  ["AI that gives generic advice and doesn't sound anything like you or your business", "Your AI system works with your business's unique values, mission, best practices and industry knowledge"],
+  ['AI usage hidden in your client interactions, possibly breaching regulations', 'Our systems are compliant with the latest EU legislation and AI use is transparent'],
+];
+
 const FAQ = [
   { id: 'q1', question: 'How long does setup take?', answer: 'Most systems are live inside three weeks — one week mapping, two building and testing alongside you.' },
   { id: 'q2', question: 'Will I need to change the tools I already use?', answer: 'Rarely. We build around your calendar, inbox and booking system rather than replacing them.' },
@@ -95,6 +103,37 @@ const FAQ = [
           </Card>
         ))}
       </div>
+    </div>
+  </Section>
+
+  <Section tone="page">
+    <SectionHeading align="center" eyebrow="A word of warning" title="What other AI system providers won't tell you" maxWidth={640} />
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-16)', marginTop: 'var(--space-12)' }}>
+      <div>
+        <Eyebrow tone="muted" style={{ marginBottom: 'var(--space-5)' }}>Others' approach</Eyebrow>
+        <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
+          {WARNING_POINTS.map(([theirs]) => (
+            <div key={theirs} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+              <Icon name="triangle-alert" size={18} style={{ color: 'var(--feedback-warning-fg)', marginTop: 3 }} />
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-base)', lineHeight: 'var(--leading-normal)', color: 'var(--text-body)' }}>{theirs}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Our approach</Eyebrow>
+        <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
+          {WARNING_POINTS.map(([, ours]) => (
+            <div key={ours} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+              <Icon name="circle-check" size={18} style={{ color: 'var(--amplio-green)', marginTop: 3 }} />
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-base)', lineHeight: 'var(--leading-normal)', color: 'var(--text-body)' }}>{ours}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div style={{ display: 'flex', justifyContent: 'center', marginTop: 'var(--space-12)' }}>
+      <Button href="/ai-automation/ai-strategy/">Learn more</Button>
     </div>
   </Section>
 
