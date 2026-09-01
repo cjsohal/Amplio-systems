@@ -20,11 +20,17 @@ const HOME_STEPS = [
 ];
 
 const WARNING_POINTS = [
-  ['Generic AI will create slop that puts your reputation and business at risk', 'We create AI systems that work with you, not against you'],
-  ['Systems without business policies put you at risk from ICO and compliance', 'We advise you on which policies and procedures you need in place to stay compliant'],
-  ['AI without guardrails will hallucinate and cause endless frustration', 'Your AI system works with you so that it has appropriate guardrails, stays on topic and works within business boundaries'],
-  ["AI that gives generic advice and doesn't sound anything like you or your business", "Your AI system works with your business's unique values, mission, best practices and industry knowledge"],
-  ['AI usage hidden in your client interactions, possibly breaching regulations', 'Our systems are compliant with the latest EU legislation and AI use is transparent'],
+  ["Generic AI can produce work that doesn't reflect well on your business", 'We build AI systems that work the way you do, not against you'],
+  ["Without clear policies in place, you're exposed to ICO and compliance risk", 'We advise you on which policies and procedures you need in place to stay compliant'],
+  ['AI without guardrails can hallucinate — confidently wrong, and costly to fix', 'Your AI system has guardrails that keep it on topic and within business boundaries'],
+  ['Generic AI rarely sounds like you, or your business', "Your AI system reflects your business's values, tone and industry knowledge"],
+  ['Undisclosed AI use in client interactions can breach transparency regulations', 'Our systems are built to comply with the latest EU legislation, and AI use is always disclosed'],
+];
+
+const TESTIMONIALS = [
+  { quote: "Amplio Systems have helped me streamline my marketing and customer data analysis. Couldn't have it done without you, thanks CJ!", name: 'Sarah James', role: 'Marketing expert' },
+  { quote: 'I wanted to learn about how different AI models can be used effectively. CJ put together bespoke training for me, and then helped me implement automation in several processes including customer contact, and an AI voice assistant.', name: 'Mike Tatum', role: 'Designer, UI/UX' },
+  { quote: 'Amplio Systems have helped me simplify some spreadsheets and data analysis, which for a small business can be costly and time-consuming. I hated doing it manually, now AI does it for me!', name: 'Lisa Bellucci', role: 'Director' },
 ];
 
 const FAQ = [
@@ -107,10 +113,10 @@ const FAQ = [
   </Section>
 
   <Section tone="page">
-    <SectionHeading align="center" eyebrow="A word of warning" title="What other AI system providers won't tell you" maxWidth={640} />
+    <SectionHeading align="center" eyebrow="Why this matters" title="The difference between AI that works and AI that doesn't" maxWidth={640} />
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-16)', marginTop: 'var(--space-12)' }}>
       <div>
-        <Eyebrow tone="muted" style={{ marginBottom: 'var(--space-5)' }}>Others' approach</Eyebrow>
+        <Eyebrow tone="muted" style={{ marginBottom: 'var(--space-5)' }}>Left unmanaged</Eyebrow>
         <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
           {WARNING_POINTS.map(([theirs]) => (
             <div key={theirs} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
@@ -121,7 +127,7 @@ const FAQ = [
         </div>
       </div>
       <div>
-        <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Our approach</Eyebrow>
+        <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Done properly</Eyebrow>
         <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
           {WARNING_POINTS.map(([, ours]) => (
             <div key={ours} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
@@ -146,9 +152,10 @@ const FAQ = [
   </Section>
 
   <Section tone="card">
-    <div style={{ maxWidth: 760, margin: '0 auto' }}>
-      <Testimonial quote="I stopped dreading Monday mornings. The week starts and the admin has already happened."
-        name="Priya Raman" role="Life coach, Bristol" />
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: 'var(--space-10)' }}>
+      {TESTIMONIALS.map((t) => (
+        <Testimonial key={t.name} quote={t.quote} name={t.name} role={t.role} />
+      ))}
     </div>
   </Section>
 
