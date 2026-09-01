@@ -115,7 +115,7 @@ export default function SiteHeader({ page }) {
         display: 'flex', alignItems: 'center', gap: 'var(--space-12)',
       }}>
         <a href="/" style={{ lineHeight: 0, flex: 'none' }}>
-          <Logo height={26} />
+          <Logo height={34} />
         </a>
         <nav className="site-nav" style={{ gap: 'var(--space-10)' }}>
           {NAV.map((n) => <NavItem key={n.href} n={n} page={page} />)}
