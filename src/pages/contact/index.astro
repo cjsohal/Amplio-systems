@@ -17,7 +17,7 @@ import ContactForm from '@components/contact/ContactForm.jsx';
           description="We read everything that comes in. You'll hear back from a person, usually the same day." />
         <div style={{ display: 'grid', gap: 'var(--space-4)', marginTop: 'var(--space-10)' }}>
           {[['mail', 'info@ampliosystemsltd.com'], ['globe', 'ampliosystemsltd.com'], ['clock', 'Replies weekdays, 9am–6pm']].map(([i, t]) => (
-            <div key={t} style={{ display: 'flex', gap: 12, alignItems: 'center', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-body)' }}>
+            <div key={t} style={{ display: 'flex', gap: '12px', alignItems: 'center', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-body)' }}>
               <Icon name={i} size={18} style={{ color: 'var(--amplio-green)' }} />{t}
             </div>
           ))}

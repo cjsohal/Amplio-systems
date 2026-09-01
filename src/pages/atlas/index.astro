@@ -79,21 +79,21 @@ const platformTitle = React.createElement(React.Fragment, null, 'AI-powered clar
         <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 'var(--weight-display)', fontSize: 'clamp(34px,4.2vw,56px)', lineHeight: 'var(--leading-tight)', color: 'var(--text-heading)', margin: 0 }}>
           Better decisions.<br />Better homes.<br /><span style={{ color: 'var(--amplio-green)' }}>Stronger communities.</span>
         </h1>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: 'var(--space-8) 0 0', maxWidth: 460 }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: 'var(--space-8) 0 0', maxWidth: '460px' }}>
           Atlas is an AI-powered decision support platform for housing providers. We help you build the right homes in the right places—for the right people.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)', marginTop: 'var(--space-8)' }}>
           <Button size="md" iconRight="arrow-right" href="/atlas/pilot/">Join the pilot</Button>
           <Button size="md" variant="secondary" href="#platform">Learn how it works</Button>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 'var(--space-8)', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-body)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: 'var(--space-8)', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-body)' }}>
           <Icon name="shield-check" size={18} style={{ color: 'var(--amplio-green)' }} />
           Built for housing. Driven by impact.
         </div>
       </div>
       <div style={{ position: 'relative' }}>
         <MediaSlot label="Hero photography · new-build housing scheme · not supplied" height={420} align="end start" labelMaxWidth={190} />
-        <div style={{ position: 'absolute', right: -12, bottom: 110 }}><SitePotentialCard /></div>
+        <div style={{ position: 'absolute', right: '-12px', bottom: '110px' }}><SitePotentialCard /></div>
       </div>
     </div>
   </div>
@@ -106,7 +106,7 @@ const platformTitle = React.createElement(React.Fragment, null, 'AI-powered clar
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 0, marginTop: 'var(--space-16)' }}>
       {CHALLENGE_PILLARS.map((p, i) => (
         <div key={p.title} style={{ textAlign: 'center', padding: '0 var(--space-6)', borderLeft: i ? '1px solid var(--border-subtle)' : 'none' }}>
-          <span style={{ width: 52, height: 52, margin: '0 auto', borderRadius: 'var(--radius-leaf)', background: 'var(--sage-mist)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
+          <span style={{ width: '52px', height: '52px', margin: '0 auto', borderRadius: 'var(--radius-leaf)', background: 'var(--sage-mist)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
             <Icon name={p.icon} size={24} />
           </span>
           <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-lg)', lineHeight: 'var(--leading-snug)', color: 'var(--text-heading)', margin: 'var(--space-5) 0 var(--space-3)' }}>{p.title}</h3>
@@ -138,7 +138,7 @@ const platformTitle = React.createElement(React.Fragment, null, 'AI-powered clar
         <div style={{ display: 'grid', gap: 'var(--space-6)' }}>
           {REFRESH_ATLAS.map(([v, l], i) => (
             <div key={v}>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', flexWrap: 'wrap' }}>
                 <span style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', lineHeight: 1.1, color: 'var(--deep-fern)' }}>{v}</span>
                 {i === 2 && <Badge tone="neutral" icon="clock">Phase three</Badge>}
               </div>
@@ -148,7 +148,7 @@ const platformTitle = React.createElement(React.Fragment, null, 'AI-powered clar
         </div>
       </Card>
     </div>
-    <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textAlign: 'center', margin: 'var(--space-8) auto 0', maxWidth: 620 }}>
+    <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textAlign: 'center', margin: 'var(--space-8) auto 0', maxWidth: '620px' }}>
       Figures describe what housing providers tell us they currently spend. Automated board
       reporting is planned for the third phase of development, not available today.
     </p>
@@ -162,8 +162,8 @@ const platformTitle = React.createElement(React.Fragment, null, 'AI-powered clar
           maxWidth={440} />
         <div style={{ display: 'grid', gap: 'var(--space-3)', marginTop: 'var(--space-8)' }}>
           {PLATFORM_POINTS.map((p) => (
-            <div key={p} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <Icon name="circle-check" size={18} style={{ color: 'var(--amplio-green)', marginTop: 2 }} />
+            <div key={p} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+              <Icon name="circle-check" size={18} style={{ color: 'var(--amplio-green)', marginTop: '2px' }} />
               <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-normal)', color: 'var(--text-body)' }}>{p}</span>
             </div>
           ))}
@@ -182,7 +182,7 @@ const platformTitle = React.createElement(React.Fragment, null, 'AI-powered clar
       {IMPACT.map((p, i) => (
         <div key={p.title} style={{ padding: '0 var(--space-8)', borderLeft: i ? '1px solid var(--border-subtle)' : 'none' }}>
           <div style={{ display: 'flex', gap: 'var(--space-4)', alignItems: 'center' }}>
-            <span style={{ width: 46, height: 46, flex: 'none', borderRadius: 'var(--radius-circle)', background: 'var(--sage-mist)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
+            <span style={{ width: '46px', height: '46px', flex: 'none', borderRadius: 'var(--radius-circle)', background: 'var(--sage-mist)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
               <Icon name={p.icon} size={22} />
             </span>
             <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-xl)', lineHeight: 'var(--leading-snug)', color: 'var(--text-heading)', margin: 0 }}>{p.title}</h3>
@@ -202,7 +202,7 @@ const platformTitle = React.createElement(React.Fragment, null, 'AI-powered clar
         </div>
       ))}
     </div>
-    <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--text-inverse-muted)', textAlign: 'center', margin: 'var(--space-10) auto 0', maxWidth: 560 }}>
+    <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--text-inverse-muted)', textAlign: 'center', margin: 'var(--space-10) auto 0', maxWidth: '560px' }}>
       Atlas is at concept stage. These are the indicators we model and the outcomes better
       decisions could unlock — not results we have delivered.
     </p>
@@ -216,7 +216,7 @@ const platformTitle = React.createElement(React.Fragment, null, 'AI-powered clar
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 'var(--weight-display)', fontSize: 'clamp(28px,3.4vw,42px)', lineHeight: 'var(--leading-snug)', color: 'var(--text-heading)', margin: 0 }}>
             Ready to make<br />better decisions?
           </h2>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: 'var(--space-5) 0 0', maxWidth: 420 }}>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: 'var(--space-5) 0 0', maxWidth: '420px' }}>
             Join forward-thinking housing providers shaping Atlas from the start, and help us build the right homes in the right places.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-4)', alignItems: 'center', marginTop: 'var(--space-8)' }}>

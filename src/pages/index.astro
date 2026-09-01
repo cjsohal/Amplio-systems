@@ -44,8 +44,8 @@ const FAQ = [
 
   <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--gradient-hero)', color: 'var(--text-inverse)' }}>
     <div aria-hidden="true" style={{
-      position: 'absolute', inset: 0, display: 'grid', placeItems: 'end start', padding: 20,
-      border: '1px dashed var(--alpha-cream-24)', margin: 12, borderRadius: 'var(--radius-xl)',
+      position: 'absolute', inset: 0, display: 'grid', placeItems: 'end start', padding: '20px',
+      border: '1px dashed var(--alpha-cream-24)', margin: '12px', borderRadius: 'var(--radius-xl)',
     }}>
       <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-2xs)', letterSpacing: 'var(--tracking-eyebrow)', textTransform: 'uppercase', color: 'var(--alpha-cream-24)' }}>
         Video slot &middot; no footage supplied
@@ -60,14 +60,14 @@ const FAQ = [
       <h1 style={{
         fontFamily: 'var(--font-display)', fontWeight: 'var(--weight-display)',
         fontSize: 'clamp(40px, 6vw, 82px)', lineHeight: 'var(--leading-tight)',
-        color: 'var(--text-inverse)', margin: 'var(--space-6) 0 0', maxWidth: 900,
+        color: 'var(--text-inverse)', margin: 'var(--space-6) 0 0', maxWidth: '900px',
       }}>
         Automate the mundane.<br />Amplify what matters.
       </h1>
       <p style={{
         fontFamily: 'var(--font-body)', fontSize: 'clamp(17px, 1.5vw, 21px)',
         lineHeight: 'var(--leading-relaxed)', color: 'var(--text-inverse-muted)',
-        margin: 'var(--space-8) 0 0', maxWidth: 620,
+        margin: 'var(--space-8) 0 0', maxWidth: '620px',
       }}>
         We systemise the tedious work that drains your week — intake, invoicing, follow-up —
         so you can get back to the part of the job you actually trained for.
@@ -98,11 +98,11 @@ const FAQ = [
       <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
         {HOME_STEPS.map((s) => (
           <Card key={s.n} variant="raised" padding="lg" style={{ display: 'flex', gap: 'var(--space-6)', alignItems: 'flex-start' }}>
-            <span style={{ width: 48, height: 48, flex: 'none', borderRadius: 'var(--radius-leaf)', background: 'var(--green-50)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
+            <span style={{ width: '48px', height: '48px', flex: 'none', borderRadius: 'var(--radius-leaf)', background: 'var(--green-50)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
               <Icon name={s.icon} size={22} />
             </span>
             <div>
-              <Eyebrow style={{ marginBottom: 6 }}>{s.n}</Eyebrow>
+              <Eyebrow style={{ marginBottom: '6px' }}>{s.n}</Eyebrow>
               <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-xl)', margin: '0 0 6px', color: 'var(--text-heading)' }}>{s.title}</h3>
               <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-relaxed)', margin: 0, color: 'var(--text-body)' }}>{s.body}</p>
             </div>
@@ -119,8 +119,8 @@ const FAQ = [
         <Eyebrow tone="muted" style={{ marginBottom: 'var(--space-5)' }}>Left unmanaged</Eyebrow>
         <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
           {WARNING_POINTS.map(([theirs]) => (
-            <div key={theirs} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <Icon name="triangle-alert" size={18} style={{ color: 'var(--feedback-warning-fg)', marginTop: 3 }} />
+            <div key={theirs} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+              <Icon name="triangle-alert" size={18} style={{ color: 'var(--feedback-warning-fg)', marginTop: '3px' }} />
               <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-base)', lineHeight: 'var(--leading-normal)', color: 'var(--text-body)' }}>{theirs}</span>
             </div>
           ))}
@@ -130,8 +130,8 @@ const FAQ = [
         <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Done properly</Eyebrow>
         <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
           {WARNING_POINTS.map(([, ours]) => (
-            <div key={ours} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <Icon name="circle-check" size={18} style={{ color: 'var(--amplio-green)', marginTop: 3 }} />
+            <div key={ours} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+              <Icon name="circle-check" size={18} style={{ color: 'var(--amplio-green)', marginTop: '3px' }} />
               <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-base)', lineHeight: 'var(--leading-normal)', color: 'var(--text-body)' }}>{ours}</span>
             </div>
           ))}

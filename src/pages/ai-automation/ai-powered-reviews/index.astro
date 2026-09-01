@@ -61,10 +61,10 @@ const FAQ = [
       style={{ position: 'absolute', right: '-7%', top: '-32%', width: 'min(560px, 50%)', opacity: 0.14 }} />
     <div style={{ position: 'relative', maxWidth: 'var(--container-xl)', margin: '0 auto', padding: 'var(--space-32) var(--space-8) var(--space-24)' }}>
       <Eyebrow tone="inverse" style={{ marginBottom: 'var(--space-5)' }}>Amplio Reviews</Eyebrow>
-      <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 'var(--weight-display)', fontSize: 'clamp(36px,5vw,68px)', lineHeight: 'var(--leading-tight)', color: 'var(--text-inverse)', margin: 0, maxWidth: 860 }}>
+      <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 'var(--weight-display)', fontSize: 'clamp(36px,5vw,68px)', lineHeight: 'var(--leading-tight)', color: 'var(--text-inverse)', margin: 0, maxWidth: '860px' }}>
         You don't have a review problem.<br />You have a remembering problem.
       </h1>
-      <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(17px,1.5vw,21px)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-inverse-muted)', margin: 'var(--space-8) 0 0', maxWidth: 640 }}>
+      <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(17px,1.5vw,21px)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-inverse-muted)', margin: 'var(--space-8) 0 0', maxWidth: '640px' }}>
         Your customers aren't unhappy and your team isn't failing. Delighted customers simply
         forget to leave reviews, and busy businesses forget to ask. Amplio Reviews turns asking
         into something that just happens.
@@ -102,13 +102,13 @@ const FAQ = [
       title="Your reviews answer these before you ever speak" maxWidth={620} />
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)', justifyContent: 'center', marginTop: 'var(--space-10)' }}>
       {REVIEW_QUESTIONS.map(([icon, q]) => (
-        <span key={q} style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: 'var(--surface-card)', borderRadius: 'var(--radius-pill)', padding: '10px 18px', boxShadow: 'var(--shadow-xs)' }}>
+        <span key={q} style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'var(--surface-card)', borderRadius: 'var(--radius-pill)', padding: '10px 18px', boxShadow: 'var(--shadow-xs)' }}>
           <Icon name={icon} size={17} style={{ color: 'var(--amplio-green)' }} />
           <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-heading)' }}>{q}</span>
         </span>
       ))}
     </div>
-    <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-body)', textAlign: 'center', margin: 'var(--space-8) auto 0', maxWidth: 560 }}>
+    <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-body)', textAlign: 'center', margin: 'var(--space-8) auto 0', maxWidth: '560px' }}>
       The uncomfortable part: they reach a conclusion without ever contacting you. There's no
       rejected quote and no phone call. They simply don't get in touch.
     </p>
@@ -121,7 +121,7 @@ const FAQ = [
       {STEPS.map((s) => (
         <Card key={s.n} variant="raised" padding="lg" style={{ height: '100%' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            <span style={{ width: 48, height: 48, borderRadius: 'var(--radius-leaf)', background: 'var(--green-50)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
+            <span style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-leaf)', background: 'var(--green-50)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
               <Icon name={s.icon} size={22} />
             </span>
             <Eyebrow tone="muted">{s.n}</Eyebrow>
@@ -145,14 +145,14 @@ const FAQ = [
         description="When the same sentence sits under every review, everyone can tell it was pasted. A reply that mentions what the customer actually said shows them — and every future customer reading it — that somebody listened." />
       <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
         <Card variant="outlined" padding="md">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
             <Icon name="x" size={16} style={{ color: 'var(--text-subtle)' }} />
             <Eyebrow tone="muted">Under every single review</Eyebrow>
           </div>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', color: 'var(--text-muted)', margin: 0, maxWidth: 'none' }}>{REPLY_BAD}</p>
         </Card>
         <Card variant="sage" padding="md">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
             <Icon name="check" size={16} style={{ color: 'var(--deep-fern)' }} />
             <Eyebrow>Drafted from what they wrote</Eyebrow>
           </div>
@@ -163,10 +163,10 @@ const FAQ = [
   </Section>
 
   <Section tone="page" tight>
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-12)', alignItems: 'center', maxWidth: 900, margin: '0 auto' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-12)', alignItems: 'center', maxWidth: '900px', margin: '0 auto' }}>
       <div>
         <Eyebrow style={{ marginBottom: 'var(--space-4)' }}>What it costs</Eyebrow>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', flexWrap: 'wrap' }}>
           <span style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(44px,5vw,64px)', lineHeight: 1, color: 'var(--text-brand)' }}>
             {LAUNCH_OFFER ? LAUNCH_OFFER.price : '£200'}
           </span>
@@ -191,8 +191,8 @@ const FAQ = [
         <Eyebrow style={{ marginBottom: 'var(--space-5)' }}>Included</Eyebrow>
         <div style={{ display: 'grid', gap: 'var(--space-3)' }}>
           {['Feedback request, review request and reminder', 'SMS and email, in your tone of voice', 'Direct link to your Google profile', 'Personalised reply drafts for every review', 'Setup and handover documentation'].map((t) => (
-            <div key={t} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <Icon name="circle-check" size={17} style={{ color: 'var(--amplio-green)', marginTop: 2 }} />
+            <div key={t} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+              <Icon name="circle-check" size={17} style={{ color: 'var(--amplio-green)', marginTop: '2px' }} />
               <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-normal)', color: 'var(--text-body)' }}>{t}</span>
             </div>
           ))}

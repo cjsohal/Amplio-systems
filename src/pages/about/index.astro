@@ -37,7 +37,7 @@ const VALUES = [
       {VALUES.map((v) => (
         <Card key={v.n} variant="raised" padding="lg">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            <span style={{ width: 46, height: 46, borderRadius: 'var(--radius-leaf)', background: 'var(--green-50)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
+            <span style={{ width: '46px', height: '46px', borderRadius: 'var(--radius-leaf)', background: 'var(--green-50)', color: 'var(--deep-fern)', display: 'grid', placeItems: 'center' }}>
               <Icon name={v.icon} size={22} />
             </span>
             <Eyebrow tone="muted">{v.n}</Eyebrow>
@@ -52,13 +52,14 @@ const VALUES = [
   <Section tone="page">
     <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 'var(--space-20)', alignItems: 'start' }}>
       <SectionHeading eyebrow="Who we work with" title="Small practices where the owner is still the product" maxWidth={400}
-        description="Life coaches, chiropractors, consultants, practitioners. People whose time is the thing being sold, and whose admin is therefore the most expensive thing in the business." />
+        description="Life coaches, local businesses, consultants, practitioners. People whose time is the thing being sold, and whose admin is therefore the most expensive thing in the business." />
       <div style={{ display: 'grid', gap: 'var(--space-8)' }}>
         <Testimonial quote="Amplio Systems have helped me streamline my marketing and customer data analysis. Couldn't have it done without you, thanks CJ!"
           name="Sarah James" role="Marketing expert" />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-8)', borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-8)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'var(--space-8)', borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-8)' }}>
           <StatBlock value="Reassured" label="How clients say they feel after the first call" />
           <StatBlock value="Relaxed" label="How they describe the build weeks" />
+          <StatBlock value="Comfortable" label="Using the system with ongoing support" />
         </div>
       </div>
     </div>
