@@ -16,6 +16,7 @@ import { CTABanner } from '@ds/components/marketing/CTABanner.jsx';
 import { Accordion } from '@ds/components/navigation/Accordion.jsx';
 import { Alert } from '@ds/components/feedback/Alert.jsx';
 import ProfileCard from '@components/reviews/ProfileCard.jsx';
+import { BOOKING_URL } from '@data/site.js';
 
 /* The launch promotion ends 30 September 2026. Set to null once it lapses —
    do not leave an expired offer on the page. */
@@ -141,7 +142,7 @@ const FAQ = [
   <Section tone="card">
     <div style={{ display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 'var(--space-16)', alignItems: 'center' }}>
       <SectionHeading eyebrow="Replies that sound human" maxWidth={400}
-        title="&ldquo;Thanks for your feedback&rdquo; is a box being ticked"
+        title="“Thanks for your feedback” is a box being ticked"
         description="When the same sentence sits under every review, everyone can tell it was pasted. A reply that mentions what the customer actually said shows them — and every future customer reading it — that somebody listened." />
       <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
         <Card variant="outlined" padding="md">
@@ -211,7 +212,8 @@ const FAQ = [
   <Section tone="page" tight>
     <CTABanner eyebrow="Stop relying on good intentions" title="You may already have the customers. You just need the system."
       description="If your work is good but your Google profile doesn't show it, you're leaving reputation, visibility and enquiries on the table."
-      primaryLabel="Get set up" primaryHref="/contact/" secondaryLabel="Talk to us first" secondaryHref="/contact/" />
+      primaryLabel="Get set up" primaryHref="/contact/" secondaryLabel="Talk to us first" secondaryHref={BOOKING_URL}
+      secondaryProps={{ target: '_blank', rel: 'noopener noreferrer' }} />
   </Section>
 
 </BaseLayout>

@@ -5,7 +5,7 @@ import { assetBase } from '../core/Logo.jsx';
 
 export function CTABanner({
   eyebrow, title, description, primaryLabel = 'Book a discovery call', primaryHref, primaryProps,
-  secondaryLabel, secondaryHref, tone = 'brand', style,
+  secondaryLabel, secondaryHref, secondaryProps, tone = 'brand', style,
 }) {
   const onDark = tone === 'brand' || tone === 'ink';
   return (
@@ -35,7 +35,8 @@ export function CTABanner({
           <Button variant={onDark ? 'inverse' : 'primary'} size="lg" iconRight="arrow-right" href={primaryHref} {...primaryProps}>{primaryLabel}</Button>
           {secondaryLabel && (
             <Button variant="ghost" size="lg" href={secondaryHref}
-              style={onDark ? { color: 'var(--warm-cream)', border: '1px solid var(--alpha-cream-24)' } : undefined}>
+              style={onDark ? { color: 'var(--warm-cream)', border: '1px solid var(--alpha-cream-24)' } : undefined}
+              {...secondaryProps}>
               {secondaryLabel}
             </Button>
           )}
