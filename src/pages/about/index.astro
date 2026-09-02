@@ -1,4 +1,5 @@
 ---
+import React from 'react';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Section from '@components/Section.jsx';
 import { Card } from '@ds/components/core/Card.jsx';
@@ -17,16 +18,30 @@ const VALUES = [
   { n: '03', icon: 'zap', title: 'Brave', body: "Stretching the boundaries of what's possible." },
   { n: '04', icon: 'sparkles', title: 'Fun', body: 'Making the process enjoyable rather than laborious.' },
 ];
+
+/* SectionHeading's title/description accept a React node, not just a string — used here to
+   italicise and colour a phrase in each, matching the emphasis style requested for this hero.
+   Built with React.createElement rather than JSX because Astro's own <>...</> template syntax
+   produces an Astro-internal chunk object here, not a real React element (see the note on the
+   Atlas page, which hit the same issue first). */
+const aboutTitle = React.createElement(React.Fragment, null,
+  'Amplio is Latin: to ',
+  React.createElement('em', { style: { fontStyle: 'italic', color: 'var(--amplio-green)' } }, 'enlarge, extend, multiply'));
+
+const aboutDescription = React.createElement(React.Fragment, null,
+  'We chose it because the point was never speed. It was room — room to think, to grow, to do the work you actually care about. ',
+  React.createElement('strong', { style: { color: 'var(--deep-fern)', fontWeight: 'var(--weight-bold)' } }, '“Systems” keeps us honest about the method'),
+  '; the warmth is the part most automation forgets.');
 ---
 <BaseLayout title="About" description="Amplio is Latin: to enlarge, extend, multiply. We chose it because the point was never speed. It was room — room to think, to grow, to do the work you actually care about.">
 
   <Section tone="page" tight style={{ paddingTop: 'var(--space-24)' }}>
-    <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 'var(--space-20)', alignItems: 'center' }}>
+    <div class="about-hero-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 'var(--space-20)', alignItems: 'center' }}>
       <SectionHeading eyebrow="About" level={1} maxWidth={560}
-        title="Amplio is Latin: to enlarge, extend, multiply"
-        description="We chose it because the point was never speed. It was room — room to think, to grow, to do the work you actually care about. “Systems” keeps us honest about the method; the warmth is the part most automation forgets." />
+        title={aboutTitle}
+        description={aboutDescription} />
       <div style={{ display: 'grid', placeItems: 'center' }}>
-        <img src="/assets/mark.svg" alt="" style={{ width: 'min(260px,100%)', opacity: 0.9 }} />
+        <img src="/assets/amplio-globe.png" alt="A globe illustration surrounded by icon tiles for data, technology, insight, people, strategy and impact" style={{ width: 'min(420px,100%)' }} />
       </div>
     </div>
   </Section>
@@ -87,3 +102,9 @@ const VALUES = [
   </Section>
 
 </BaseLayout>
+
+<style>
+  @media (max-width: 820px) {
+    .about-hero-grid { grid-template-columns: 1fr !important; }
+  }
+</style>

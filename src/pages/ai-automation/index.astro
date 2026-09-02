@@ -1,4 +1,5 @@
 ---
+import React from 'react';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Section from '@components/Section.jsx';
 import { SectionHeading } from '@ds/components/marketing/SectionHeading.jsx';
@@ -14,12 +15,16 @@ const STANDALONE = [
   ['/ai-automation/ai-seo/', 'trending-up', 'AI SEO', 'Be visible in LLMs, not just search engines.'],
   ['/ai-automation/ai-strategy/', 'lightbulb', 'AI Strategy', 'A roadmap to navigate AI safely, in the right order.'],
 ];
+
+const servicesTitle = React.createElement(React.Fragment, null,
+  'Four systems, built in the order that ',
+  React.createElement('em', { style: { fontStyle: 'italic', color: 'var(--amplio-green)' } }, 'pays for itself fastest'));
 ---
 <BaseLayout title="AI Automation" description="Four systems, built in the order that pays for itself fastest. We rarely build all of these at once — we start with whichever one is costing you the most this month.">
 
   <Section tone="page" tight style={{ paddingTop: 'var(--space-24)' }}>
     <SectionHeading eyebrow="Services" level={1}
-      title="Four systems, built in the order that pays for itself fastest"
+      title={servicesTitle}
       description="We rarely build all of these at once. We start with whichever one is costing you the most this month." />
   </Section>
 
