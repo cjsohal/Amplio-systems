@@ -4,7 +4,6 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Section from '@components/Section.jsx';
 import { Card } from '@ds/components/core/Card.jsx';
 import { Icon } from '@ds/components/core/Icon.jsx';
-import { Logo } from '@ds/components/core/Logo.jsx';
 import { Eyebrow } from '@ds/components/marketing/Eyebrow.jsx';
 import { SectionHeading } from '@ds/components/marketing/SectionHeading.jsx';
 import { Testimonial } from '@ds/components/marketing/Testimonial.jsx';
@@ -82,15 +81,15 @@ const aboutDescription = React.createElement(React.Fragment, null,
   </Section>
 
   <Section tone="ink" tight>
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-16)', alignItems: 'center' }}>
-      <div>
+    <div style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 'var(--space-16)', alignItems: 'center' }}>
+      <div style={{ display: 'grid', placeItems: 'center' }}>
+        <img src="/assets/tech-working-with-people.png" alt="An illustration of technology working alongside people" style={{ width: 'min(340px,100%)' }} />
+      </div>
+      <div style={{ textAlign: 'right' }}>
         <Eyebrow tone="inverse" style={{ marginBottom: 'var(--space-5)' }}>What we believe</Eyebrow>
         <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px,2.6vw,34px)', lineHeight: 'var(--leading-snug)', color: 'var(--text-inverse)', margin: 0 }}>
           Technology should serve people, not the other way around. We bring warmth to automation, and we create space rather than just speed.
         </p>
-      </div>
-      <div style={{ display: 'grid', placeItems: 'center' }}>
-        <Logo variant="mark-cream" height={150} style={{ opacity: 0.9 }} />
       </div>
     </div>
   </Section>
