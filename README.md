@@ -8,10 +8,10 @@ Workers (Cloudflare's Git integration now provisions static sites as a Workers p
 ## Stack
 
 - **Astro** (static output — ships zero JS by default)
-- **React** islands for the interactive pieces only: the header dropdown/mobile nav, the booking
-  dialog, tabs, accordions, the contact/pilot forms, and the Atlas map
+- **React** islands for the interactive pieces only: the header dropdown/mobile nav, tabs,
+  accordions, the contact/pilot forms, and the Atlas map
 - **A small Cloudflare Worker** (`worker/index.js`) that serves the static build and handles the
-  three form endpoints — see [`wrangler.jsonc`](wrangler.jsonc)
+  contact/pilot form endpoints — see [`wrangler.jsonc`](wrangler.jsonc)
 
 ## Local development
 
@@ -21,13 +21,12 @@ npm run dev        # Astro dev server, http://localhost:4321
 npm run build      # static output to dist/
 npm run preview    # serve the built output locally (Astro's own preview, no Worker)
 npm run cf:dev      # build, then run the actual Worker locally via `wrangler dev` — the only
-                     # way to test /api/contact, /api/pilot, /api/booking locally
+                     # way to test /api/contact and /api/pilot locally
 ```
 
 `npm run dev` is fastest for day-to-day page work, but it doesn't run `worker/index.js` — calls
-to `/api/contact`, `/api/pilot`, `/api/booking` will 404 (the forms handle this gracefully and
-still show their success state). Use `npm run cf:dev` when you need those routes to actually
-respond.
+to `/api/contact` and `/api/pilot` will 404 (the forms handle this gracefully and still show
+their success state). Use `npm run cf:dev` when you need those routes to actually respond.
 
 ## Where things live
 
@@ -36,9 +35,10 @@ respond.
 | `design-system/` | The design system as handed off — tokens, assets, React components, brand readme. Source of truth; imported directly (via the `@ds` alias), not retyped. |
 | `public/assets/` | A served copy of `design-system/assets/` (minus the desktop TTFs, which are for design tools, not the browser). Update both if you add or change an asset. |
 | `src/pages/` | One file per route, matching the table in `design-system/HANDOFF.md`. |
-| `src/components/` | Site-specific components: chrome (header/footer/booking dialog), and page-specific pieces (services tabs, Atlas map/dashboard, forms). |
+| `src/components/` | Site-specific components: chrome (header/footer), and page-specific pieces (services tabs, Atlas map/dashboard, forms). |
 | `src/data/servicePages.js` | The shared data object behind the three AI Automation sub-pages, so they can't structurally drift apart. |
-| `worker/index.js` + `wrangler.jsonc` | The Cloudflare Worker that serves the static build and the three form endpoints — currently stubs, see below. |
+| `src/data/site.js` | Site-wide constants — currently just `BOOKING_URL`, the external booking page every "Book a discovery call" link points to. |
+| `worker/index.js` + `wrangler.jsonc` | The Cloudflare Worker that serves the static build and the contact/pilot form endpoints — currently stubs, see below. |
 | `.claude/skills/amplio-systems-design/` | A pointer so Claude Code picks up the design system as a skill in future sessions on this repo. |
 
 ## Deliberate adaptations from the handed-off design system
@@ -60,12 +60,14 @@ are the exceptions, each small and additive:
   hover/press values the JS already used, so the interaction spec in `HANDOFF.md` holds with zero
   JS. The original JS behaviour is untouched and still runs identically wherever a component is
   hydrated.
-- **`CTABanner` `primaryProps`.** Its primary button only took an `href`. "Book a discovery call"
-  is its default label on most pages' closing section, and needs to open the booking dialog like
-  every other instance of that button — `primaryProps` is a plain pass-through prop (e.g.
-  `{ 'data-open-booking': true }`) spread onto the button, nothing else changed.
+- **`CTABanner` `primaryProps`.** Its primary button only took an `href`; every "Book a discovery
+  call" instance also needs `target="_blank" rel="noopener noreferrer"` since it links out to the
+  external booking page (`BOOKING_URL`). `primaryProps` is a plain pass-through prop spread onto
+  the button for exactly that, nothing else changed.
 - **`Dialog` close button.** `<IconButton icon="x" label="Close" />` had no `onClick` — the X did
-  nothing. Wired to `onClose`.
+  nothing. Wired to `onClose`. (The design system's `Dialog` component itself is currently unused
+  on this site — it was originally used for a booking dialog, since replaced by a direct link to
+  `BOOKING_URL`, see below — but the fix stands as a correction to the component itself.)
 - **Atlas map.** Rebuilt against the `leaflet` npm package instead of the prototype's CDN
   `<script>` + `window.L` global (same behaviour: Northampton, interaction disabled, OSM
   attribution kept). Leaflet touches `window` at import time, which breaks Astro's Node
@@ -83,15 +85,18 @@ are the exceptions, each small and additive:
   enough that the JS-cost difference isn't worth the risk of a Which-browser-dependent dead FAQ
   accordion.
 
-## Forms and the booking dialog
+## Forms and "Book a discovery call"
 
-The contact form, the Atlas pilot form, and the "Book a discovery call" dialog all `fetch()` a
-route on the Worker (`/api/contact`, `/api/pilot`, `/api/booking`) on submit. Right now each route
-only validates the payload shape and returns `200` — **nothing is actually sent or stored
-anywhere yet.** `worker/index.js` has a `// TODO` showing where to add real delivery (e.g.
-[Resend](https://resend.com)); wiring that in needs an API key added as a secret on the Worker
-(Cloudflare dashboard → this project → Settings → Variables and secrets), not committed to the
-repo.
+Every "Book a discovery call" / "Get in touch" / "Talk about this one" link across the site opens
+`BOOKING_URL` (from `src/data/site.js`, currently `https://bookme.name/cjsohal/`) in a new tab —
+plain links, no JS, no in-page dialog. To point bookings somewhere else, change that one constant.
+
+The contact form and the Atlas pilot form are unrelated to booking — they `fetch()` a route on the
+Worker (`/api/contact`, `/api/pilot`) on submit. Right now each route only validates the payload
+shape and returns `200` — **nothing is actually sent or stored anywhere yet.** `worker/index.js`
+has a `// TODO` showing where to add real delivery (e.g. [Resend](https://resend.com)); wiring
+that in needs an API key added as a secret on the Worker (Cloudflare dashboard → this project →
+Settings → Variables and secrets), not committed to the repo.
 
 ## Deploying
 

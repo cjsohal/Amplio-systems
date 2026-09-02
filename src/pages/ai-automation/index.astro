@@ -6,6 +6,7 @@ import { FeatureCard } from '@ds/components/marketing/FeatureCard.jsx';
 import { CTABanner } from '@ds/components/marketing/CTABanner.jsx';
 import { Icon } from '@ds/components/core/Icon.jsx';
 import ServiceTabs from '@components/services/ServiceTabs.jsx';
+import { BOOKING_URL } from '@data/site.js';
 
 const STANDALONE = [
   ['/ai-automation/ai-powered-reviews/', 'star', 'AI Powered Reviews', 'Google reviews on autopilot — three messages, properly timed.'],
@@ -54,7 +55,7 @@ const STANDALONE = [
 
   <Section tone="page" tight>
     <CTABanner tone="ink" eyebrow="Not sure where to start" title="Bring us the task you dread most"
-      description="That is almost always the right first project. Thirty minutes is enough to tell." primaryLabel="Book a discovery call" primaryProps={{ 'data-open-booking': true }} />
+      description="That is almost always the right first project. Thirty minutes is enough to tell." primaryLabel="Book a discovery call" primaryHref={BOOKING_URL} primaryProps={{ target: '_blank', rel: 'noopener noreferrer' }} />
   </Section>
 
 </BaseLayout>

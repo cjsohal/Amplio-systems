@@ -7,6 +7,7 @@ import { Eyebrow } from '@ds/components/marketing/Eyebrow.jsx';
 import { SectionHeading } from '@ds/components/marketing/SectionHeading.jsx';
 import { CTABanner } from '@ds/components/marketing/CTABanner.jsx';
 import { Accordion } from '@ds/components/navigation/Accordion.jsx';
+import { BOOKING_URL } from '@data/site.js';
 
 const { d } = Astro.props;
 ---
@@ -97,6 +98,6 @@ const { d } = Astro.props;
 
 <Section tone="page" tight>
   <CTABanner eyebrow="Next step" title={d.ctaTitle} description={d.ctaBody}
-    primaryLabel="Book a discovery call" primaryProps={{ 'data-open-booking': true }}
+    primaryLabel="Book a discovery call" primaryHref={BOOKING_URL} primaryProps={{ target: '_blank', rel: 'noopener noreferrer' }}
     secondaryLabel="See all services" secondaryHref="/ai-automation/" />
 </Section>

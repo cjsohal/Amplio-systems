@@ -1,10 +1,10 @@
 // Cloudflare Worker entry point. Cloudflare's Git integration for static sites now deploys
 // via `wrangler deploy` (a "Workers" project) rather than the older Pages product, so the
 // file-based routing convention Pages Functions used (functions/api/*.js) doesn't apply here —
-// this single script handles the three form endpoints and falls back to the static build
+// this single script handles the form endpoints and falls back to the static build
 // (bound as ASSETS, from wrangler.jsonc's `assets.directory`) for everything else.
 //
-// All three routes are stubs: they validate the payload shape and return 200. Nothing is sent
+// The routes are stubs: they validate the payload shape and return 200. Nothing is sent
 // or stored anywhere yet.
 //
 // TODO before launch: send the payload on, e.g. via Resend (https://resend.com — free tier,
@@ -59,18 +59,9 @@ async function handlePilot(request) {
   return jsonResponse({ ok: true }, 200);
 }
 
-async function handleBooking(request) {
-  const body = await readJson(request);
-  if (!body || typeof body.email !== 'string' || !body.email.includes('@')) {
-    return jsonResponse({ ok: false, error: 'A valid email is required' }, 400);
-  }
-  return jsonResponse({ ok: true }, 200);
-}
-
 const ROUTES = {
   '/api/contact': handleContact,
   '/api/pilot': handlePilot,
-  '/api/booking': handleBooking,
 };
 
 export default {

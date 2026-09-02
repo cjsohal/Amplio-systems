@@ -12,6 +12,7 @@ import { StatBlock } from '@ds/components/marketing/StatBlock.jsx';
 import { Testimonial } from '@ds/components/marketing/Testimonial.jsx';
 import { CTABanner } from '@ds/components/marketing/CTABanner.jsx';
 import { Accordion } from '@ds/components/navigation/Accordion.jsx';
+import { BOOKING_URL } from '@data/site.js';
 
 const HOME_STEPS = [
   { n: '01', icon: 'search', title: 'We map your week', body: 'A short audit of where your hours actually go. No tools, no changes — just an honest picture.' },
@@ -73,7 +74,7 @@ const FAQ = [
         so you can get back to the part of the job you actually trained for.
       </p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)', marginTop: 'var(--space-10)' }}>
-        <Button variant="inverse" size="lg" iconRight="arrow-right" data-open-booking>Book a discovery call</Button>
+        <Button variant="inverse" size="lg" iconRight="arrow-right" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a discovery call</Button>
         <Button variant="ghost" size="lg" href="/ai-automation/"
           style={{ color: 'var(--warm-cream)', border: '1px solid var(--alpha-cream-24)' }}>See how it works</Button>
       </div>
@@ -169,7 +170,7 @@ const FAQ = [
   <Section tone="page" tight>
     <CTABanner eyebrow="Next step" title="Let's find the hour you've been losing every day"
       description="A thirty-minute call. We'll map what's worth automating, and tell you honestly if it isn't us."
-      primaryLabel="Book a discovery call" primaryProps={{ 'data-open-booking': true }}
+      primaryLabel="Book a discovery call" primaryHref={BOOKING_URL} primaryProps={{ target: '_blank', rel: 'noopener noreferrer' }}
       secondaryLabel="See our services" secondaryHref="/ai-automation/" />
   </Section>
 

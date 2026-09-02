@@ -7,6 +7,7 @@ import { Eyebrow } from '@ds/components/marketing/Eyebrow.jsx';
 import { SectionHeading } from '@ds/components/marketing/SectionHeading.jsx';
 import { Button } from '@ds/components/core/Button.jsx';
 import ContactForm from '@components/contact/ContactForm.jsx';
+import { BOOKING_URL } from '@data/site.js';
 ---
 <BaseLayout title="Contact" description="Tell us what's draining your week. We read everything that comes in — you'll hear back from a person, usually the same day.">
 
@@ -27,7 +28,7 @@ import ContactForm from '@components/contact/ContactForm.jsx';
           <p style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-lg)', lineHeight: 'var(--leading-snug)', margin: '0 0 var(--space-5)', color: 'var(--text-heading)' }}>
             Thirty minutes, no pitch.
           </p>
-          <Button variant="secondary" fullWidth iconRight="calendar-check" data-open-booking>Book a discovery call</Button>
+          <Button variant="secondary" fullWidth iconRight="calendar-check" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a discovery call</Button>
         </Card>
       </div>
 

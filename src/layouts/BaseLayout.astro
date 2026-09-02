@@ -2,7 +2,6 @@
 import '@ds/styles.css';
 import SiteHeader from '@components/SiteHeader.jsx';
 import SiteFooter from '@components/SiteFooter.astro';
-import BookingDialog from '@components/BookingDialog.jsx';
 
 const { title, description = 'AI automation for small service businesses — life coaches, chiropractors, consultants, practitioners.' } = Astro.props;
 const pageTitle = title ? `${title} — Amplio Systems` : 'Amplio Systems — Automate the mundane. Amplify what matters.';
@@ -22,15 +21,6 @@ const pageTitle = title ? `${title} — Amplio Systems` : 'Amplio Systems — Au
       <slot />
     </main>
     <SiteFooter />
-    <BookingDialog client:load />
-    <script>
-      document.addEventListener('click', (event) => {
-        const trigger = event.target instanceof Element ? event.target.closest('[data-open-booking]') : null;
-        if (!trigger) return;
-        event.preventDefault();
-        window.dispatchEvent(new CustomEvent('amplio:open-booking'));
-      });
-    </script>
   </body>
 </html>
 

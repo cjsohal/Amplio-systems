@@ -9,6 +9,7 @@ import { SectionHeading } from '@ds/components/marketing/SectionHeading.jsx';
 import { Testimonial } from '@ds/components/marketing/Testimonial.jsx';
 import { StatBlock } from '@ds/components/marketing/StatBlock.jsx';
 import { CTABanner } from '@ds/components/marketing/CTABanner.jsx';
+import { BOOKING_URL } from '@data/site.js';
 
 const VALUES = [
   { n: '01', icon: 'shield-check', title: 'Integrity', body: 'Honest about where and how we can help — and where we cannot.' },
@@ -82,7 +83,7 @@ const VALUES = [
   <Section tone="page" tight>
     <CTABanner tone="sage" eyebrow="Say hello" title="Come and tell us what your week looks like"
       description="No form-filling marathon. One conversation, and an honest answer about whether we can help."
-      primaryLabel="Book a discovery call" primaryProps={{ 'data-open-booking': true }} />
+      primaryLabel="Book a discovery call" primaryHref={BOOKING_URL} primaryProps={{ target: '_blank', rel: 'noopener noreferrer' }} />
   </Section>
 
 </BaseLayout>

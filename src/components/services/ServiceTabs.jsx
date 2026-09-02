@@ -5,6 +5,7 @@ import { Icon } from '@ds/components/core/Icon.jsx';
 import { Badge } from '@ds/components/core/Badge.jsx';
 import { Button } from '@ds/components/core/Button.jsx';
 import { Eyebrow } from '@ds/components/marketing/Eyebrow.jsx';
+import { BOOKING_URL } from '@data/site.js';
 
 const SERVICE_TABS = [
   { id: 'intake', label: 'Client intake', icon: 'inbox' },
@@ -67,7 +68,7 @@ export default function ServiceTabs() {
             <Badge tone="neutral" icon="plug">Your existing tools</Badge>
             <Badge tone="neutral" icon="shield-check">Documented handover</Badge>
           </div>
-          <Button fullWidth iconRight="arrow-right" data-open-booking>Talk about this one</Button>
+          <Button fullWidth iconRight="arrow-right" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Talk about this one</Button>
         </Card>
       </div>
     </>

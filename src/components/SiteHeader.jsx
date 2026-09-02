@@ -3,6 +3,7 @@ import { Logo } from '@ds/components/core/Logo.jsx';
 import { Button } from '@ds/components/core/Button.jsx';
 import { IconButton } from '@ds/components/core/IconButton.jsx';
 import { Icon } from '@ds/components/core/Icon.jsx';
+import { BOOKING_URL } from '@data/site.js';
 
 export const NAV = [
   { href: '/about/', label: 'About Us' },
@@ -121,7 +122,7 @@ export default function SiteHeader({ page }) {
           {NAV.map((n) => <NavItem key={n.href} n={n} page={page} />)}
         </nav>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-          <Button size="sm" data-open-booking>Get in touch</Button>
+          <Button size="sm" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Get in touch</Button>
           <span className="site-burger">
             <IconButton icon={mobileOpen ? 'x' : 'menu'} label="Menu" onClick={() => setMobileOpen((o) => !o)} />
           </span>
