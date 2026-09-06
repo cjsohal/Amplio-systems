@@ -104,7 +104,8 @@ async function handlePilot(request, env) {
         ['Phone', body.phone],
         ['Wants Atlas to help with', body.focus],
         ['Notes', body.notes],
-        ['Consented to contact', body.consent ? 'Yes' : 'No'],
+        ['Pilot contact consent', body.consent ? 'Yes' : 'No'],
+        ['Marketing consent', body.marketingConsent ? 'Yes' : 'No'],
       ],
     });
   } catch (err) {
