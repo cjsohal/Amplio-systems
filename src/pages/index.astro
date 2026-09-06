@@ -13,6 +13,7 @@ import { Testimonial } from '@ds/components/marketing/Testimonial.jsx';
 import { CTABanner } from '@ds/components/marketing/CTABanner.jsx';
 import { Accordion } from '@ds/components/navigation/Accordion.jsx';
 import { BOOKING_URL } from '@data/site.js';
+import FaqSchema from '@components/seo/FaqSchema.astro';
 
 const HOME_STEPS = [
   { n: '01', icon: 'search', title: 'We map your week', body: 'A short audit of where your hours actually go. No tools, no changes — just an honest picture.' },
@@ -41,7 +42,9 @@ const FAQ = [
   { id: 'q4', question: 'What happens after handover?', answer: "You own the system, the logins and the documentation. We're reachable if something changes, but you are not dependent on us. We also offer the option of ongoing support, and the choice is always yours." },
 ];
 ---
-<BaseLayout title="Home" description="AI automation for small service businesses. We systemise the tedious work that drains your week — intake, invoicing, follow-up — so you can get back to the part of the job you actually trained for.">
+<BaseLayout title="AI Automation for Small Service Businesses" description="AI automation for small service businesses. We systemise the tedious work that drains your week — intake, invoicing, follow-up — so you can get back to the part of the job you actually trained for.">
+
+  <FaqSchema items={FAQ} />
 
   <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--gradient-hero)', color: 'var(--text-inverse)' }}>
     <div aria-hidden="true" style={{

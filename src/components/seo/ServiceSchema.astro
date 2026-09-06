@@ -1,0 +1,20 @@
+---
+/* Renders Service JSON-LD for one of Amplio's AI-automation offerings — gives search and answer
+   engines a clear, structured entity (name, description, provider) for each service rather than
+   leaving them to infer it from marketing copy. `price` is optional: only AI Powered Reviews is
+   sold at a fixed, published rate today, so most callers omit it and no Offer is emitted. */
+const { name, description, url, price, priceCurrency = 'GBP' } = Astro.props;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: name,
+  name,
+  description,
+  url: new URL(url, Astro.site).toString(),
+  provider: { '@type': 'Organization', name: 'Amplio Systems', url: 'https://ampliosystemsltd.com/' },
+  areaServed: 'GB',
+  ...(price ? { offers: { '@type': 'Offer', price: String(price), priceCurrency, url: new URL(url, Astro.site).toString() } } : {}),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />

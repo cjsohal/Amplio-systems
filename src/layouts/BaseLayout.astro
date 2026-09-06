@@ -3,17 +3,57 @@ import '@ds/styles.css';
 import SiteHeader from '@components/SiteHeader.jsx';
 import SiteFooter from '@components/SiteFooter.astro';
 
-const { title, description = 'AI automation for small service businesses — life coaches, chiropractors, consultants, practitioners.' } = Astro.props;
+const {
+  title,
+  description = 'AI automation for small service businesses — life coaches, chiropractors, consultants, practitioners.',
+  image = '/assets/logo-lockup.png',
+} = Astro.props;
 const pageTitle = title ? `${title} — Amplio Systems` : 'Amplio Systems — Automate the mundane. Amplify what matters.';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(image, Astro.site);
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Amplio Systems',
+  legalName: 'Amplio Systems Ltd',
+  url: 'https://ampliosystemsltd.com/',
+  logo: new URL('/assets/logo-lockup.png', Astro.site).toString(),
+  description: 'AI automation for small service businesses — life coaches, chiropractors, consultants, practitioners.',
+  email: 'info@ampliosystemsltd.com',
+};
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Amplio Systems',
+  url: 'https://ampliosystemsltd.com/',
+};
 ---
 
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#6FA84A" />
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" href="/assets/mark.png" />
+    <link rel="apple-touch-icon" href="/assets/mark.png" />
     <title>{pageTitle}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Amplio Systems" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   </head>
   <body>
     <SiteHeader client:load page={Astro.url.pathname} />

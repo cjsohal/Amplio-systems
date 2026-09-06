@@ -1,0 +1,22 @@
+# Amplio Systems
+
+> AI automation for small service businesses — life coaches, chiropractors, consultants and other practitioners whose own time is the thing being sold. Amplio Systems builds systems that handle client intake, invoicing, follow-up and admin, on the tools a business already uses, then hands over the logins and documentation.
+
+Amplio Systems Ltd is a UK-based AI automation consultancy. Engagements start with a discovery call, are scoped to what a business actually needs, and are handed over with documentation rather than left as a black box the business depends on the agency to run.
+
+## Services
+
+- [AI Automation overview](https://ampliosystemsltd.com/ai-automation/): the four systems Amplio builds — client intake, billing, follow-up and back-office admin — and the order they're typically tackled in.
+- [AI Powered Reviews](https://ampliosystemsltd.com/ai-automation/ai-powered-reviews/): automated Google review requests, private feedback capture and AI-drafted reply suggestions. Published pricing on the page.
+- [AI Voice Receptionist](https://ampliosystemsltd.com/ai-automation/ai-voice-receptionist/): an AI receptionist that answers calls, qualifies and books enquiries, and hands anything sensitive to a human.
+- [AI SEO](https://ampliosystemsltd.com/ai-automation/ai-seo/): content and technical work aimed at visibility in both traditional search and AI-assistant answers.
+- [AI Strategy](https://ampliosystemsltd.com/ai-automation/ai-strategy/): a prioritised AI roadmap engagement — what to do first, what to be careful with, and who should own it.
+
+## Atlas
+
+- [Atlas](https://ampliosystemsltd.com/atlas/): a separate, in-development product — an AI-powered decision-support platform for social housing providers, helping them decide where and what to build. Atlas is at concept stage; it is not yet a live, purchasable product. A small pilot cohort of housing associations is being recruited via the [pilot application page](https://ampliosystemsltd.com/atlas/pilot/).
+
+## Company
+
+- [About](https://ampliosystemsltd.com/about/): who Amplio Systems is, its values, and who it works with.
+- [Contact](https://ampliosystemsltd.com/contact/): info@ampliosystemsltd.com.

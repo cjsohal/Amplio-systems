@@ -38,6 +38,7 @@ their success state). Use `npm run cf:dev` when you need those routes to actuall
 | `src/components/` | Site-specific components: chrome (header/footer), and page-specific pieces (services tabs, Atlas map/dashboard, forms). |
 | `src/data/servicePages.js` | The shared data object behind the three AI Automation sub-pages, so they can't structurally drift apart. |
 | `src/data/site.js` | Site-wide constants — currently just `BOOKING_URL`, the external booking page every "Book a discovery call" link points to. |
+| `src/components/seo/` | `FaqSchema.astro` / `ServiceSchema.astro` — JSON-LD components, see "SEO and structured data" below. |
 | `worker/index.js` + `wrangler.jsonc` | The Cloudflare Worker that serves the static build and the contact/pilot form endpoints — currently stubs, see below. |
 | `.claude/skills/amplio-systems-design/` | A pointer so Claude Code picks up the design system as a skill in future sessions on this repo. |
 
@@ -135,6 +136,38 @@ forcing the desktop version to stack doesn't work:
 - **`ServiceTabs` tab bar.** Four tabs with icon + label don't fit a phone width no matter how
   much they reflow. Rather than wrap or shrink the labels, the tab list scrolls horizontally
   below its own breakpoint — see the `Tabs` adaptation above.
+
+## SEO and structured data
+
+`astro.config.mjs` sets `site: 'https://ampliosystemsltd.com'` — required for the canonical URLs,
+Open Graph/Twitter image URLs, and the `@astrojs/sitemap` integration (auto-generates
+`sitemap-index.xml` + `sitemap-0.xml` at build time from `src/pages/`) to resolve absolute URLs.
+`public/robots.txt` points at it.
+
+`BaseLayout.astro` renders, on every page: a canonical `<link>`, Open Graph + Twitter Card tags
+(falls back to `/assets/logo-lockup.png` for `og:image`/`twitter:image` unless a page passes its
+own `image` prop — no page does yet, since there's no purpose-built 1200×630 social card image;
+worth commissioning one), and sitewide `Organization` + `WebSite` JSON-LD.
+
+Two more JSON-LD components live in `src/components/seo/`, dropped into specific pages rather than
+the layout since they only apply where the content actually exists:
+
+- **`FaqSchema.astro`** — takes the same `{question, answer}` array already passed to `<Accordion>`
+  and emits `FAQPage` JSON-LD, so search/answer engines (Google AI Overviews, ChatGPT search,
+  Perplexity) can quote the answer directly. Used on the homepage, `/ai-automation/*` service
+  pages, and AI Powered Reviews — every page with a real FAQ accordion.
+- **`ServiceSchema.astro`** — one `Service` entity per AI-automation offering (name, description,
+  provider). AI Powered Reviews also passes `price`, read from the page's own `LAUNCH_OFFER`
+  logic so the schema can't drift from the number actually shown on the page.
+
+Atlas deliberately gets neither `Service`/`Offer` schema beyond the sitewide `Organization` — it's
+explicitly "concept stage" on the page itself, and marking it up as an available, purchasable
+product would misrepresent that (and risks a structured-data policy issue with Google, which
+checks that markup matches visible page content).
+
+`public/llms.txt` is a plain-text summary of the business and its pages, in the informal but
+increasingly-recognised `llms.txt` convention some AI crawlers look for — a curated equivalent of
+the sitemap, aimed at answer engines rather than search indexers.
 
 ## Forms and "Book a discovery call"
 

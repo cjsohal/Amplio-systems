@@ -8,9 +8,14 @@ import { SectionHeading } from '@ds/components/marketing/SectionHeading.jsx';
 import { CTABanner } from '@ds/components/marketing/CTABanner.jsx';
 import { Accordion } from '@ds/components/navigation/Accordion.jsx';
 import { BOOKING_URL } from '@data/site.js';
+import FaqSchema from '@components/seo/FaqSchema.astro';
+import ServiceSchema from '@components/seo/ServiceSchema.astro';
 
 const { d } = Astro.props;
+const faqItems = d.faq.map(([fid, question, answer]) => ({ id: fid, question, answer }));
 ---
+<ServiceSchema name={d.eyebrow} description={d.promise} url={`/ai-automation/${d.slug}/`} />
+<FaqSchema items={faqItems} />
 <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--gradient-hero)', color: 'var(--text-inverse)' }}>
   <img src="/assets/mark-light.svg" alt="" aria-hidden="true"
     style={{ position: 'absolute', right: '-7%', top: '-32%', width: 'min(560px, 50%)', opacity: 0.14 }} />
@@ -91,8 +96,7 @@ const { d } = Astro.props;
 <Section tone="page" tight style={{ paddingTop: 0 }}>
   <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 'var(--space-20)', alignItems: 'start' }}>
     <SectionHeading eyebrow="Questions" title="The things people ask us first" maxWidth={320} />
-    <Accordion client:load defaultOpen={[d.faq[0][0]]}
-      items={d.faq.map(([fid, question, answer]) => ({ id: fid, question, answer }))} />
+    <Accordion client:load defaultOpen={[faqItems[0].id]} items={faqItems} />
   </div>
 </Section>
 

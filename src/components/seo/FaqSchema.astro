@@ -1,0 +1,20 @@
+---
+/* Renders FAQPage JSON-LD for a set of question/answer pairs — drop this next to any <Accordion>
+   built from FAQ data so search engines and answer engines (Google AI Overviews, ChatGPT search,
+   Perplexity, etc.) can quote the answers directly rather than only linking to the page.
+   `items` takes the same {question, answer} shape already passed to Accordion — reuse that
+   expression rather than reshaping the data twice. `answer` must be plain text: schema.org's
+   Answer.text doesn't render markup, so this discards HTML/rich content if any were passed in. */
+const { items = [] } = Astro.props;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map(({ question, answer }) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

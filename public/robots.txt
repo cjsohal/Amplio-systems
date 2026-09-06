@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ampliosystemsltd.com/sitemap-index.xml

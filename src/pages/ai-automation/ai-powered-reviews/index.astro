@@ -17,6 +17,8 @@ import { Accordion } from '@ds/components/navigation/Accordion.jsx';
 import { Alert } from '@ds/components/feedback/Alert.jsx';
 import ProfileCard from '@components/reviews/ProfileCard.jsx';
 import { BOOKING_URL } from '@data/site.js';
+import FaqSchema from '@components/seo/FaqSchema.astro';
+import ServiceSchema from '@components/seo/ServiceSchema.astro';
 
 /* The launch promotion ends 30 September 2026. Set to null once it lapses —
    do not leave an expired offer on the page. */
@@ -54,8 +56,14 @@ const FAQ = [
   { id: 'r4', question: 'Who writes the replies to reviews?', answer: 'The system drafts a personalised response that refers to what the customer actually said — the service they used, the result, the person they praised. You stay in control of what gets posted.' },
   { id: 'r5', question: 'How long until it is running?', answer: 'Setup is short. Tell us your tone of voice and where your Google profile lives, and the sequence starts on your next completed job.' },
 ];
+const currentPrice = LAUNCH_OFFER ? 100 : 200;
 ---
 <BaseLayout title="AI Powered Reviews" description="You don't have a review problem. You have a remembering problem. Amplio Reviews turns asking for reviews into something that just happens.">
+
+  <ServiceSchema name="AI Powered Reviews" url="/ai-automation/ai-powered-reviews/"
+    description="Automated Google review requests, feedback capture and AI-drafted reply suggestions for small service businesses."
+    price={currentPrice} />
+  <FaqSchema items={FAQ} />
 
   <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--gradient-hero)', color: 'var(--text-inverse)' }}>
     <img src="/assets/mark-light.svg" alt="" aria-hidden="true"
