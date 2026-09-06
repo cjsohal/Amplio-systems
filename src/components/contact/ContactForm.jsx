@@ -20,16 +20,17 @@ export default function ContactForm() {
     setError('');
     setSending(true);
     try {
-      await fetch('/api/contact', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
+      if (!res.ok) throw new Error('request failed');
+      setSent(true);
     } catch {
-      // Best-effort — see the TODO in functions/api/contact.js.
+      setError("That didn't send — please try again, or email info@ampliosystemsltd.com directly.");
     }
     setSending(false);
-    setSent(true);
   };
 
   if (sent) {

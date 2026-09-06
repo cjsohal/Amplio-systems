@@ -92,11 +92,13 @@ Every "Book a discovery call" / "Get in touch" / "Talk about this one" link acro
 plain links, no JS, no in-page dialog. To point bookings somewhere else, change that one constant.
 
 The contact form and the Atlas pilot form are unrelated to booking — they `fetch()` a route on the
-Worker (`/api/contact`, `/api/pilot`) on submit. Right now each route only validates the payload
-shape and returns `200` — **nothing is actually sent or stored anywhere yet.** `worker/index.js`
-has a `// TODO` showing where to add real delivery (e.g. [Resend](https://resend.com)); wiring
-that in needs an API key added as a secret on the Worker (Cloudflare dashboard → this project →
-Settings → Variables and secrets), not committed to the repo.
+Worker (`/api/contact`, `/api/pilot`) on submit. Each route validates the payload shape, then emails
+the submission to `info@ampliosystemsltd.com` via [Resend](https://resend.com), with `reply_to` set
+to the submitter's address so a reply goes straight to them. This needs a `RESEND_API_KEY` secret
+on the Worker (`wrangler secret put RESEND_API_KEY`, or Cloudflare dashboard → this project →
+Settings → Variables and secrets) — never committed to the repo. Without that secret set, both
+routes return a `502` and the forms show an inline error asking the user to email directly or
+retry.
 
 ## Deploying
 
@@ -118,4 +120,5 @@ These were already flagged in `design-system/HANDOFF.md` and still apply:
    30 September 2026 — set it to `null` when it lapses so the page reverts to £200/month.
 5. Atlas "Explore the platform" / "Learn how it works" links to the platform section on the same
    page (`#platform`) — there's no separate platform UI page yet.
-6. Form submission endpoints are stubs — see above.
+6. Form submission needs the `RESEND_API_KEY` Worker secret set before it will actually send —
+   see "Forms and 'Book a discovery call'" above.

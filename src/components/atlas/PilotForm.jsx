@@ -41,6 +41,7 @@ export default function PilotForm() {
   const [errors, setErrors] = React.useState({});
   const [sent, setSent] = React.useState(false);
   const [sending, setSending] = React.useState(false);
+  const [sendError, setSendError] = React.useState(false);
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
 
   const submit = async (e) => {
@@ -56,17 +57,19 @@ export default function PilotForm() {
     if (Object.keys(next).length !== 0) return;
 
     setSending(true);
+    setSendError(false);
     try {
-      await fetch('/api/pilot', {
+      const res = await fetch('/api/pilot', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(f),
       });
+      if (!res.ok) throw new Error('request failed');
+      setSent(true);
     } catch {
-      // Best-effort — see the TODO in functions/api/pilot.js.
+      setSendError(true);
     }
     setSending(false);
-    setSent(true);
   };
 
   const laterPhase = f.orgType === 'la' || f.orgType === 'other';
@@ -166,6 +169,13 @@ export default function PilotForm() {
       <Checkbox label="Happy for us to contact you about the Atlas pilot"
         description="Nothing else, and nothing shared with anyone else."
         checked={f.consent} onChange={(v) => setF({ ...f, consent: v })} />
+
+      {sendError && (
+        <Alert tone="danger" title="That didn't send">
+          Something went wrong on our end. Please try again, or email us directly at{' '}
+          <a href="mailto:info@ampliosystemsltd.com">info@ampliosystemsltd.com</a>.
+        </Alert>
+      )}
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
         <Button type="submit" size="lg" iconRight="send" loading={sending}>Submit application</Button>
