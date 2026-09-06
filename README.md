@@ -68,6 +68,13 @@ are the exceptions, each small and additive:
   nothing. Wired to `onClose`. (The design system's `Dialog` component itself is currently unused
   on this site — it was originally used for a booking dialog, since replaced by a direct link to
   `BOOKING_URL`, see below — but the fix stands as a correction to the component itself.)
+- **`Checkbox` double-toggle race.** The visible box had its own `onClick` *and* sat inside a
+  `<label>`, which natively forwards clicks to the wrapped (visually hidden) `<input>`. A single
+  click on the box fired both paths, and depending on render timing they could disagree and cancel
+  each other out — the box specifically (not the label text) would then fail to toggle. Removed the
+  redundant `onClick`; the native label-forwarding is now the only path, so a click anywhere in the
+  label toggles reliably. Also added `required` (asterisk on the label, matching `Input`) since the
+  pilot form's consent checkbox needed one.
 - **Atlas map.** Rebuilt against the `leaflet` npm package instead of the prototype's CDN
   `<script>` + `window.L` global (same behaviour: Northampton, interaction disabled, OSM
   attribution kept). Leaflet touches `window` at import time, which breaks Astro's Node

@@ -1,11 +1,10 @@
 import React from 'react';
 import { Icon } from '../core/Icon.jsx';
 
-export function Checkbox({ label, description, checked = false, onChange, disabled, style, ...rest }) {
+export function Checkbox({ label, description, checked = false, onChange, disabled, required, style, ...rest }) {
   return (
     <label style={{ display: 'flex', gap: 12, alignItems: 'flex-start', cursor: disabled ? 'not-allowed' : 'pointer', opacity: disabled ? 0.55 : 1, ...style }}>
       <span
-        onClick={() => !disabled && onChange && onChange(!checked)}
         style={{
           width: 20, height: 20, flex: 'none', marginTop: 2, display: 'grid', placeItems: 'center',
           borderRadius: 'var(--radius-xs)',
@@ -16,11 +15,13 @@ export function Checkbox({ label, description, checked = false, onChange, disabl
       >
         {checked && <Icon name="check" size={14} />}
       </span>
-      <input type="checkbox" checked={checked} disabled={disabled}
+      <input type="checkbox" checked={checked} disabled={disabled} required={required}
         onChange={(e) => onChange && onChange(e.target.checked)}
         style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }} {...rest} />
       <span>
-        <span style={{ display: 'block', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-heading)', lineHeight: 1.5 }}>{label}</span>
+        <span style={{ display: 'block', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--text-heading)', lineHeight: 1.5 }}>
+          {label}{required && <span style={{ color: 'var(--amplio-green)' }}> *</span>}
+        </span>
         {description && <span style={{ display: 'block', fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2 }}>{description}</span>}
       </span>
     </label>

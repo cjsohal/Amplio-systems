@@ -36,7 +36,7 @@ const DECISION_HELP = [
 export default function PilotForm() {
   const [f, setF] = React.useState({
     org: '', orgType: '', orgTypeOther: '', name: '', position: '', email: '', phone: '',
-    homes: '', region: '', focus: '', notes: '', consent: false,
+    homes: '', region: '', focus: '', notes: '', consent: false, marketingConsent: false,
   });
   const [errors, setErrors] = React.useState({});
   const [sent, setSent] = React.useState(false);
@@ -53,6 +53,7 @@ export default function PilotForm() {
     if (!f.position.trim()) next.position = 'Your role helps us pitch the first conversation right';
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email)) next.email = 'Enter an email address we can reply to';
     if (!f.homes) next.homes = 'Pick the closest range';
+    if (!f.consent) next.consent = 'Please confirm you’re happy for us to contact you about the pilot';
     setErrors(next);
     if (Object.keys(next).length !== 0) return;
 
@@ -166,9 +167,18 @@ export default function PilotForm() {
         </div>
       </div>
 
-      <Checkbox label="Happy for us to contact you about the Atlas pilot"
-        description="Nothing else, and nothing shared with anyone else."
-        checked={f.consent} onChange={(v) => setF({ ...f, consent: v })} />
+      <div style={{ display: 'grid', gap: 'var(--space-3)' }}>
+        <Checkbox label="Happy for us to contact you about the Atlas pilot" required
+          checked={f.consent} onChange={(v) => setF({ ...f, consent: v })} />
+        {errors.consent && (
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--clay-600)' }}>{errors.consent}</div>
+        )}
+        <Checkbox label="Happy for Amplio to contact me for marketing on this and other Amplio products/services"
+          checked={f.marketingConsent} onChange={(v) => setF({ ...f, marketingConsent: v })} />
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', margin: 0 }}>
+          Amplio will never share your details with any third party and will only contact you according to your preferences.
+        </p>
+      </div>
 
       {sendError && (
         <Alert tone="danger" title="That didn't send">
