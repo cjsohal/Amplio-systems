@@ -13,7 +13,7 @@ const SCORE_ROWS = [
 
 export default function SitePotentialCard() {
   return (
-    <Card variant="raised" padding="md" style={{ width: 300, boxShadow: 'var(--shadow-xl)' }}>
+    <Card variant="raised" padding="md" style={{ width: 'min(300px, 100%)', boxShadow: 'var(--shadow-xl)' }}>
       <div style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>Site potential</div>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 6 }}>
         <span style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-4xl)', lineHeight: 1, color: 'var(--text-heading)' }}>85</span>

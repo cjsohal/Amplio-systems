@@ -75,6 +75,12 @@ are the exceptions, each small and additive:
   redundant `onClick`; the native label-forwarding is now the only path, so a click anywhere in the
   label toggles reliably. Also added `required` (asterisk on the label, matching `Input`) since the
   pilot form's consent checkbox needed one.
+- **`Tabs` overflow.** The tab row was `display: flex` with no wrap and no scroll — fine for the
+  specimen pages' short labels, but `ServiceTabs` on `/ai-automation/` has four tabs with icon +
+  label that don't fit a phone-width viewport, and would otherwise silently overflow the page.
+  Added `overflow-x: auto` (with `-webkit-overflow-scrolling: touch`) to the tablist and
+  `flex: none` + `white-space: nowrap` to each tab button, so the row scrolls horizontally instead
+  — a standard mobile tab-bar pattern — rather than wrapping or squeezing labels.
 - **Atlas map.** Rebuilt against the `leaflet` npm package instead of the prototype's CDN
   `<script>` + `window.L` global (same behaviour: Northampton, interaction disabled, OSM
   attribution kept). Leaflet touches `window` at import time, which breaks Astro's Node
@@ -91,6 +97,44 @@ are the exceptions, each small and additive:
   fires and the component never hydrates. `client:load` sidesteps it; these components are small
   enough that the JS-cost difference isn't worth the risk of a Which-browser-dependent dead FAQ
   accordion.
+
+## Responsive layout
+
+Most pages lay out sections with a fixed-ratio CSS grid set inline (e.g.
+`gridTemplateColumns: '0.8fr 1.2fr'`) — fine on desktop, but with nothing to make it reflow, so
+every one of them would otherwise stay two- (or three-, or four-) column at phone widths. Since
+most traffic here is expected to be mobile, every such grid across the site now carries a class
+from a small shared set defined in `src/layouts/BaseLayout.astro`'s global `<style>` block:
+
+- `.grid-stack-md` — collapses to one column at 820px (matches the header's own nav→burger
+  breakpoint), for the section-level "text next to image/form/card" layouts.
+- `.grid-stack-sm` — same, at 540px, for tighter groupings that only need to give way on an
+  actual phone (form field pairs, a dashboard's internal panels) rather than a tablet.
+- `.divider-cols` / `.divider-cols-inverse` — for a row of items separated by a left border
+  (e.g. Atlas's "challenge" pillars); stacked to one column, the divider moves from each item's
+  left edge to its top edge instead of leaving a stray vertical line. The `-inverse` variant uses
+  `--border-inverse` for dark (`tone="ink"`) sections.
+- `.text-center-mobile` — re-centres a paragraph that's deliberately right- or left-aligned
+  against a two-column layout, which reads oddly once that layout stacks to one column.
+
+These are `!important` because they're overriding an inline style, which otherwise wins over
+anything in an external stylesheet regardless of selector — the same trick the pre-existing
+`.about-hero-grid` and `.footer-grid` rules already used before this pass. A `repeat(N,1fr)` grid
+of same-shaped, undivided items (feature cards, testimonials, a stat row with no per-item border)
+uses `repeat(auto-fit,minmax(<px>,1fr))` instead, which reflows on its own without a breakpoint.
+
+Two spots don't just reflow — the layout genuinely renders differently by viewport, because
+forcing the desktop version to stack doesn't work:
+
+- **Atlas hero photo.** On desktop it's an absolutely-positioned full-bleed background behind
+  the heading, cropped so its left-edge fade sits under the text. Once the text column stacks
+  above/below the (now much taller) section, "cover" sizing would zoom the same image to fill
+  that height and lose the fade entirely — see `.atlas-hero-photo` in `src/pages/atlas/index.astro`.
+  Below 820px it switches to `position: static` with a fixed height instead, rendering as a plain
+  banner image above the copy rather than a backdrop behind it.
+- **`ServiceTabs` tab bar.** Four tabs with icon + label don't fit a phone width no matter how
+  much they reflow. Rather than wrap or shrink the labels, the tab list scrolls horizontally
+  below its own breakpoint — see the `Tabs` adaptation above.
 
 ## Forms and "Book a discovery call"
 

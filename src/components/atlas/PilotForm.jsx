@@ -129,7 +129,7 @@ export default function PilotForm() {
             )}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-5)' }}>
+          <div className="grid-stack-sm" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-5)' }}>
             <Select label="Homes owned or managed" required placeholder="Choose a range"
               options={HOME_BANDS} value={f.homes} onChange={set('homes')} error={errors.homes} />
             <Input label="Where do you operate?" placeholder="e.g. East Midlands"
@@ -141,13 +141,13 @@ export default function PilotForm() {
       <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-6)' }}>
         <Eyebrow style={{ marginBottom: 'var(--space-4)' }}>About you</Eyebrow>
         <div style={{ display: 'grid', gap: 'var(--space-5)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-5)' }}>
+          <div className="grid-stack-sm" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-5)' }}>
             <Input label="Your name" required placeholder="Priya Raman"
               value={f.name} onChange={set('name')} error={errors.name} />
             <Input label="Your position" required placeholder="Director of Development"
               value={f.position} onChange={set('position')} error={errors.position} />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-5)' }}>
+          <div className="grid-stack-sm" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-5)' }}>
             <Input label="Work email" type="email" required iconLeft="mail" placeholder="you@organisation.org.uk"
               value={f.email} onChange={set('email')} error={errors.email} />
             <Input label="Phone" iconLeft="phone" hint="Optional" placeholder="Optional"

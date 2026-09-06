@@ -10,6 +10,7 @@ export function Tabs({ tabs = [], value, onChange, variant = 'underline', style 
       borderBottom: isPill ? 'none' : '1px solid var(--border-subtle)',
       background: isPill ? 'var(--surface-subtle)' : 'transparent',
       padding: isPill ? 5 : 0, borderRadius: isPill ? 'var(--radius-pill)' : 0,
+      overflowX: 'auto', WebkitOverflowScrolling: 'touch',
       ...style,
     }}>
       {tabs.map((t) => {
@@ -17,7 +18,7 @@ export function Tabs({ tabs = [], value, onChange, variant = 'underline', style 
         return (
           <button key={t.id} role="tab" aria-selected={on} onClick={() => onChange && onChange(t.id)}
             style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8, cursor: 'pointer',
+              display: 'inline-flex', alignItems: 'center', gap: 8, cursor: 'pointer', flex: 'none', whiteSpace: 'nowrap',
               fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)',
               fontWeight: on ? 'var(--weight-bold)' : 'var(--weight-regular)',
               color: on ? (isPill ? 'var(--deep-fern)' : 'var(--text-heading)') : 'var(--text-muted)',

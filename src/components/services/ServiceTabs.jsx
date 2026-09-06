@@ -47,7 +47,7 @@ export default function ServiceTabs() {
   return (
     <>
       <Tabs tabs={SERVICE_TABS} value={tab} onChange={setTab} />
-      <div style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: 'var(--space-16)', marginTop: 'var(--space-12)', alignItems: 'start' }}>
+      <div className="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: 'var(--space-16)', marginTop: 'var(--space-12)', alignItems: 'start' }}>
         <div>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px,3vw,38px)', lineHeight: 'var(--leading-snug)', color: 'var(--text-heading)', margin: 0 }}>{d.title}</h2>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-md)', lineHeight: 'var(--leading-relaxed)', color: 'var(--text-body)', margin: 'var(--space-5) 0 0' }}>{d.body}</p>

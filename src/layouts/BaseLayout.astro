@@ -38,4 +38,24 @@ const pageTitle = title ? `${title} — Amplio Systems` : 'Amplio Systems — Au
     .site-nav { display: none !important; }
     .site-burger { display: inline-flex !important; }
   }
+
+  /* Shared responsive utilities for the fixed-ratio grids used throughout the marketing pages
+     (e.g. `gridTemplateColumns: '0.8fr 1.2fr'`). These are set inline per-page for the desktop
+     layout; the classes below collapse them on narrow viewports. `!important` is required
+     because inline styles otherwise beat an external stylesheet regardless of selector. */
+  @media (max-width: 820px) {
+    .grid-stack-md { grid-template-columns: 1fr !important; }
+
+    /* For grids of items separated by a left border (a divider between side-by-side columns).
+       Stacked to one column, that divider should run along the top of each item instead. */
+    .divider-cols > * { border-left: none !important; border-top: 1px solid var(--border-subtle) !important; padding-left: 0 !important; padding-top: var(--space-6) !important; margin-top: var(--space-6) !important; }
+    .divider-cols > *:first-child { border-top: none !important; padding-top: 0 !important; margin-top: 0 !important; }
+    .divider-cols-inverse > * { border-left: none !important; border-top: 1px solid var(--border-inverse) !important; padding-left: 0 !important; padding-top: var(--space-6) !important; margin-top: var(--space-6) !important; }
+    .divider-cols-inverse > *:first-child { border-top: none !important; padding-top: 0 !important; margin-top: 0 !important; }
+
+    .text-center-mobile { text-align: center !important; }
+  }
+  @media (max-width: 540px) {
+    .grid-stack-sm { grid-template-columns: 1fr !important; }
+  }
 </style>

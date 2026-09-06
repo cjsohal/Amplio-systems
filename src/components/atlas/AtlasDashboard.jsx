@@ -22,7 +22,7 @@ export default function AtlasDashboard({ children }) {
       </div>
       <div style={{ padding: 'var(--space-6)' }}>
         <div style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', fontWeight: 'var(--weight-bold)', color: 'var(--text-heading)' }}>Opportunity overview</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12, marginTop: 14 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(90px,1fr))', gap: 12, marginTop: 14 }}>
           {[['Overall score', '85', 'High potential'], ['Homes needed', '1,240', 'Over 10 years'], ['Affordable need', '68%', 'of total need']].map(([k, v, s]) => (
             <div key={k} style={{ border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', padding: 12 }}>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: 10, color: 'var(--text-muted)' }}>{k}</div>
@@ -31,7 +31,7 @@ export default function AtlasDashboard({ children }) {
             </div>
           ))}
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 12 }}>
+        <div className="grid-stack-sm" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 12 }}>
           <div>
             <div style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', fontWeight: 'var(--weight-bold)', color: 'var(--text-heading)', marginBottom: 8 }}>Key insights</div>
             <div style={{ display: 'grid', gap: 7 }}>

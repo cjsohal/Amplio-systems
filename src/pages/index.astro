@@ -93,7 +93,7 @@ const FAQ = [
   </Section>
 
   <Section tone="sage">
-    <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 'var(--space-20)', alignItems: 'start' }}>
+    <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 'var(--space-20)', alignItems: 'start' }}>
       <SectionHeading eyebrow="How it works" title="Three steps, no upheaval" maxWidth={420}
         description="We don't replace the tools you like. We connect them, then remove the bits you were doing by hand." />
       <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
@@ -115,7 +115,7 @@ const FAQ = [
 
   <Section tone="page">
     <SectionHeading align="center" eyebrow="Why this matters" title="The difference between AI that works and AI that doesn't" maxWidth={640} />
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-16)', marginTop: 'var(--space-12)' }}>
+    <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-16)', marginTop: 'var(--space-12)' }}>
       <div>
         <Eyebrow tone="muted" style={{ marginBottom: 'var(--space-5)' }}>Left unmanaged</Eyebrow>
         <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
@@ -145,7 +145,7 @@ const FAQ = [
   </Section>
 
   <Section tone="page" tight>
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'var(--space-12)' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 'var(--space-12)' }}>
       <StatBlock value="11 hrs" label="Average admin time returned per week across our first cohort" />
       <StatBlock value="8+" label="Automation projects delivered for small businesses so far" />
       <StatBlock value="No lock-in" label="Built on tools you already own, documented and handed over" />
@@ -161,7 +161,7 @@ const FAQ = [
   </Section>
 
   <Section tone="page">
-    <div style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 'var(--space-20)', alignItems: 'start' }}>
+    <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 'var(--space-20)', alignItems: 'start' }}>
       <SectionHeading eyebrow="Questions" title="The things people ask us first" maxWidth={340} />
       <Accordion client:load defaultOpen={['q1']} items={FAQ} />
     </div>

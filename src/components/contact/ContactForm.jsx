@@ -47,7 +47,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={submit} noValidate style={{ display: 'grid', gap: 'var(--space-5)' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-5)' }}>
+      <div className="grid-stack-sm" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-5)' }}>
         <Input label="Your name" placeholder="Priya Raman" value={form.name} onChange={set('name')} />
         <Input label="Work email" type="email" iconLeft="mail" placeholder="you@practice.com" required
           value={form.email} onChange={set('email')} error={error} />

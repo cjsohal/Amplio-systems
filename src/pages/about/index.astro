@@ -35,7 +35,7 @@ const aboutDescription = React.createElement(React.Fragment, null,
 <BaseLayout title="About" description="Amplio is Latin: to enlarge, extend, multiply. We chose it because the point was never speed. It was room — room to think, to grow, to do the work you actually care about.">
 
   <Section tone="page" tight style={{ paddingTop: 'var(--space-24)' }}>
-    <div class="about-hero-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 'var(--space-20)', alignItems: 'center' }}>
+    <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 'var(--space-20)', alignItems: 'center' }}>
       <SectionHeading eyebrow="About" level={1} maxWidth={560}
         title={aboutTitle}
         description={aboutDescription} />
@@ -65,13 +65,13 @@ const aboutDescription = React.createElement(React.Fragment, null,
   </Section>
 
   <Section tone="page">
-    <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 'var(--space-20)', alignItems: 'start' }}>
+    <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 'var(--space-20)', alignItems: 'start' }}>
       <SectionHeading eyebrow="Who we work with" title="Small practices where the owner is still the product" maxWidth={400}
         description="Life coaches, local businesses, consultants, practitioners. People whose time is the thing being sold, and whose admin is therefore the most expensive thing in the business." />
       <div style={{ display: 'grid', gap: 'var(--space-8)' }}>
         <Testimonial quote="Amplio Systems have helped me streamline my marketing and customer data analysis. Couldn't have it done without you, thanks CJ!"
           name="Sarah James" role="Marketing expert" />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'var(--space-8)', borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-8)' }}>
+        <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'var(--space-8)', borderTop: '1px solid var(--border-subtle)', paddingTop: 'var(--space-8)' }}>
           <StatBlock value="Reassured" label="How clients say they feel after the first call" />
           <StatBlock value="Relaxed" label="How they describe the build weeks" />
           <StatBlock value="Comfortable" label="Using the system with ongoing support" />
@@ -81,11 +81,11 @@ const aboutDescription = React.createElement(React.Fragment, null,
   </Section>
 
   <Section tone="ink" tight>
-    <div style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 'var(--space-16)', alignItems: 'center' }}>
+    <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 'var(--space-16)', alignItems: 'center' }}>
       <div style={{ display: 'grid', placeItems: 'center' }}>
         <img src="/assets/tech-working-with-people.png" alt="An illustration of technology working alongside people" style={{ width: 'min(340px,100%)' }} />
       </div>
-      <div style={{ textAlign: 'right' }}>
+      <div class="text-center-mobile" style={{ textAlign: 'right' }}>
         <Eyebrow tone="inverse" style={{ marginBottom: 'var(--space-5)' }}>What we believe</Eyebrow>
         <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px,2.6vw,34px)', lineHeight: 'var(--leading-snug)', color: 'var(--text-inverse)', margin: 0 }}>
           Technology should serve people, not the other way around. We bring warmth to automation, and we create space rather than just speed.
@@ -102,8 +102,3 @@ const aboutDescription = React.createElement(React.Fragment, null,
 
 </BaseLayout>
 
-<style>
-  @media (max-width: 820px) {
-    .about-hero-grid { grid-template-columns: 1fr !important; }
-  }
-</style>

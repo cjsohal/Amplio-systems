@@ -30,7 +30,7 @@ const { d } = Astro.props;
 </div>
 
 <Section tone="page">
-  <div style={{ display: 'grid', gridTemplateColumns: '0.95fr 1.05fr', gap: 'var(--space-16)', alignItems: 'start' }}>
+  <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '0.95fr 1.05fr', gap: 'var(--space-16)', alignItems: 'start' }}>
     <SectionHeading eyebrow={d.gapEyebrow} title={d.gapTitle} description={d.gapBody} maxWidth={440} />
     <div style={{ display: 'grid', gap: 'var(--space-4)' }}>
       {d.gapPoints.map(([icon, title, body]) => (
@@ -49,7 +49,7 @@ const { d } = Astro.props;
 </Section>
 
 <Section tone="sage" style={{ scrollMarginTop: 80 }}>
-  <div id="detail" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 'var(--space-16)', alignItems: 'start' }}>
+  <div id="detail" class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 'var(--space-16)', alignItems: 'start' }}>
     <div>
       <SectionHeading eyebrow={d.doesEyebrow} title={d.doesTitle} maxWidth={480} />
       <div style={{ display: 'grid', gap: 'var(--space-4)', marginTop: 'var(--space-8)' }}>
@@ -72,7 +72,7 @@ const { d } = Astro.props;
 
 <Section tone="page">
   <SectionHeading eyebrow={d.stepsEyebrow} title={d.stepsTitle} />
-  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'var(--space-6)', marginTop: 'var(--space-12)' }}>
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 'var(--space-6)', marginTop: 'var(--space-12)' }}>
     {d.steps.map(([icon, title, body], i) => (
       <Card key={title} variant="raised" padding="lg" style={{ height: '100%' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -89,7 +89,7 @@ const { d } = Astro.props;
 </Section>
 
 <Section tone="page" tight style={{ paddingTop: 0 }}>
-  <div style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 'var(--space-20)', alignItems: 'start' }}>
+  <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 'var(--space-20)', alignItems: 'start' }}>
     <SectionHeading eyebrow="Questions" title="The things people ask us first" maxWidth={320} />
     <Accordion client:load defaultOpen={[d.faq[0][0]]}
       items={d.faq.map(([fid, question, answer]) => ({ id: fid, question, answer }))} />

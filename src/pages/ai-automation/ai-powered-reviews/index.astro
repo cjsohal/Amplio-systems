@@ -78,12 +78,12 @@ const FAQ = [
   </div>
 
   <Section tone="page">
-    <div style={{ display: 'grid', gridTemplateColumns: '0.95fr 1.05fr', gap: 'var(--space-16)', alignItems: 'start' }}>
+    <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '0.95fr 1.05fr', gap: 'var(--space-16)', alignItems: 'start' }}>
       <SectionHeading eyebrow="The gap" maxWidth={440}
         title="Hundreds of happy customers. Seventeen reviews."
         description="A prospect can't see the thank-you emails in your inbox, or hear the customer who told your team they'd been brilliant. They can only judge the evidence in front of them — and a high rating on its own doesn't always do the job." />
       <div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-5)' }}>
+        <div class="grid-stack-sm" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-5)' }}>
           <ProfileCard tone="weak" rating="4.9" count="14" recency="Latest review: 8 months ago"
             verdict="Excellent score. Reads as new, rarely used, or unable to persuade customers to recommend it." />
           <ProfileCard rating="4.7" count="186" recency="Several in the past few weeks"
@@ -118,7 +118,7 @@ const FAQ = [
   <Section tone="page" id="how" style={{ scrollMarginTop: 80 }}>
     <SectionHeading eyebrow="How it works" title="Three messages, properly timed"
       description="The whole system is three communications per customer. Enough to be remembered, few enough that nobody feels chased." />
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'var(--space-6)', marginTop: 'var(--space-12)' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 'var(--space-6)', marginTop: 'var(--space-12)' }}>
       {STEPS.map((s) => (
         <Card key={s.n} variant="raised" padding="lg" style={{ height: '100%' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -140,7 +140,7 @@ const FAQ = [
   </Section>
 
   <Section tone="card">
-    <div style={{ display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 'var(--space-16)', alignItems: 'center' }}>
+    <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 'var(--space-16)', alignItems: 'center' }}>
       <SectionHeading eyebrow="Replies that sound human" maxWidth={400}
         title="“Thanks for your feedback” is a box being ticked"
         description="When the same sentence sits under every review, everyone can tell it was pasted. A reply that mentions what the customer actually said shows them — and every future customer reading it — that somebody listened." />
@@ -164,7 +164,7 @@ const FAQ = [
   </Section>
 
   <Section tone="page" tight>
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-12)', alignItems: 'center', maxWidth: '900px', margin: '0 auto' }}>
+    <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-12)', alignItems: 'center', maxWidth: '900px', margin: '0 auto' }}>
       <div>
         <Eyebrow style={{ marginBottom: 'var(--space-4)' }}>What it costs</Eyebrow>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', flexWrap: 'wrap' }}>
@@ -203,7 +203,7 @@ const FAQ = [
   </Section>
 
   <Section tone="page" tight style={{ paddingTop: 0 }}>
-    <div style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 'var(--space-20)', alignItems: 'start' }}>
+    <div class="grid-stack-md" style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: 'var(--space-20)', alignItems: 'start' }}>
       <SectionHeading eyebrow="Questions" title="The things people ask us first" maxWidth={320} />
       <Accordion client:load defaultOpen={['r1']} items={FAQ} />
     </div>
