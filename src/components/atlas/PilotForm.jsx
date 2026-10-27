@@ -9,6 +9,7 @@ import { Alert } from '@ds/components/feedback/Alert.jsx';
 import { Badge } from '@ds/components/core/Badge.jsx';
 import { Eyebrow } from '@ds/components/marketing/Eyebrow.jsx';
 import Honeypot from '@components/Honeypot.jsx';
+import { trackLead } from '@/lib/track.js';
 
 const ORG_TYPES = [
   { value: 'ha', label: 'Housing Association', description: 'The focus of our first pilot cohort.' },
@@ -67,6 +68,7 @@ export default function PilotForm() {
         body: JSON.stringify(f),
       });
       if (!res.ok) throw new Error('request failed');
+      trackLead('atlas-pilot');
       setSent(true);
     } catch {
       setSendError(true);

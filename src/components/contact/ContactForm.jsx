@@ -7,6 +7,7 @@ import { Button } from '@ds/components/core/Button.jsx';
 import { Alert } from '@ds/components/feedback/Alert.jsx';
 import { Badge } from '@ds/components/core/Badge.jsx';
 import Honeypot from '@components/Honeypot.jsx';
+import { trackLead } from '@/lib/track.js';
 
 export default function ContactForm() {
   const [form, setForm] = React.useState({ name: '', email: '', practice: '', message: '', consent: false, hp_website: '' });
@@ -27,6 +28,7 @@ export default function ContactForm() {
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error('request failed');
+      trackLead('contact');
       setSent(true);
     } catch {
       setError("That didn't send — please try again, or email info@ampliosystemsltd.com directly.");

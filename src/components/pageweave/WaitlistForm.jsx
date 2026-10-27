@@ -6,6 +6,7 @@ import { Alert } from '@ds/components/feedback/Alert.jsx';
 import { Icon } from '@ds/components/core/Icon.jsx';
 import Honeypot from '@components/Honeypot.jsx';
 import { SURVEY } from '@data/pageweaveSurvey.js';
+import { trackLead } from '@/lib/track.js';
 
 // Campaign tags carried from the ad click into the notification email, so each sign-up can be
 // traced to the ad that earned it. Only these keys are read; the Worker caps their length again.
@@ -103,6 +104,7 @@ export default function WaitlistForm() {
         body: JSON.stringify({ ...a, ...f, ...readTracking() }),
       });
       if (!res.ok) throw new Error('request failed');
+      trackLead('pageweave-waitlist');
       setSent(true);
       // Meta Pixel "Lead" event, if the pixel has been added to the page. A no-op otherwise.
       if (typeof window.fbq === 'function') window.fbq('track', 'Lead');
