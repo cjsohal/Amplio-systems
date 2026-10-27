@@ -229,6 +229,14 @@ Settings → Variables and secrets) — never committed to the repo. Without tha
 routes return a `502` and the forms show an inline error asking the user to email directly or
 retry.
 
+## Atlas waiting-list page (`/atlas/waitlist/`)
+
+A short sign-up page to share at events (link, slide or QR code): `src/pages/atlas/waitlist/index.astro`,
+form in `src/components/atlas/AtlasWaitlistForm.jsx`, endpoint `/api/atlas-waitlist` in `worker/index.js`
+(emailed via Resend). Minimal layout, `noindex`, and left out of the sitemap (filter in
+`astro.config.mjs`). Add `?src=<event>` to the link, e.g. `/atlas/waitlist/?src=housing-summit`, and
+the tag appears in the notification email subject and body so sign-ups can be told apart.
+
 ## Pageweave waiting-list page (`/pageweave/`)
 
 A single-screen campaign landing page for the Meta ad campaign: `src/pages/pageweave/index.astro`,

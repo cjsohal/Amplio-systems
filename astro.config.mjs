@@ -7,7 +7,7 @@ export default defineConfig({
   site: 'https://ampliosystemsltd.com',
   output: 'static',
   trailingSlash: 'always',
-  integrations: [react(), sitemap()],
+  integrations: [react(), sitemap({ filter: (page) => !/\/(pageweave|atlas\/waitlist)\/$/.test(page) })],
   vite: {
     resolve: {
       alias: {

@@ -262,10 +262,51 @@ async function handleWaitlist(request, env) {
   return jsonResponse({ ok: true }, 200);
 }
 
+// Atlas waiting list (the /atlas/waitlist/ page, shared at events). Deliberately short: name,
+// email and organisation are enough to follow up. `src` tags which event/link it came from.
+async function handleAtlasWaitlist(request, env) {
+  const { body, response } = await intake(request);
+  if (response) return response;
+
+  const email = text(body.email, 254);
+  const name = text(body.name, 200);
+  const org = text(body.org, 200);
+  if (!name || !org || !EMAIL_RE.test(email)) {
+    return jsonResponse({ ok: false, error: 'Name, organisation and a valid email are required' }, 400);
+  }
+  if (body.consent !== true) {
+    return jsonResponse({ ok: false, error: 'Consent to be contacted is required' }, 400);
+  }
+  const src = text(body.src, 60);
+
+  try {
+    await sendNotification(env, {
+      subject: `[Website] Atlas waiting list: ${name}, ${org}${src ? ` (${src})` : ''}`.slice(0, 150),
+      replyTo: email,
+      fields: [
+        ['Name', name],
+        ['Email', email],
+        ['Organisation', org],
+        ['Organisation type', text(body.orgType, 60)],
+        ['Role', text(body.position, 100)],
+        ['Source', src],
+        ['Contact consent (Atlas)', 'Yes'],
+        ['Marketing consent (other Amplio products)', body.marketingConsent === true ? 'Yes' : 'No'],
+      ],
+    });
+  } catch (err) {
+    console.error('atlas waitlist notification failed', err);
+    return jsonResponse({ ok: false, error: 'Could not join the waiting list right now' }, 502);
+  }
+
+  return jsonResponse({ ok: true }, 200);
+}
+
 const ROUTES = {
   '/api/contact': handleContact,
   '/api/pilot': handlePilot,
   '/api/waitlist': handleWaitlist,
+  '/api/atlas-waitlist': handleAtlasWaitlist,
 };
 
 export default {

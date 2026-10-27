@@ -1,0 +1,91 @@
+---
+/* /atlas/waitlist/ — Atlas waiting list for event delegates.
+   A link to hand out or put on a slide/QR code: no site navigation, one short form. Kept out of
+   search results (it's a share-by-link page). Atlas is at concept stage with no pilot customers
+   yet, so the copy promises a conversation, not a product. Add `?src=<event>` to the link to tag
+   where sign-ups came from; it appears in the notification email. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Logo } from '@ds/components/core/Logo.jsx';
+import { Eyebrow } from '@ds/components/marketing/Eyebrow.jsx';
+import { Icon } from '@ds/components/core/Icon.jsx';
+import { Badge } from '@ds/components/core/Badge.jsx';
+import AtlasWaitlistForm from '@components/atlas/AtlasWaitlistForm.jsx';
+
+const POINTS = [
+  ['search', 'AI-driven analysis of housing need, demand and viability'],
+  ['map-pin', 'Compare sites and scenarios side by side'],
+  ['users', 'Early members help shape what Atlas answers first'],
+];
+---
+<BaseLayout
+  minimal
+  noindex
+  title="Atlas waiting list"
+  description="Join the waiting list for Atlas, AI-powered clarity for housing providers."
+>
+  <div class="aw">
+    <header class="aw-top">
+      <a href="/" aria-label="Amplio Systems home" style="line-height: 0;"><Logo height={36} /></a>
+      <Badge tone="brand" icon="sparkles">Early access</Badge>
+    </header>
+
+    <div class="aw-main">
+      <section class="aw-copy">
+        <Eyebrow as="p" style={{ marginBottom: 'var(--space-5)' }}>Amplio Atlas</Eyebrow>
+        <h1 class="aw-h1">AI-powered clarity <em>for housing providers</em></h1>
+        <p class="aw-lede">
+          Atlas brings data, AI and human expertise together to help you decide where to build, which
+          sites to prioritise and whether a scheme stacks up. Leave your details and we’ll be in touch.
+        </p>
+        <ul class="aw-points">
+          {POINTS.map(([icon, text]) => (
+            <li><span class="aw-tile"><Icon name={icon} size={18} /></span><span>{text}</span></li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="aw-form" aria-label="Atlas waiting list">
+        <AtlasWaitlistForm client:load />
+      </section>
+    </div>
+
+    <footer class="aw-foot">
+      <span>&copy; 2026 Amplio Systems Ltd</span>
+      <span class="aw-foot-links">
+        <a href="/atlas/">About Atlas</a>
+        <a href="/privacy/">Privacy notice</a>
+        <a href="#cookie-settings" data-cookie-settings>Cookie settings</a>
+      </span>
+    </footer>
+  </div>
+</BaseLayout>
+
+<style>
+  .aw { position: relative; min-height: 100svh; display: flex; flex-direction: column; overflow: hidden; padding: 0 var(--space-8); }
+  .aw::before {
+    content: ''; position: absolute; right: -180px; bottom: -220px; width: 720px; height: 720px;
+    background: url('/assets/mark.svg') no-repeat center / contain; opacity: 0.12; pointer-events: none;
+  }
+  .aw > * { position: relative; }
+  .aw-top { width: 100%; max-width: var(--container-xl); margin: 0 auto; padding: var(--space-6) 0 0; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+  .aw-main { flex: 1; width: 100%; max-width: var(--container-xl); margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--space-16); align-items: center; padding: var(--space-8) 0; }
+  .aw-h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(34px, 4.6vw, var(--text-5xl)); line-height: var(--leading-tight); color: var(--text-heading); margin: 0; max-width: 14em; }
+  .aw-h1 em { font-style: italic; color: var(--amplio-green); }
+  .aw-lede { font-family: var(--font-body); font-size: var(--text-md); line-height: var(--leading-relaxed); color: var(--text-body); margin: var(--space-6) 0 0; max-width: 34em; }
+  .aw-points { list-style: none; margin: var(--space-8) 0 0; padding: 0; display: grid; gap: var(--space-4); font-family: var(--font-body); font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--text-heading); }
+  .aw-points li { display: flex; gap: var(--space-4); align-items: center; }
+  .aw-tile { width: 38px; height: 38px; flex: none; border-radius: var(--radius-leaf); background: var(--sage-mist); color: var(--deep-fern); display: grid; place-items: center; }
+  .aw-form { background: var(--surface-card); border-radius: var(--radius-xl, 20px); box-shadow: var(--shadow-lg); padding: var(--space-8); display: grid; gap: var(--space-5); align-content: start; }
+  .aw-foot { width: 100%; max-width: var(--container-xl); margin: 0 auto; padding: 0 0 var(--space-6); display: flex; justify-content: space-between; gap: var(--space-4); font-family: var(--font-body); font-size: var(--text-xs); color: var(--text-muted); }
+  .aw-foot-links { display: flex; gap: var(--space-5); flex-wrap: wrap; }
+  .aw-foot a { color: var(--text-muted); text-decoration: underline; }
+  @media (max-width: 900px) {
+    .aw { padding: 0 var(--space-5); }
+    .aw-main { grid-template-columns: 1fr; gap: var(--space-8); padding: var(--space-6) 0 var(--space-10); }
+    .aw-form { padding: var(--space-6); }
+    .aw-lede { font-size: var(--text-base); margin-top: var(--space-4); }
+    .aw-points { margin-top: var(--space-6); }
+    .aw::before { width: 480px; height: 480px; right: -160px; bottom: -120px; }
+  }
+  @media (max-width: 600px) { .aw-points { display: none; } .aw-main { gap: var(--space-6); } }
+</style>
