@@ -1,0 +1,26 @@
+0000000000000000000000000000000000000000 ddf0c3a6c9011dbe34e0ba4af758863e3f0b9194 cjsohal <cj.sohal@aisingh.co.uk> 1788203976 +0100	commit (initial): Add design system and project scaffold
+ddf0c3a6c9011dbe34e0ba4af758863e3f0b9194 f72ae05bccbc8d7a6c10417b5563c78e8c48a443 cjsohal <cj.sohal@aisingh.co.uk> 1788203991 +0100	commit: Add site chrome: base layout, header, footer, booking dialog
+f72ae05bccbc8d7a6c10417b5563c78e8c48a443 1e486914b6dfffcce1f86f7d5ce8a5f701b8c6de cjsohal <cj.sohal@aisingh.co.uk> 1788204005 +0100	commit: Add home, about and contact pages
+1e486914b6dfffcce1f86f7d5ce8a5f701b8c6de 5b424e809ecf78ddf2e395b1653e7d6d0dfd8c08 cjsohal <cj.sohal@aisingh.co.uk> 1788204018 +0100	commit: Add AI Automation hub, service sub-pages and Reviews page
+5b424e809ecf78ddf2e395b1653e7d6d0dfd8c08 cfdd39af7c4751a7309201e2d6fc9e895e49d193 cjsohal <cj.sohal@aisingh.co.uk> 1788204033 +0100	commit: Add Atlas product page and pilot application
+cfdd39af7c4751a7309201e2d6fc9e895e49d193 71bfd6c98a7d846696bea47a3fdd5abb2b6809e1 cjsohal <cj.sohal@aisingh.co.uk> 1788204045 +0100	commit: Add form submission stubs and project README
+71bfd6c98a7d846696bea47a3fdd5abb2b6809e1 e0b60c7c1c7e7b6cc4200dc873c1610e30871641 cjsohal <cj.sohal@aisingh.co.uk> 1788205094 +0100	commit: Change homepage hero badge to "small businesses"
+e0b60c7c1c7e7b6cc4200dc873c1610e30871641 6c10e4390a3046f2d93ffdb21b318ee56aab6a35 cjsohal <cj.sohal@aisingh.co.uk> 1788266398 +0100	commit: Switch deployment to Cloudflare Workers, fixing the failed build
+6c10e4390a3046f2d93ffdb21b318ee56aab6a35 0468923f9247541273a596d75d7cff81425dfad5 cjsohal <cj.sohal@aisingh.co.uk> 1788269560 +0100	commit: Add "what other AI providers won't tell you" comparison section
+0468923f9247541273a596d75d7cff81425dfad5 00c55a47f4cf59bb6d57c7fee58ac0cfc587b1d0 cjsohal <cj.sohal@aisingh.co.uk> 1788270245 +0100	commit: Soften "AI providers" section copy, add real client testimonials
+00c55a47f4cf59bb6d57c7fee58ac0cfc587b1d0 0443b04f3c6fe4ba64138e715ddf89290c4370ac cjsohal <cj.sohal@aisingh.co.uk> 1788270888 +0100	commit: Replace timeline stat with project count, fix week-count consistency
+0443b04f3c6fe4ba64138e715ddf89290c4370ac fa3eff359a96283522b42aad1101508f5e88d616 cjsohal <cj.sohal@aisingh.co.uk> 1788283377 +0100	commit: Fix unitless numeric CSS values across all .astro pages
+fa3eff359a96283522b42aad1101508f5e88d616 00aa41fdcdcca8122d0a15179a78aff8eefbe467 cjsohal <cj.sohal@aisingh.co.uk> 1788283968 +0100	commit: Increase header logo size (26px -> 34px height, ~20px wider)
+00aa41fdcdcca8122d0a15179a78aff8eefbe467 baae898ec42c2a055f541fcc299bbe24cdf1f490 cjsohal <cj.sohal@aisingh.co.uk> 1788285193 +0100	commit: Increase header logo size again for readability (34px -> 40px height)
+baae898ec42c2a055f541fcc299bbe24cdf1f490 87aa5a34012054a78c657925c212a9a00df1d7d7 cjsohal <cj.sohal@aisingh.co.uk> 1788350183 +0100	commit: Replace booking dialog with a direct link to the real booking system
+87aa5a34012054a78c657925c212a9a00df1d7d7 e2fc881bc3dc7ca8055f7c466bf04c0f338c7486 cjsohal <cj.sohal@aisingh.co.uk> 1788382959 +0100	commit: Add ongoing support mention to homepage FAQ handover answer
+e2fc881bc3dc7ca8055f7c466bf04c0f338c7486 5e43caf2c7762eff68659fde0281278f04ca75cf cjsohal <cj.sohal@aisingh.co.uk> 1788384151 +0100	commit: Fix escaped HTML entities on Reviews page, wire CTA to booking, tidy footer
+5e43caf2c7762eff68659fde0281278f04ca75cf 627a2abe30b36417d46a6fa4749fd4c41a21e713 cjsohal <cj.sohal@aisingh.co.uk> 1788385194 +0100	commit: Add emphasis formatting to plain page headers, swap About hero image
+627a2abe30b36417d46a6fa4749fd4c41a21e713 0b2717cef5998d9b1c9791c7663a7891b899d616 cjsohal <cj.sohal@aisingh.co.uk> 1788385990 +0100	commit: Swap "What we believe" section: image left, text right-aligned
+0b2717cef5998d9b1c9791c7663a7891b899d616 4e765e9236e7691431d770a614a4a540f54c4758 cjsohal <cj.sohal@aisingh.co.uk> 1788545003 +0100	commit: Atlas: point platform section CTA to pilot signup
+4e765e9236e7691431d770a614a4a540f54c4758 870bd834d6aa6a489f78c70cc86d3e9c5f4a0135 cjsohal <cj.sohal@aisingh.co.uk> 1788724771 +0100	commit: Wire up email delivery for pilot and contact forms via Resend
+870bd834d6aa6a489f78c70cc86d3e9c5f4a0135 05c3dfc79001b3f3d7a8457b1936e6b3a4453468 cjsohal <cj.sohal@aisingh.co.uk> 1788726506 +0100	commit: Fix checkbox toggle race and add consent options to pilot form
+05c3dfc79001b3f3d7a8457b1936e6b3a4453468 2e8ea934f5a5895f5e9724db466ec6819faae454 cjsohal <cj.sohal@aisingh.co.uk> 1788727771 +0100	commit: Add hero photography to the Atlas page
+2e8ea934f5a5895f5e9724db466ec6819faae454 5912cfaf7979bd1d02b5fd76e9ff0c02673a9dec cjsohal <cj.sohal@aisingh.co.uk> 1788729545 +0100	commit: Make the site responsive for mobile
+5912cfaf7979bd1d02b5fd76e9ff0c02673a9dec 91017db9a4bfb2ab1372de9823dcf2369fd008b5 cjsohal <cj.sohal@aisingh.co.uk> 1788730294 +0100	commit: Include marketing consent in the pilot notification email
+91017db9a4bfb2ab1372de9823dcf2369fd008b5 6f465ceded30711769863738cc644cea461fa816 cjsohal <cj.sohal@aisingh.co.uk> 1788738801 +0100	commit: Add SEO/AEO technical foundation and structured data

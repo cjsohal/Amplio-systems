@@ -1,18 +1,15 @@
 ---
 /* /privacy/ — privacy notice (UK GDPR / PECR).
 
-   DRAFT. Written from what the site actually does today (what the two forms collect, who
-   processes it, that no cookies/analytics are set) — but it has not been reviewed by anyone
-   qualified, and the bits only the business can answer are marked [TO CONFIRM] below. Resolve
-   every one of them (search this file for "TO CONFIRM") before this goes live, and re-read it
-   whenever the site changes what it collects or adds a new third-party service (analytics, a
-   chat widget, an embedded form): the cookies and third-party sections are only true while
-   nothing like that is added. */
+   Business details (company/ICO numbers, retention, providers) confirmed by the owner on
+   27 October 2026. Not reviewed by a solicitor. Re-read it whenever the site changes what it
+   collects or adds a new third-party service (analytics, a chat widget, an embedded form), and
+   when a tool in src/data/site.js is switched on or off: the cookies section must match. */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Section from '@components/Section.jsx';
 import { SectionHeading } from '@ds/components/marketing/SectionHeading.jsx';
 
-const UPDATED = '14 October 2026';
+const UPDATED = '27 October 2026';
 ---
 <BaseLayout title="Privacy notice" description="How Amplio Systems Ltd collects, uses and protects the personal information you give us through this website.">
 
@@ -24,9 +21,10 @@ const UPDATED = '14 October 2026';
       <h2>Who we are</h2>
       <p>
         Amplio Systems Ltd ("Amplio", "we", "us") is the controller of the personal information
-        described in this notice. [TO CONFIRM: registered company number and registered office
-        address.] You can reach us at <a href="mailto:info@ampliosystemsltd.com">info@ampliosystemsltd.com</a>.
-        [TO CONFIRM: ICO registration number, if registered.]
+        described in this notice. a company registered in England and Wales
+        (company number 16997901), with its registered office at 6 Hampstead Gardens, Chadwell Heath,
+        Romford, RM6 4FE, United Kingdom. You can reach us at <a href="mailto:info@ampliosystemsltd.com">info@ampliosystemsltd.com</a>.
+        We are registered with the Information Commissioner's Office (registration number ZC167552).
       </p>
 
       <h2>What we collect, and why</h2>
@@ -88,13 +86,12 @@ const UPDATED = '14 October 2026';
       </p>
       <ul>
         <li><strong>Strictly necessary (always on)</strong> — your cookie choice is remembered in your browser's local storage, so we don't ask you on every visit. It's kept for 12 months, then we ask again. This doesn't need your consent.</li>
-        <li><strong>Analytics (only if you accept)</strong> — Google Analytics, which tells us which pages are visited and how people reach them. [TO CONFIRM: remove this line until Google Analytics is switched on, and list the cookies it sets.]</li>
-        <li><strong>Advertising (only if you accept)</strong> — the Meta Pixel and Google Ads tag, which tell us whether someone who clicked one of our adverts went on to sign up or get in touch. [TO CONFIRM: remove whichever of these is not switched on yet.]</li>
+        <li><strong>Advertising (only if you accept)</strong> — the Meta (Facebook) Pixel, which tells us whether someone who clicked one of our adverts went on to sign up or get in touch.</li>
       </ul>
       <p>
-        Meta and Google receive information about your visit (such as the page you viewed and an
-        identifier) when these are on, and their own privacy policies apply to what they do with it.
-        If you decline, none of these tools load. If you accept and later withdraw, we remove their
+        Meta receives information about your visit (such as the page you viewed and an
+        identifier) when this is on, and its own privacy policy applies to what they do with it.
+        If you decline, it doesn't load. If you accept and later withdraw, we remove its
         cookies from this site and reload the page.
       </p>
 
@@ -111,24 +108,24 @@ const UPDATED = '14 October 2026';
       <ul>
         <li><strong>Cloudflare</strong> — hosts this website and runs the code that receives form submissions.</li>
         <li><strong>Resend</strong> — the email delivery service that sends us a notification containing what you submitted.</li>
-        <li><strong>Our email provider</strong> — receives that notification and holds our mailbox. [TO CONFIRM: name of the mailbox provider.]</li>
+        <li><strong>Google Workspace</strong> — our email provider, which receives that notification and holds our mailbox.</li>
+        <li><strong>Microsoft Azure</strong> — where data held within the Atlas platform is stored, in a Microsoft cloud environment we control.</li>
         <li><strong>OpenStreetMap</strong> — supplies the Atlas map tiles, as described above.</li>
       </ul>
       <p>
         Some of these providers are based in, or process information in, countries outside the UK
         (including the United States). Where that happens we rely on an approved safeguard such as
-        the UK's data bridge arrangements or standard contractual clauses. [TO CONFIRM: that this
-        matches each provider's current terms.] We may also share information where the law requires
+        the UK's data bridge arrangements or standard contractual clauses. We may also share information where the law requires
         it.
       </p>
 
       <h2>How long we keep it</h2>
       <p>
-        [TO CONFIRM: retention periods. A reasonable starting point to adapt: enquiries and
-        applications that don't lead to us working together are deleted after 12 months; records
-        of a working relationship are kept for as long as we need them for the work and our legal
-        and accounting obligations; marketing details are kept until you withdraw consent; pilot
-        details held for a later phase are reviewed at least once a year.]
+We keep information only for as long as we need it. Enquiries, applications and
+        waiting-list sign-ups from people who don't become customers are deleted after 12 months.
+        If you become a customer, we keep your information for the length of our contract plus 24
+        months, and longer where UK law requires us to (for example tax and accounting records).
+        Marketing details are kept until you withdraw consent.
       </p>
 
       <h2>Your rights</h2>
