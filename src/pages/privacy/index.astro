@@ -1,0 +1,172 @@
+---
+/* /privacy/ — privacy notice (UK GDPR / PECR).
+
+   DRAFT. Written from what the site actually does today (what the two forms collect, who
+   processes it, that no cookies/analytics are set) — but it has not been reviewed by anyone
+   qualified, and the bits only the business can answer are marked [TO CONFIRM] below. Resolve
+   every one of them (search this file for "TO CONFIRM") before this goes live, and re-read it
+   whenever the site changes what it collects or adds a new third-party service (analytics, a
+   chat widget, an embedded form): the cookies and third-party sections are only true while
+   nothing like that is added. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Section from '@components/Section.jsx';
+import { SectionHeading } from '@ds/components/marketing/SectionHeading.jsx';
+
+const UPDATED = '14 October 2026';
+---
+<BaseLayout title="Privacy notice" description="How Amplio Systems Ltd collects, uses and protects the personal information you give us through this website.">
+
+  <Section tone="page" tight style={{ paddingTop: 'var(--space-24)' }}>
+    <SectionHeading eyebrow="Legal" level={1} title="Privacy notice" maxWidth={620}
+      description={`How Amplio Systems Ltd uses the information you give us through this website. Last updated ${UPDATED}.`} />
+
+    <div class="prose">
+      <h2>Who we are</h2>
+      <p>
+        Amplio Systems Ltd ("Amplio", "we", "us") is the controller of the personal information
+        described in this notice. [TO CONFIRM: registered company number and registered office
+        address.] You can reach us at <a href="mailto:info@ampliosystemsltd.com">info@ampliosystemsltd.com</a>.
+        [TO CONFIRM: ICO registration number, if registered.]
+      </p>
+
+      <h2>What we collect, and why</h2>
+      <p>We only collect what you choose to type into a form on this site, plus the technical data any website receives.</p>
+
+      <h3>Contact form</h3>
+      <p>
+        Your name, email address, the type of practice you run, your message, and whether you ticked
+        the box asking for our monthly automation note. We use this to reply to you.
+      </p>
+
+      <h3>Atlas pilot application</h3>
+      <p>
+        Your organisation's name and type, the range of homes it owns or manages, where it operates,
+        your name, job title, work email, phone number (optional), what you'd like Atlas to help you
+        decide, anything else you tell us, and whether you ticked each of the two consent boxes
+        (being contacted about the pilot, and receiving marketing from Amplio). We use this to assess
+        your application and to get in touch about the pilot. If your organisation isn't in the
+        first cohort (for example local authorities and other organisations), we may keep your
+        details so we can contact you when a later phase opens.
+      </p>
+
+      <h3>Pageweave waiting list</h3>
+      <p>
+        Your first name, work email address, company (optional), your answers to five short
+        questions about your work, how many prospects you contact, how you'd use personalised
+        landing pages, what monthly price you'd consider reasonable and whether you'd like to help
+        test an early version, any detail you add after choosing "Other", and whether you ticked
+        each of the two consent boxes (being contacted about Pageweave, and hearing about other
+        Amplio products and services). If you arrive from one of our adverts, we also record the
+        campaign tags in the link you clicked (such as the source and campaign name) so we can see
+        which advert led to your sign-up. We use this to run the waiting list, to contact you about
+        Pageweave and early testing, and to understand what to build and how to price it. We use
+        your answers in aggregate for that research. The five questions and the first consent box
+        are needed to join the list; the second consent box is optional.
+      </p>
+
+      <h3>Booking a call</h3>
+      <p>
+        "Book a discovery call" links take you to a separate booking page run by another company.
+        We don't collect what you enter there through this website, and that company's own privacy
+        policy applies to it.
+      </p>
+
+      <h3>Technical data</h3>
+      <p>
+        Like any website, our hosting provider (Cloudflare) receives your IP address and browser
+        details when you visit, in order to deliver the pages and protect the site from attack and
+        abuse. Cookies and similar technologies are covered separately, below.
+        The Atlas map loads map tiles from OpenStreetMap's servers, which also receive your IP
+        address and browser details when the map loads.
+      </p>
+
+      <h2 id="cookies">Cookies and similar technologies</h2>
+      <p>
+        Cookies are small files a website stores in your browser. Apart from the one thing described
+        first, we only set them if you say yes in the cookie banner, and you can change your mind at
+        any time using "Cookie settings" at the foot of any page.
+      </p>
+      <ul>
+        <li><strong>Strictly necessary (always on)</strong> — your cookie choice is remembered in your browser's local storage, so we don't ask you on every visit. It's kept for 12 months, then we ask again. This doesn't need your consent.</li>
+        <li><strong>Analytics (only if you accept)</strong> — Google Analytics, which tells us which pages are visited and how people reach them. [TO CONFIRM: remove this line until Google Analytics is switched on, and list the cookies it sets.]</li>
+        <li><strong>Advertising (only if you accept)</strong> — the Meta Pixel and Google Ads tag, which tell us whether someone who clicked one of our adverts went on to sign up or get in touch. [TO CONFIRM: remove whichever of these is not switched on yet.]</li>
+      </ul>
+      <p>
+        Meta and Google receive information about your visit (such as the page you viewed and an
+        identifier) when these are on, and their own privacy policies apply to what they do with it.
+        If you decline, none of these tools load. If you accept and later withdraw, we remove their
+        cookies from this site and reload the page.
+      </p>
+
+      <h2>Our lawful bases</h2>
+      <ul>
+        <li><strong>Replying to you and handling your application</strong> — to respond to what you've asked us for, and our legitimate interest in running our business.</li>
+        <li><strong>The Pageweave waiting list</strong> — your consent to be contacted about Pageweave (the first box on the form), and our legitimate interest in understanding the market for the product we're building.</li>
+        <li><strong>Marketing and the monthly note</strong> — your consent, which you give by ticking the relevant optional box. You can withdraw it at any time (see "Your rights").</li>
+        <li><strong>Security and preventing abuse</strong> — our legitimate interest in keeping the site and its forms working and free from spam.</li>
+      </ul>
+
+      <h2>Who we share it with</h2>
+      <p>We don't sell your information, and we don't share it with anyone for their own marketing. We use a small number of service providers to run the site and handle what you send us, who may only use it on our behalf:</p>
+      <ul>
+        <li><strong>Cloudflare</strong> — hosts this website and runs the code that receives form submissions.</li>
+        <li><strong>Resend</strong> — the email delivery service that sends us a notification containing what you submitted.</li>
+        <li><strong>Our email provider</strong> — receives that notification and holds our mailbox. [TO CONFIRM: name of the mailbox provider.]</li>
+        <li><strong>OpenStreetMap</strong> — supplies the Atlas map tiles, as described above.</li>
+      </ul>
+      <p>
+        Some of these providers are based in, or process information in, countries outside the UK
+        (including the United States). Where that happens we rely on an approved safeguard such as
+        the UK's data bridge arrangements or standard contractual clauses. [TO CONFIRM: that this
+        matches each provider's current terms.] We may also share information where the law requires
+        it.
+      </p>
+
+      <h2>How long we keep it</h2>
+      <p>
+        [TO CONFIRM: retention periods. A reasonable starting point to adapt: enquiries and
+        applications that don't lead to us working together are deleted after 12 months; records
+        of a working relationship are kept for as long as we need them for the work and our legal
+        and accounting obligations; marketing details are kept until you withdraw consent; pilot
+        details held for a later phase are reviewed at least once a year.]
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        You can ask us to give you a copy of the information we hold about you, correct it, delete
+        it, restrict how we use it, or move it to someone else, and you can object to our using it
+        where we rely on legitimate interests. You can withdraw any marketing consent at any time and
+        we'll stop. To do any of this, email <a href="mailto:info@ampliosystemsltd.com">info@ampliosystemsltd.com</a>.
+      </p>
+      <p>
+        If you're unhappy with how we've handled your information, you can complain to the
+        Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/" rel="noopener noreferrer">ico.org.uk</a>
+        or on 0303 123 1113. We'd appreciate the chance to put it right first.
+      </p>
+
+      <h2>Security</h2>
+      <p>
+        This site is served over an encrypted (HTTPS) connection, and form submissions go straight
+        to our own code rather than a third-party form service. No method of sending information over
+        the internet is completely secure, so please don't put sensitive details in a free-text box.
+      </p>
+
+      <h2>Children</h2>
+      <p>This site is aimed at businesses and isn't directed at children, and we don't knowingly collect their information.</p>
+
+      <h2>Changes to this notice</h2>
+      <p>We'll update this page if what we collect or who we use changes, and change the date at the top when we do.</p>
+    </div>
+  </Section>
+
+</BaseLayout>
+
+<style>
+  .prose { max-width: 720px; margin-top: var(--space-10); font-family: var(--font-body); color: var(--text-body); }
+  .prose h2 { font-family: var(--font-display); font-weight: var(--weight-display); font-size: var(--text-2xl); line-height: var(--leading-snug); color: var(--text-heading); margin: var(--space-12) 0 var(--space-4); }
+  .prose h3 { font-family: var(--font-body); font-weight: var(--weight-bold); font-size: var(--text-md); color: var(--text-heading); margin: var(--space-6) 0 var(--space-2); }
+  .prose p, .prose li { font-size: var(--text-base); line-height: var(--leading-relaxed); }
+  .prose p { margin: 0 0 var(--space-4); max-width: none; }
+  .prose ul { margin: 0 0 var(--space-4); padding-left: var(--space-6); display: grid; gap: var(--space-3); }
+  .prose a { color: var(--text-link); }
+</style>

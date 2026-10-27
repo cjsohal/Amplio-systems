@@ -5,6 +5,8 @@
    `items` takes the same {question, answer} shape already passed to Accordion — reuse that
    expression rather than reshaping the data twice. `answer` must be plain text: schema.org's
    Answer.text doesn't render markup, so this discards HTML/rich content if any were passed in. */
+import { jsonLd } from '@/lib/jsonLd.js';
+
 const { items = [] } = Astro.props;
 
 const faqSchema = {
@@ -17,4 +19,4 @@ const faqSchema = {
   })),
 };
 ---
-<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={jsonLd(faqSchema)} />

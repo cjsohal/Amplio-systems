@@ -1,0 +1,21 @@
+# Security headers for every static page and asset. Cloudflare reads this file from the build
+# output (public/ is copied into dist/ by Astro). It does not apply to the Worker's own /api/*
+# responses, which set their own headers in worker/index.js, and it is ignored by `npm run dev`
+# (use `npm run cf:dev` to see these locally).
+#
+# The CSP allows 'unsafe-inline' for scripts and styles because Astro's React islands hydrate
+# from small inline <script> tags and the components style themselves with inline `style`
+# attributes — a nonce/hash-based policy would need a build step this site doesn't have. It still
+# blocks everything that matters most: scripts and fonts from other origins, framing, plugins,
+# and forms posting elsewhere. The only third-party origin allowed is OpenStreetMap, for the
+# Atlas map tiles, plus the Google (tag manager / analytics) and Meta (pixel) origins that the cookie
+# banner (src/components/CookieConsent.astro) loads only after a visitor opts in; they are inert
+# until a tool ID is set in src/data/site.js. If a new third-party resource is added (analytics, a widget, a font CDN),
+# it will be blocked until its origin is added here — check the browser console after adding one.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tile.openstreetmap.org https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://www.facebook.com; font-src 'self'; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://www.facebook.com https://connect.facebook.net; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests

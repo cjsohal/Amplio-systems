@@ -8,6 +8,7 @@ import { Button } from '@ds/components/core/Button.jsx';
 import { Alert } from '@ds/components/feedback/Alert.jsx';
 import { Badge } from '@ds/components/core/Badge.jsx';
 import { Eyebrow } from '@ds/components/marketing/Eyebrow.jsx';
+import Honeypot from '@components/Honeypot.jsx';
 
 const ORG_TYPES = [
   { value: 'ha', label: 'Housing Association', description: 'The focus of our first pilot cohort.' },
@@ -36,7 +37,7 @@ const DECISION_HELP = [
 export default function PilotForm() {
   const [f, setF] = React.useState({
     org: '', orgType: '', orgTypeOther: '', name: '', position: '', email: '', phone: '',
-    homes: '', region: '', focus: '', notes: '', consent: false, marketingConsent: false,
+    homes: '', region: '', focus: '', notes: '', consent: false, marketingConsent: false, hp_website: '',
   });
   const [errors, setErrors] = React.useState({});
   const [sent, setSent] = React.useState(false);
@@ -176,8 +177,10 @@ export default function PilotForm() {
         <Checkbox label="Happy for Amplio to contact me for marketing on this and other Amplio products/services"
           checked={f.marketingConsent} onChange={(v) => setF({ ...f, marketingConsent: v })} />
         <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', margin: 0 }}>
-          Amplio will never share your details with any third party and will only contact you according to your preferences.
+          Amplio will never share your details with any third party and will only contact you according to your preferences.{' '}
+          <a href="/privacy/">Read our privacy notice</a>.
         </p>
+        <Honeypot value={f.hp_website} onChange={set('hp_website')} />
       </div>
 
       {sendError && (

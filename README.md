@@ -39,7 +39,7 @@ their success state). Use `npm run cf:dev` when you need those routes to actuall
 | `src/data/servicePages.js` | The shared data object behind the three AI Automation sub-pages, so they can't structurally drift apart. |
 | `src/data/site.js` | Site-wide constants — currently just `BOOKING_URL`, the external booking page every "Book a discovery call" link points to. |
 | `src/components/seo/` | `FaqSchema.astro` / `ServiceSchema.astro` — JSON-LD components, see "SEO and structured data" below. |
-| `worker/index.js` + `wrangler.jsonc` | The Cloudflare Worker that serves the static build and the contact/pilot form endpoints — currently stubs, see below. |
+| `worker/index.js` + `wrangler.jsonc` | The Cloudflare Worker that serves the static build and the contact/pilot form endpoints (validated, then emailed via Resend) — see "Security" and "Forms" below. |
 | `.claude/skills/amplio-systems-design/` | A pointer so Claude Code picks up the design system as a skill in future sessions on this repo. |
 
 ## Deliberate adaptations from the handed-off design system
@@ -169,6 +169,51 @@ checks that markup matches visible page content).
 increasingly-recognised `llms.txt` convention some AI crawlers look for — a curated equivalent of
 the sitemap, aimed at answer engines rather than search indexers.
 
+## Security
+
+**The form endpoints** (`/api/contact`, `/api/pilot` in `worker/index.js`) are public and
+unauthenticated, so they defend themselves: JSON only (`415` otherwise), browsers must be
+same-origin (`403` for cross-site `Sec-Fetch-Site`/`Origin`, which stops another website making a
+visitor's browser submit to us), a 16KB body cap read as a stream (`413`), per-field length caps,
+control characters stripped, and single-line fields flattened so nothing can inject into the email
+subject. A hidden `hp_website` honeypot field (`src/components/Honeypot.jsx`) gets a fake `200` and
+no email. The pilot endpoint also enforces the mandatory consent tick server-side, since a
+hand-built request can skip the client check. Notification emails are tagged `[Website]` and carry
+a banner saying the content is untrusted visitor text — they come from our own DKIM-signed address,
+so a hostile message in the Notes field would otherwise look trustworthy.
+
+**What that does not stop** is a determined scripted bot, which can omit the browser headers and
+skip the honeypot. That needs a Cloudflare-side control, not code: a **rate-limiting rule** on
+`/api/*` (Cloudflare dashboard → Security → WAF → Rate limiting rules), and ideally **Turnstile** on
+both forms (needs a site key + secret; the secret would be added as a Worker secret like
+`RESEND_API_KEY`, and verified in `intake()` in the Worker).
+
+**Security headers** live in `public/_headers` (copied into `dist/`, applied to static pages and
+assets by Cloudflare; the Worker's own API responses set theirs in code). The CSP allows
+`'unsafe-inline'` for scripts and styles because Astro's islands hydrate from inline `<script>`s and
+components style themselves with inline `style` attributes; it still blocks other-origin scripts,
+fonts, fetches, framing and plugins. The one third-party origin allowed is
+`tile.openstreetmap.org` (Atlas map tiles). **If you add a new third-party resource** (analytics, a
+chat widget, an embed, a font CDN) it will be silently blocked until its origin is added there —
+check the browser console. `_headers` is ignored by `npm run dev`; use `npm run cf:dev` to see it.
+
+**JSON-LD** is serialised through `src/lib/jsonLd.js`, which escapes `<` so copy containing a
+closing script tag can't break out of the `<script>` block.
+
+**Secrets**: `RESEND_API_KEY` is a Worker secret and must never be committed. For `wrangler dev`
+locally, pass it with `--var RESEND_API_KEY:<value>` or a `.dev.vars` file — `.dev.vars*` is
+gitignored. To test the endpoints without sending real email, use a dummy key: validation and
+rejection paths run normally, and a valid submission fails at Resend with a `502`.
+
+**Still to do outside the codebase**: turn on "Always Use HTTPS" in Cloudflare (SSL/TLS → Edge
+Certificates) — plain `http://` currently serves the site rather than redirecting; tighten DMARC
+from `p=none` (add an `rua=` address, then move through `quarantine` to `reject`); consider CAA
+records; add the rate-limit rule / Turnstile above.
+
+The privacy notice is at `/privacy/` (`src/pages/privacy/index.astro`). It is a **draft**: search it
+for `TO CONFIRM` and resolve every one before it goes live, and re-read it whenever the site starts
+collecting something new or using a new third-party service.
+
 ## Forms and "Book a discovery call"
 
 Every "Book a discovery call" / "Get in touch" / "Talk about this one" link across the site opens
@@ -183,6 +228,32 @@ on the Worker (`wrangler secret put RESEND_API_KEY`, or Cloudflare dashboard →
 Settings → Variables and secrets) — never committed to the repo. Without that secret set, both
 routes return a `502` and the forms show an inline error asking the user to email directly or
 retry.
+
+## Pageweave waiting-list page (`/pageweave/`)
+
+A single-screen campaign landing page for the Meta ad campaign: `src/pages/pageweave/index.astro`,
+form in `src/components/pageweave/WaitlistForm.jsx`, endpoint `/api/waitlist` in `worker/index.js`
+(emailed via Resend like the other forms). It uses `BaseLayout`'s `minimal` prop (no site header or
+footer) and `noindex`, so it is neither navigable-away-from nor searchable. `utm_*` and `fbclid` from
+the ad URL are sent with the sign-up and appear in the notification email.
+
+The form is a six-step flow: five one-tap market-research questions, then name/email/company and
+two separate consent boxes. The questions and their options live in `src/data/pageweaveSurvey.js`,
+which both the form and the Worker import, so edit them there (the Worker drops any answer that
+isn't one of the listed options). The privacy notice has a matching "Pageweave waiting list" section.
+
+**Tracking and cookie consent.** `src/components/CookieConsent.astro` (loaded by `BaseLayout` on
+every page) is the only way tracking tags load: Google Analytics 4, a Google Ads tag and the Meta
+Pixel, each only after the visitor accepts its category (Reject is as prominent as Accept; the
+choice is kept 12 months in localStorage; footer "Cookie settings" reopens it; withdrawing clears
+the tool's cookies and reloads). Put the IDs in `src/data/site.js` (`TRACKING`); with them all
+empty the banner doesn't appear on the live site (it does in `npm run dev`, for testing). Google
+tags run in Consent Mode v2. `public/_headers` already allows the Google and Meta origins. Use a
+Meta Pixel dedicated to Amplio, not Delite Salon's. **AdSense** (showing ads on this site) is not
+wired up: serving it to UK/EEA visitors needs a Google-certified (IAB TCF) consent platform, which
+this banner is not. If you only need Google Ads conversion tracking, use `TRACKING.googleAds`.
+The privacy notice's "Cookies" section has `TO CONFIRM` markers to resolve when a tool goes live.
+The waiting-list form fires `fbq('track', 'Lead')` on success whenever the Pixel is loaded.
 
 ## Deploying
 

@@ -1,0 +1,262 @@
+---
+/* Cookie consent banner and the gate for every tracking tag on the site (UK PECR / UK GDPR).
+   - Nothing non-essential loads until the visitor opts in; "Reject all" is as prominent as "Accept all".
+   - Choice is kept in localStorage (a record of consent is itself strictly necessary) for 12 months,
+     then asked again. Withdrawing a category clears that tool's cookies and reloads the page.
+   - Any element with data-cookie-settings reopens the banner (footer "Cookie settings" links).
+   - Tool IDs live in src/data/site.js. No IDs set = no banner (except in `npm run dev`, so it can
+     be styled and tested).
+   - Google tags run in Consent Mode v2: all four signals start denied and are updated from the
+     choice. NOTE: serving AdSense ads to UK/EEA visitors additionally needs a Google-certified
+     (IAB TCF) consent platform; this banner is not one. */
+import { TRACKING } from '@/data/site.js';
+
+const tools = {
+  ga4: TRACKING.ga4,
+  googleAds: TRACKING.googleAds,
+  metaPixel: TRACKING.metaPixel,
+};
+const hasAnalytics = !!tools.ga4;
+const hasAdvertising = !!(tools.googleAds || tools.metaPixel);
+const enabled = hasAnalytics || hasAdvertising || import.meta.env.DEV;
+// In dev with no IDs configured, show both categories so the banner can be seen and tested.
+const showAnalytics = hasAnalytics || !(hasAnalytics || hasAdvertising);
+const showAdvertising = hasAdvertising || !(hasAnalytics || hasAdvertising);
+---
+
+{enabled && (
+  <>
+    <div id="cc" class="cc" role="dialog" aria-labelledby="cc-title" aria-describedby="cc-desc" tabindex="-1" hidden>
+      <div class="cc-main">
+        <h2 id="cc-title" class="cc-title">Cookies on this site</h2>
+        <p id="cc-desc" class="cc-text">
+          We’d like to use cookies to understand how the site is used{showAdvertising ? ' and to measure our adverts' : ''}.
+          They’re off unless you say yes, and you can change your mind at any time.
+          <a href="/privacy/#cookies">How we use them</a>.
+        </p>
+        <div class="cc-actions">
+          <button type="button" class="cc-btn cc-btn-primary" data-cc="accept">Accept all</button>
+          <button type="button" class="cc-btn cc-btn-secondary" data-cc="reject">Reject all</button>
+          <button type="button" class="cc-btn cc-btn-ghost" data-cc="customise" aria-expanded="false" aria-controls="cc-prefs">Choose</button>
+        </div>
+      </div>
+
+      <div id="cc-prefs" class="cc-prefs" hidden>
+        <label class="cc-row">
+          <span class="cc-row-text">
+            <strong>Strictly necessary</strong>
+            <span>Remembers your cookie choice. Always on.</span>
+          </span>
+          <input type="checkbox" checked disabled />
+          <span class="cc-switch" aria-hidden="true"></span>
+        </label>
+        {showAnalytics && (
+          <label class="cc-row">
+            <span class="cc-row-text">
+              <strong>Analytics</strong>
+              <span>Google Analytics, so we can see which pages are useful.</span>
+            </span>
+            <input type="checkbox" id="cc-analytics" />
+            <span class="cc-switch" aria-hidden="true"></span>
+          </label>
+        )}
+        {showAdvertising && (
+          <label class="cc-row">
+            <span class="cc-row-text">
+              <strong>Advertising</strong>
+              <span>Meta and Google tags that tell us which adverts led to a sign-up.</span>
+            </span>
+            <input type="checkbox" id="cc-advertising" />
+            <span class="cc-switch" aria-hidden="true"></span>
+          </label>
+        )}
+        <button type="button" class="cc-btn cc-btn-primary cc-save" data-cc="save">Save my choices</button>
+      </div>
+    </div>
+
+    <script define:vars={{ tools, showAnalytics, showAdvertising }}>
+      (function () {
+        var KEY = 'amplio_consent_v1';
+        var MAX_AGE_MS = 365 * 24 * 60 * 60 * 1000;
+        var root = document.getElementById('cc');
+        var prefs = document.getElementById('cc-prefs');
+        var cbA = document.getElementById('cc-analytics');
+        var cbD = document.getElementById('cc-advertising');
+        var loaded = false;
+
+        function read() {
+          try {
+            var c = JSON.parse(localStorage.getItem(KEY));
+            if (c && c.v === 1 && Date.now() - Date.parse(c.t) < MAX_AGE_MS) return c;
+          } catch (e) {}
+          return null;
+        }
+        function write(c) {
+          try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {}
+        }
+
+        function script(src) {
+          var s = document.createElement('script');
+          s.async = true; s.src = src;
+          document.head.appendChild(s);
+        }
+
+        function loadGoogle(c) {
+          var ids = [];
+          if (c.analytics && tools.ga4) ids.push(tools.ga4);
+          if (c.advertising && tools.googleAds) ids.push(tools.googleAds);
+          if (!ids.length) return;
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { window.dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+          gtag('consent', 'update', {
+            analytics_storage: c.analytics ? 'granted' : 'denied',
+            ad_storage: c.advertising ? 'granted' : 'denied',
+            ad_user_data: c.advertising ? 'granted' : 'denied',
+            ad_personalization: c.advertising ? 'granted' : 'denied'
+          });
+          gtag('js', new Date());
+          ids.forEach(function (id) { gtag('config', id); });
+          script('https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ids[0]));
+        }
+
+        function loadMeta() {
+          if (!tools.metaPixel || window.fbq) return;
+          var n = window.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+          if (!window._fbq) window._fbq = n;
+          n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
+          script('https://connect.facebook.net/en_US/fbevents.js');
+          window.fbq('init', tools.metaPixel);
+          window.fbq('track', 'PageView');
+        }
+
+        function load(c) {
+          if (loaded) return;
+          loaded = true;
+          loadGoogle(c);
+          if (c.advertising) loadMeta();
+        }
+
+        // Withdrawing consent can't unload a script that is already running, so remove what it
+        // set and reload the page without it.
+        function clearCookies() {
+          var parts = location.hostname.split('.');
+          var domains = ['', location.hostname, '.' + location.hostname];
+          if (parts.length > 2) domains.push('.' + parts.slice(-2).join('.'));
+          document.cookie.split(';').forEach(function (raw) {
+            var name = raw.split('=')[0].trim();
+            if (/^(_ga|_gid|_gat|_gcl|_fbp|_fbc|IDE|test_cookie|__gads|__gpi)/.test(name)) {
+              domains.forEach(function (d) {
+                document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (d ? '; domain=' + d : '');
+              });
+            }
+          });
+        }
+
+        function show(focus) {
+          var c = read() || {};
+          if (cbA) cbA.checked = !!c.analytics;
+          if (cbD) cbD.checked = !!c.advertising;
+          root.hidden = false;
+          if (focus) root.focus();
+        }
+        function hide() { root.hidden = true; }
+
+        function save(analytics, advertising) {
+          var before = read() || {};
+          var c = { v: 1, t: new Date().toISOString(), analytics: !!analytics && showAnalytics, advertising: !!advertising && showAdvertising };
+          write(c);
+          hide();
+          // Tags already running on this page can't be changed in place. If the choice changed
+          // while they were running, drop what was withdrawn and reload so the page starts clean.
+          if (loaded && (before.analytics !== c.analytics || before.advertising !== c.advertising)) {
+            if ((before.analytics && !c.analytics) || (before.advertising && !c.advertising)) clearCookies();
+            location.reload();
+            return;
+          }
+          load(c);
+        }
+
+        root.addEventListener('click', function (e) {
+          var b = e.target.closest('[data-cc]');
+          if (!b) return;
+          var act = b.getAttribute('data-cc');
+          if (act === 'accept') save(true, true);
+          else if (act === 'reject') save(false, false);
+          else if (act === 'save') save(cbA && cbA.checked, cbD && cbD.checked);
+          else if (act === 'customise') {
+            var open = prefs.hidden;
+            prefs.hidden = !open;
+            b.setAttribute('aria-expanded', String(open));
+          }
+        });
+
+        document.addEventListener('click', function (e) {
+          var t = e.target.closest('[data-cookie-settings]');
+          if (!t) return;
+          e.preventDefault();
+          prefs.hidden = false;
+          var cust = root.querySelector('[data-cc=customise]');
+          if (cust) cust.setAttribute('aria-expanded', 'true');
+          show(true);
+        });
+
+        var existing = read();
+        if (existing) load(existing); else show(false);
+      })();
+    </script>
+  </>
+)}
+
+<style>
+  .cc {
+    position: fixed; z-index: 100; left: var(--space-6); bottom: var(--space-6);
+    width: min(440px, calc(100vw - 2 * var(--space-6)));
+    max-height: calc(100svh - 2 * var(--space-6)); overflow-y: auto;
+    background: var(--surface-card); border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+    padding: var(--space-5); box-sizing: border-box;
+    font-family: var(--font-body); color: var(--text-body); outline: none;
+    animation: amplio-rise var(--duration-slow, 400ms) var(--ease-entrance, ease-out);
+  }
+  .cc[hidden] { display: none; }
+  .cc-title { font-family: var(--font-display); font-weight: 400; font-size: var(--text-lg); line-height: var(--leading-snug); color: var(--text-heading); margin: 0 0 var(--space-2); }
+  .cc-text { font-size: var(--text-sm); line-height: var(--leading-normal); margin: 0; }
+  .cc-text a { color: var(--text-link); }
+  .cc-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+
+  .cc-btn {
+    font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-bold);
+    min-height: 40px; padding: 0 var(--space-5); border-radius: var(--radius-pill);
+    border: 1px solid transparent; cursor: pointer; transition: var(--transition-control);
+  }
+  .cc-btn:focus-visible { outline: 2px solid var(--focus-ring-color); outline-offset: 2px; }
+  .cc-btn-primary { background: var(--action-primary-bg); color: var(--action-primary-fg); }
+  .cc-btn-primary:hover { background: var(--action-primary-bg-hover); }
+  .cc-btn-primary:active { background: var(--action-primary-bg-active); }
+  /* Reject is deliberately the same weight as Accept: same size, outlined rather than hidden. */
+  .cc-btn-secondary { background: var(--action-secondary-bg); color: var(--action-secondary-fg); border-color: var(--action-secondary-border); }
+  .cc-btn-secondary:hover { background: var(--action-secondary-bg-hover); border-color: var(--amplio-green); }
+  .cc-btn-ghost { background: transparent; color: var(--action-ghost-fg); }
+  .cc-btn-ghost:hover { background: var(--action-ghost-bg-hover); }
+
+  .cc-prefs { margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border-subtle); display: grid; gap: var(--space-3); }
+  .cc-prefs[hidden] { display: none; }
+  .cc-row { display: flex; align-items: center; gap: var(--space-4); position: relative; cursor: pointer; }
+  .cc-row-text { flex: 1; display: grid; gap: 2px; font-size: var(--text-xs); line-height: var(--leading-normal); }
+  .cc-row-text strong { font-size: var(--text-sm); color: var(--text-heading); }
+  .cc-row input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .cc-switch { flex: none; width: 40px; height: 24px; border-radius: 12px; background: var(--neutral-300); position: relative; transition: var(--transition-control); }
+  .cc-switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform var(--duration-fast, 140ms) var(--ease-out-soft, ease-out); }
+  .cc-row input:checked + .cc-switch { background: var(--amplio-green); }
+  .cc-row input:checked + .cc-switch::after { transform: translateX(16px); }
+  .cc-row input:disabled + .cc-switch { opacity: 0.55; }
+  .cc-row input:focus-visible + .cc-switch { box-shadow: var(--ring-focus); }
+  .cc-save { justify-self: start; }
+
+  @media (max-width: 540px) {
+    .cc { left: var(--space-3); right: var(--space-3); bottom: var(--space-3); width: auto; max-height: 80svh; padding: var(--space-4); }
+    .cc-btn { flex: 1; padding: 0 var(--space-3); }
+  }
+</style>

@@ -1,0 +1,269 @@
+---
+/* /pageweave/ — Pageweave founding-access waiting list.
+   Landing page for the Meta ad campaign. One screen on desktop: no site navigation, nothing to
+   click except the form. Kept out of search results (it's an ad destination, not site content).
+   The three "example pages" are illustrative, not real customer output — they're labelled as such.
+   Meta Pixel is not installed yet; when it is, public/_headers needs connect.facebook.net added to
+   script-src and connect-src (and facebook.com to img-src), or the CSP will block it. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Logo } from '@ds/components/core/Logo.jsx';
+import { Eyebrow } from '@ds/components/marketing/Eyebrow.jsx';
+import { Icon } from '@ds/components/core/Icon.jsx';
+import { Badge } from '@ds/components/core/Badge.jsx';
+import WaitlistForm from '@components/pageweave/WaitlistForm.jsx';
+
+const POINTS = [
+  ['users', 'One campaign, hundreds of individual pages'],
+  ['file-text', 'Each one written around a contact’s interests, business and background'],
+  ['heart-handshake', 'Founding participants help shape the product before launch'],
+];
+
+const EXAMPLES = [
+  { to: 'For Priya', tag: 'Housing association', head: 'Where your next homes will matter most' },
+  { to: 'For Daniel', tag: 'Independent consultancy', head: 'Fewer proposals, better conversations' },
+  { to: 'For Amara', tag: 'Professional services', head: 'A clearer way to win the work you want' },
+];
+---
+<BaseLayout
+  minimal
+  noindex
+  title="Pageweave early access"
+  description="Landing pages that adapt to each contact’s interests, business and background. Join the early-access waiting list."
+>
+  <div class="pw">
+    <header class="pw-top">
+      <a href="/" aria-label="Amplio Systems home" style="line-height: 0;"><Logo height={36} /></a>
+      <Badge tone="brand" icon="sparkles">Founding access</Badge>
+    </header>
+
+    <div class="pw-main">
+      <section class="pw-copy">
+        <Eyebrow as="p" style={{ marginBottom: 'var(--space-5)' }}>Amplio Pageweave</Eyebrow>
+        <h1 class="pw-h1">
+          What if every prospect landed on a page <em>created just for them</em>?
+        </h1>
+        <p class="pw-lede">
+          AI-assisted landing pages that adapt to each contact’s interests, business and background,
+          turning one campaign into hundreds of individually relevant experiences.
+        </p>
+
+        <ul class="pw-points">
+          {POINTS.map(([icon, text]) => (
+            <li>
+              <span class="pw-tile"><Icon name={icon} size={18} /></span>
+              <span>{text}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="pw-fan" aria-hidden="true">
+          {EXAMPLES.map((e, i) => (
+            <div class={`pw-card pw-card-${i + 1}`}>
+              <span class="pw-card-tag">{e.to} · {e.tag}</span>
+              <span class="pw-card-head">{e.head}</span>
+              <span class="pw-bar" style="width: 92%;"></span>
+              <span class="pw-bar" style="width: 74%;"></span>
+              <span class="pw-pill"></span>
+            </div>
+          ))}
+          <span class="pw-fan-note">Same campaign, three different pages. Illustrative.</span>
+        </div>
+      </section>
+
+      <section class="pw-form" aria-label="Early-access waiting list">
+        <WaitlistForm client:load />
+      </section>
+    </div>
+
+    <footer class="pw-foot">
+      <span>&copy; 2026 Amplio Systems Ltd</span>
+      <span class="pw-foot-links">
+        <a href="/privacy/">Privacy notice</a>
+        <a href="#cookie-settings" data-cookie-settings>Cookie settings</a>
+      </span>
+    </footer>
+  </div>
+</BaseLayout>
+
+<style>
+  .pw {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0 var(--space-8);
+  }
+  /* The ripple motif: the logo mark, oversized and bled off a corner, behind the form side only. */
+  .pw::before {
+    content: '';
+    position: absolute;
+    right: -180px;
+    bottom: -220px;
+    width: 720px;
+    height: 720px;
+    background: url('/assets/mark.svg') no-repeat center / contain;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  .pw > * { position: relative; }
+
+  .pw-top {
+    width: 100%;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: var(--space-6) 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .pw-main {
+    flex: 1;
+    width: 100%;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--space-16);
+    align-items: center;
+    padding: var(--space-8) 0;
+  }
+
+  .pw-h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(34px, 4.6vw, var(--text-5xl));
+    line-height: var(--leading-tight);
+    color: var(--text-heading);
+    margin: 0;
+    max-width: 16em;
+  }
+  .pw-h1 em { font-style: italic; color: var(--amplio-green); }
+
+  .pw-lede {
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    line-height: var(--leading-relaxed);
+    color: var(--text-body);
+    margin: var(--space-6) 0 0;
+    max-width: 34em;
+  }
+
+  .pw-points {
+    list-style: none;
+    margin: var(--space-8) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--text-heading);
+  }
+  .pw-points li { display: flex; gap: var(--space-4); align-items: center; }
+  .pw-tile {
+    width: 38px; height: 38px; flex: none;
+    border-radius: var(--radius-leaf);
+    background: var(--sage-mist);
+    color: var(--deep-fern);
+    display: grid; place-items: center;
+  }
+
+  /* Three mini pages, fanned. Decorative; hidden when there isn't room for them. */
+  .pw-fan {
+    position: relative;
+    height: 185px;
+    margin: var(--space-8) 0 var(--space-6);
+    max-width: 600px;
+  }
+  .pw-card {
+    position: absolute;
+    top: 0;
+    width: 200px;
+    display: grid;
+    gap: 8px;
+    padding: 14px 16px 16px;
+    background: var(--surface-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    font-family: var(--font-body);
+  }
+  .pw-card-1 { left: 0;  transform: rotate(-4deg); z-index: 1; }
+  .pw-card-2 { left: 190px; transform: translateY(10px) rotate(0.5deg); z-index: 2; }
+  .pw-card-3 { left: 380px; transform: rotate(4deg); z-index: 1; }
+  .pw-card-tag {
+    font-size: 10px; font-weight: var(--weight-bold); letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--green-600);
+  }
+  .pw-card-head {
+    font-family: var(--font-display); font-size: 16px; line-height: 1.25; color: var(--text-heading);
+  }
+  .pw-bar { height: 6px; border-radius: 3px; background: var(--neutral-100); display: block; }
+  .pw-pill { width: 72px; height: 18px; border-radius: 9px; background: var(--amplio-green); display: block; margin-top: 2px; }
+  .pw-fan-note {
+    position: absolute; left: 0; bottom: -26px;
+    font-family: var(--font-body); font-size: var(--text-xs); color: var(--text-muted);
+  }
+
+  .pw-form {
+    background: var(--surface-card);
+    border-radius: var(--radius-xl, 20px);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-8);
+    display: grid;
+    gap: var(--space-5);
+    align-content: start;
+    /* Steps differ in height; a floor keeps the card from jumping as the visitor moves through. */
+    min-height: 520px;
+  }
+
+  .pw-foot {
+    width: 100%;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 0 var(--space-6);
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+  .pw-foot-links { display: flex; gap: var(--space-5); }
+  .pw-foot a { color: var(--text-muted); text-decoration: underline; }
+
+  /* Not enough height for the fan alongside the copy: drop it rather than scroll the screen. */
+  @media (max-height: 980px) {
+    .pw-fan { display: none; }
+  }
+
+  /* Short laptop screens (~720px of viewport): tighten spacing so the form still fits in one
+     screen without scrolling. */
+  @media (max-height: 800px) and (min-width: 901px) {
+    .pw-top { padding-top: var(--space-4); }
+    .pw-main { padding: var(--space-4) 0; }
+    .pw-foot { padding-bottom: var(--space-4); }
+    .pw-form { padding: var(--space-6); --space-5: 14px; gap: 14px; }
+    .pw-lede { margin-top: var(--space-4); }
+    .pw-points { margin-top: var(--space-6); gap: var(--space-3); }
+  }
+
+  @media (max-width: 900px) {
+    .pw { padding: 0 var(--space-5); }
+    .pw-main { grid-template-columns: 1fr; gap: var(--space-8); padding: var(--space-6) 0 var(--space-10); }
+    .pw-fan { display: none; }
+    .pw-form { padding: var(--space-6); min-height: 0; }
+    .pw-lede { font-size: var(--text-base); margin-top: var(--space-4); }
+    .pw-points { margin-top: var(--space-6); }
+    .pw::before { width: 480px; height: 480px; right: -160px; bottom: -120px; }
+  }
+
+  /* Phones: the headline and intro already say what the bullets say, and dropping them puts the
+     first form field above the fold, which is where ad traffic needs it. */
+  @media (max-width: 600px) {
+    .pw-points { display: none; }
+    .pw-main { gap: var(--space-6); }
+  }
+</style>

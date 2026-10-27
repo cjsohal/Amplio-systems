@@ -6,9 +6,10 @@ import { Checkbox } from '@ds/components/forms/Checkbox.jsx';
 import { Button } from '@ds/components/core/Button.jsx';
 import { Alert } from '@ds/components/feedback/Alert.jsx';
 import { Badge } from '@ds/components/core/Badge.jsx';
+import Honeypot from '@components/Honeypot.jsx';
 
 export default function ContactForm() {
-  const [form, setForm] = React.useState({ name: '', email: '', practice: '', message: '', consent: false });
+  const [form, setForm] = React.useState({ name: '', email: '', practice: '', message: '', consent: false, hp_website: '' });
   const [error, setError] = React.useState('');
   const [sent, setSent] = React.useState(false);
   const [sending, setSending] = React.useState(false);
@@ -59,10 +60,14 @@ export default function ContactForm() {
         value={form.message} onChange={set('message')} />
       <Checkbox label="Send me the monthly automation note" description="One email a month. Unsubscribe any time."
         checked={form.consent} onChange={(v) => setForm({ ...form, consent: v })} />
+      <Honeypot value={form.hp_website} onChange={set('hp_website')} />
       <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
         <Button type="submit" size="lg" iconRight="send" loading={sending}>Send it over</Button>
         <Badge tone="neutral" icon="shield-check">We never share your details</Badge>
       </div>
+      <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', color: 'var(--text-muted)', margin: 0 }}>
+        We use your details to reply to you. See our <a href="/privacy/">privacy notice</a>.
+      </p>
     </form>
   );
 }

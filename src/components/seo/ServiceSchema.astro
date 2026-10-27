@@ -3,6 +3,8 @@
    engines a clear, structured entity (name, description, provider) for each service rather than
    leaving them to infer it from marketing copy. `price` is optional: only AI Powered Reviews is
    sold at a fixed, published rate today, so most callers omit it and no Offer is emitted. */
+import { jsonLd } from '@/lib/jsonLd.js';
+
 const { name, description, url, price, priceCurrency = 'GBP' } = Astro.props;
 
 const serviceSchema = {
@@ -17,4 +19,4 @@ const serviceSchema = {
   ...(price ? { offers: { '@type': 'Offer', price: String(price), priceCurrency, url: new URL(url, Astro.site).toString() } } : {}),
 };
 ---
-<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={jsonLd(serviceSchema)} />

@@ -5,5 +5,8 @@ dist/
 .env
 .env.*
 !.env.example
+# wrangler's local-dev secrets file (holds RESEND_API_KEY etc. for `wrangler dev`)
+.dev.vars
+.dev.vars.*
 npm-debug.log*
 .DS_Store

@@ -2,11 +2,17 @@
 import '@ds/styles.css';
 import SiteHeader from '@components/SiteHeader.jsx';
 import SiteFooter from '@components/SiteFooter.astro';
+import CookieConsent from '@components/CookieConsent.astro';
+import { jsonLd } from '@/lib/jsonLd.js';
 
 const {
   title,
   description = 'AI automation for small service businesses — life coaches, chiropractors, consultants, practitioners.',
   image = '/assets/logo-lockup.png',
+  // Campaign landing pages: no site header/footer (nothing to lead the visitor away from the
+  // form), and optionally kept out of search results.
+  minimal = false,
+  noindex = false,
 } = Astro.props;
 const pageTitle = title ? `${title} — Amplio Systems` : 'Amplio Systems — Automate the mundane. Amplify what matters.';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -36,6 +42,7 @@ const websiteSchema = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#6FA84A" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" href="/assets/mark.png" />
     <link rel="apple-touch-icon" href="/assets/mark.png" />
@@ -52,15 +59,16 @@ const websiteSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" set:html={jsonLd(organizationSchema)} />
+    <script type="application/ld+json" set:html={jsonLd(websiteSchema)} />
   </head>
   <body>
-    <SiteHeader client:load page={Astro.url.pathname} />
+    {!minimal && <SiteHeader client:load page={Astro.url.pathname} />}
     <main>
       <slot />
     </main>
-    <SiteFooter />
+    {!minimal && <SiteFooter />}
+    <CookieConsent />
   </body>
 </html>
 
