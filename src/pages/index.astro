@@ -47,14 +47,19 @@ const FAQ = [
   <FaqSchema items={FAQ} />
 
   <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--gradient-hero)', color: 'var(--text-inverse)' }}>
-    <div aria-hidden="true" style={{
-      position: 'absolute', inset: 0, display: 'grid', placeItems: 'end start', padding: '20px',
-      border: '1px dashed var(--alpha-cream-24)', margin: '12px', borderRadius: 'var(--radius-xl)',
-    }}>
-      <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-2xs)', letterSpacing: 'var(--tracking-eyebrow)', textTransform: 'uppercase', color: 'var(--alpha-cream-24)' }}>
-        Video slot &middot; no footage supplied
-      </span>
-    </div>
+    {/* Background loop: muted + playsinline so it autoplays on phones. The hero gradient sits over
+        it at partial opacity so the white headline stays readable whatever the footage does. */}
+    <video id="hero-video" aria-hidden="true" autoplay muted loop playsinline preload="auto"
+      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}>
+      <source src="/assets/Amplio-AI-automation-hero-video.mp4" type="video/mp4" />
+    </video>
+    <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'var(--gradient-hero)', opacity: 0.72 }}></div>
+    <script is:inline>
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var v = document.getElementById('hero-video');
+        if (v) { v.removeAttribute('autoplay'); v.pause(); }
+      }
+    </script>
     <img src="/assets/mark-light.svg" alt="" aria-hidden="true"
       style={{ position: 'absolute', right: '-8%', top: '-30%', width: 'min(680px, 58%)', opacity: 0.14 }} />
     <div style={{ position: 'relative', maxWidth: 'var(--container-xl)', margin: '0 auto', padding: 'var(--space-40) var(--space-8) var(--space-32)' }}>
