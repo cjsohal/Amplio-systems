@@ -262,17 +262,16 @@ async function handleWaitlist(request, env) {
   return jsonResponse({ ok: true }, 200);
 }
 
-// Atlas waiting list (the /atlas/waitlist/ page, shared at events). Deliberately short: name,
-// email and organisation are enough to follow up. `src` tags which event/link it came from.
+// Atlas waiting list (the /atlas/waitlist/ page). Deliberately minimal: name, email and an
+// optional phone number. `src` tags which event/link it came from.
 async function handleAtlasWaitlist(request, env) {
   const { body, response } = await intake(request);
   if (response) return response;
 
   const email = text(body.email, 254);
   const name = text(body.name, 200);
-  const org = text(body.org, 200);
-  if (!name || !org || !EMAIL_RE.test(email)) {
-    return jsonResponse({ ok: false, error: 'Name, organisation and a valid email are required' }, 400);
+  if (!name || !EMAIL_RE.test(email)) {
+    return jsonResponse({ ok: false, error: 'Name and a valid email are required' }, 400);
   }
   if (body.consent !== true) {
     return jsonResponse({ ok: false, error: 'Consent to be contacted is required' }, 400);
@@ -281,17 +280,14 @@ async function handleAtlasWaitlist(request, env) {
 
   try {
     await sendNotification(env, {
-      subject: `[Website] Atlas waiting list: ${name}, ${org}${src ? ` (${src})` : ''}`.slice(0, 150),
+      subject: `[Website] Atlas waiting list: ${name}${src ? ` (${src})` : ''}`.slice(0, 150),
       replyTo: email,
       fields: [
         ['Name', name],
         ['Email', email],
-        ['Organisation', org],
-        ['Organisation type', text(body.orgType, 60)],
-        ['Role', text(body.position, 100)],
+        ['Phone', text(body.phone, 40)],
         ['Source', src],
         ['Contact consent (Atlas)', 'Yes'],
-        ['Marketing consent (other Amplio products)', body.marketingConsent === true ? 'Yes' : 'No'],
       ],
     });
   } catch (err) {
